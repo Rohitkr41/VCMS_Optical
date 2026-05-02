@@ -3,6 +3,8 @@ import pages.BasePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.StaleElementReferenceException;
+
 
 public class OcularExaminationPage extends BasePage {
 
@@ -15,6 +17,7 @@ public class OcularExaminationPage extends BasePage {
 
     // ===== TOP SECTION =====
     private By ocularAlignment = By.id("CE_ddlOcularExamination_Motility");
+    
     private By ocularMovement = By.id("CE_ddlOcularExamination_Movement");
     private By remarks = By.id("CE_txtOcularExamination_FreeRemarks");
 
@@ -141,32 +144,46 @@ public class OcularExaminationPage extends BasePage {
         type(remarks, value);
     }
 
-    public void clickIsNormal() {
+	   public void clickIsNormal() {
+    System.out.println("⚡ Clicking Is Normal checkbox");
 
-        WebElement checkbox = wait.until(ExpectedConditions.presenceOfElementLocated(isNormalCheckbox));
+    setIsNormalCheckbox(true);
 
-        // Scroll into view
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block:'center'});", checkbox);
-
-        try {
-            // Try normal click
-            wait.until(ExpectedConditions.elementToBeClickable(checkbox)).click();
-
-        } catch (Exception e) {
-
-            System.out.println("⚠️ Normal click failed, trying JS click...");
-
-            // Fallback JS click
-            ((JavascriptExecutor) driver).executeScript(
-                    "arguments[0].click();", checkbox);
-        }
-
-        // 🔴 IMPORTANT: ensure checkbox is actually selected
-        wait.until(driver -> checkbox.isSelected());
-
-        System.out.println("🟢 Checkbox Selected");
+    try {
+        Thread.sleep(1000);
+    } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
     }
+
+    System.out.println("🟢 Is Normal checkbox selected");
+}
+
+
+	    
+	    private void setIsNormalCheckbox(boolean shouldBeChecked) {
+    WebElement checkbox = wait.until(ExpectedConditions.presenceOfElementLocated(isNormalCheckbox));
+
+    ((JavascriptExecutor) driver).executeScript(
+            "arguments[0].scrollIntoView({block:'center'});", checkbox);
+
+    if (checkbox.isSelected() != shouldBeChecked) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(checkbox)).click();
+        } catch (Exception e) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
+        }
+    }
+
+    wait.until(driver -> {
+        WebElement freshCheckbox = driver.findElement(isNormalCheckbox);
+        return freshCheckbox.isSelected() == shouldBeChecked;
+    });
+
+    System.out.println("🟢 Is Normal checkbox value: " + shouldBeChecked);
+}
+
+
+
 
     // ===== RIGHT EYE METHODS =====
     public void fillRightEye(String lid, String roplas, String conjunctiva,
@@ -201,75 +218,113 @@ public class OcularExaminationPage extends BasePage {
     	selectSelect2Dropdown(le_fundus, fundus);
         type(le_remarks, remarks);
     }
+    
+    private By successPopup = By.id("popup_container");
+    private By successPopupMessage = By.id("popup_message");
+    private By successPopupOk = By.id("popup_ok");
+
+    public void handleSuccessPopup() {
+        WebElement popup = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(successPopup));
+
+        String message = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(successPopupMessage))
+                .getText();
+
+        System.out.println("🟢 Popup message: " + message);
+
+        WebElement okBtn = wait.until(
+                ExpectedConditions.elementToBeClickable(successPopupOk));
+
+        try {
+            okBtn.click();
+        } catch (Exception e) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", okBtn);
+        }
+
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(successPopup));
+    }
+
 
     // ===== SAVE =====
     public void clickSave() {
-        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(saveBtn));
-        scrollAndClick(btn);
-    }
-    
-    private void selectSelect2Dropdown(By locator, String value) {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("select2-drop")));
 
-        WebElement container = wait.until(ExpectedConditions.elementToBeClickable(locator));
-        container.click();
+        WebElement btn = wait.until(ExpectedConditions.presenceOfElementLocated(saveBtn));
 
-        WebElement dropdown = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("select2-drop")));
-
-        // 🔥 Type value
-        try {
-            WebElement searchBox = dropdown.findElement(By.cssSelector("input.select2-input"));
-            searchBox.clear();
-            searchBox.sendKeys(value);
-        } catch (Exception ignored) {}
-
-        // 🔥 BETTER XPATH (contains + normalize-space)
-        By option = By.xpath(
-                "//div[@id='select2-drop']//li[contains(@class,'select2-result-selectable')]//div[contains(normalize-space(),'" + value + "')]"
-        );
-
-        WebElement optionElement = wait.until(ExpectedConditions.visibilityOfElementLocated(option));
-
-        // 🔥 Scroll into view (important)
         ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block:'center'});", optionElement);
+                "arguments[0].scrollIntoView({block:'center'});", btn);
 
-        // 🔥 Click with fallback
+        wait.until(ExpectedConditions.elementToBeClickable(btn));
+
         try {
-            optionElement.click();
+            btn.click();
         } catch (Exception e) {
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", optionElement);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
         }
 
-        System.out.println("🟢 Selected: " + value);
+        System.out.println("🟢 Save clicked");
+
+        handleSuccessPopup();
     }
 
-    // ===== COMPLETE FLOW =====
-//    public void fillOcularExamination(
-//            String alignment, String movement, String remarksText,
-//            String re_lidVal, String re_roplasVal, String re_conjVal,
-//            String re_corneaVal, String re_acVal, String re_pupilVal,
-//            String re_lensVal, String re_fundusVal, String re_remarkVal,
-//            String le_lidVal, String le_roplasVal, String le_conjVal,
-//            String le_corneaVal, String le_acVal, String le_pupilVal,
-//            String le_lensVal, String le_fundusVal, String le_remarkVal
-//    ) {
-//
-//        selectOcularAlignment(alignment);
-//        selectOcularMovement(movement);
-//        enterRemarks(remarksText);
-//        
-//        clickIsNormal();
-//        
-//        fillRightEye(re_lidVal, re_roplasVal, re_conjVal, re_corneaVal,
-//                re_acVal, re_pupilVal, re_lensVal, re_fundusVal, re_remarkVal);
-//
-//        fillLeftEye(le_lidVal, le_roplasVal, le_conjVal, le_corneaVal,
-//                le_acVal, le_pupilVal, le_lensVal, le_fundusVal, le_remarkVal);
-//        
-//        clickSave();
-//    }
     
+   private void selectSelect2Dropdown(By locator, String value) {
+
+    for (int attempt = 1; attempt <= 3; attempt++) {
+        try {
+            WebElement container = wait.until(ExpectedConditions.elementToBeClickable(locator));
+
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});", container);
+
+            container.click();
+
+            WebElement dropdown = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.id("select2-drop")));
+
+            try {
+                WebElement searchBox = dropdown.findElement(By.cssSelector("input.select2-input"));
+                searchBox.clear();
+                searchBox.sendKeys(value);
+            } catch (Exception ignored) {}
+
+            By option = By.xpath(
+                    "//div[@id='select2-drop']//li[contains(@class,'select2-result-selectable')]//div[contains(normalize-space(),'" + value + "')]"
+            );
+
+            WebElement optionElement = wait.until(ExpectedConditions.elementToBeClickable(option));
+
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});", optionElement);
+
+            try {
+                optionElement.click();
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", optionElement);
+            }
+
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("select2-drop")));
+
+            System.out.println("🟢 Selected: " + value);
+            return;
+
+        } catch (StaleElementReferenceException e) {
+            System.out.println("⚠️ Stale element found, retrying Select2: " + value + " attempt " + attempt);
+
+            try {
+                Thread.sleep(700);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
+    throw new RuntimeException("Unable to select value after retries: " + value);
+}
+
+
+  
     //Condition check IsNormal//
     
     public void waitForEyeSectionToLoad() {
@@ -280,7 +335,7 @@ public class OcularExaminationPage extends BasePage {
         System.out.println("✅ Eye section ready");
     }
     
-   public void fillOcularExamination(
+	   public void fillOcularExamination(
         boolean isNormalFlow,
 
         String alignment, String movement, String remarksText,
@@ -289,36 +344,38 @@ public class OcularExaminationPage extends BasePage {
         String re_lensVal, String re_fundusVal, String re_remarkVal,
         String le_lidVal, String le_roplasVal, String le_conjVal,
         String le_corneaVal, String le_acVal, String le_pupilVal,
-        String le_lensVal, String le_fundusVal, String le_remarkVal
-	) {
-	
-	    selectOcularAlignment(alignment);
-	    selectOcularMovement(movement);
-	    enterRemarks(remarksText);
-	
-	    // 🔥 IMPORTANT WAIT
-	    waitForEyeSectionToLoad();
-	
-	    if (isNormalFlow) {
-	
-	        System.out.println("⚡ Is Normal flow → Skipping Eye fields");
-	
-	        // OPTIONAL (agar required ho)
-	//        clickIsNormal();
-	
-	    } else {
-	
-	        System.out.println("⚡ Manual flow → Filling Eye fields");
-	
-	        fillRightEye(re_lidVal, re_roplasVal, re_conjVal, re_corneaVal,
-	                re_acVal, re_pupilVal, re_lensVal, re_fundusVal, re_remarkVal);
-	
-	        fillLeftEye(le_lidVal, le_roplasVal, le_conjVal, le_corneaVal,
-	                le_acVal, le_pupilVal, le_lensVal, le_fundusVal, le_remarkVal);
-	    }
-	
-	//    clickSave();
-	}
+        String le_lensVal, String le_fundusVal, String le_remarkVals
+) {
+
+    selectOcularAlignment(alignment);
+    selectOcularMovement(movement);
+    enterRemarks(remarksText);
+
+    waitForEyeSectionToLoad();
+
+    if (isNormalFlow) {
+
+        System.out.println("⚡ Is Normal flow → only checkbox click, no manual eye fill");
+
+        clickIsNormal();
+
+    } else {
+
+        System.out.println("⚡ Manual flow → checkbox OFF + manual eye values fill");
+
+        setIsNormalCheckbox(false);
+
+        fillRightEye(re_lidVal, re_roplasVal, re_conjVal, re_corneaVal,
+                re_acVal, re_pupilVal, re_lensVal, re_fundusVal, re_remarkVal);
+
+        fillLeftEye(le_lidVal, le_roplasVal, le_conjVal, le_corneaVal,
+                le_acVal, le_pupilVal, le_lensVal, le_fundusVal, le_remarkVals);
+    }
+
+    clickSave();
+}
+
+
 	   
 	// ===== VERIFICATION METHODS =====
 	

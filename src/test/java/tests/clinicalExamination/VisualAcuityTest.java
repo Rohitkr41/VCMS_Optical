@@ -8,9 +8,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
+import pages.ClinicalPage;
 import pages.LoginPage;
 import pages.SidebarPage;
-import pages.clinicalExamination.ClinicalPage;
 import pages.clinicalExamination.VisualAcuityPage;
 import utils.ConfigReader;
 import utils.ScreenshotUtil;
@@ -25,6 +25,7 @@ public class VisualAcuityTest extends BaseTest {
         String years = "1";
         String months = "6";
         String purpose = "Distance Vision";
+        
 
         String reUnaided = "6/18";
         String reSpecs   = "6/6";
@@ -36,9 +37,7 @@ public class VisualAcuityTest extends BaseTest {
         String lePH      = "6/9";
         String leNear    = "N8";
 
-        String colorVision = "Normal";
-        String stereopsis  = "50-100";
-        String contrast    = "45";
+        
 
         // ===== REFRACTION DATA ====
 
@@ -54,12 +53,12 @@ public class VisualAcuityTest extends BaseTest {
 
             // ===== NAVIGATION =====
             SidebarPage sidebar = new SidebarPage(driver);
-            sidebar.clickMenu("Clinical Examination");
+            sidebar.clickMenu("Clinical Examination By Optom");
             System.out.println("✅ Navigated to Clinical Examination");
 
             // ===== OPEN PATIENT =====
             ClinicalPage clinical = new ClinicalPage(driver);
-            clinical.searchByDate("02/04/2026", "03/04/2026");
+            clinical.searchByDate("01/05/2026", "03/05/2026");
             clinical.clickNewStatusIcon();
             System.out.println("✅ Patient opened");
 
@@ -72,8 +71,8 @@ public class VisualAcuityTest extends BaseTest {
             visual.fillVisualAcuityForm(
                     spectacles, years, months, purpose,
                     reUnaided, reSpecs, rePH, reNear,
-                    leUnaided, leSpecs, lePH, leNear,
-                    colorVision, stereopsis, contrast
+                    leUnaided, leSpecs, lePH, leNear
+                    
             );
 
             System.out.println("✅ Visual Acuity + Other Diagnostic saved");
@@ -85,8 +84,8 @@ public class VisualAcuityTest extends BaseTest {
             visual.fillFullRefractionFlow(
 
                 // ===== PG =====
-                "-1.00", "-0.50", "180", "+1.00",
-                "-1.25", "-0.75", "170", "+1.00",
+                "-1.00", "-0.50", "180", "1.75",
+                "-1.25", "-0.75", "170", "1.75",
 
                 // ===== DRY =====
                 "-1.00", "-0.50", "180",
@@ -97,8 +96,8 @@ public class VisualAcuityTest extends BaseTest {
                 "-1.75", "-1.00", "170",
 
                 // ===== FINAL =====
-                "-1.25", "-0.50", "180", "+1.00",
-                "-1.50", "-0.75", "170", "+1.00",
+                "-1.25", "-0.50", "180", "6/6",
+                "-1.50", "-0.75", "170", "6/6",
 
                 // ===== EXTRA ADD =====
                 "+1.00", "+1.00",

@@ -17,6 +17,7 @@ public class VisualAcuityPage extends BasePage {
 
     // ===== TOP SECTION =====
     private By spectaclesDropdown = By.id("CE_ddlVisualActuityWearingSpecs");
+    
     private By specAgeYears = By.id("CE_txtUsingSpectaclesYear");
     private By specAgeMonths = By.id("CE_txtUsingSpectaclesMonth");
     private By purposeField = By.id("CE_txtVisualAcuitySpecsPrupose");
@@ -36,12 +37,7 @@ public class VisualAcuityPage extends BasePage {
     // ===== SAVE BUTTON =====
     private By saveButton = By.id("CE_btnAddUpadateVisualAcuity");
 
-    // ===== OTHER DIAGNOSTIC =====
-
-
-    private By contrastField = By.id("CECV_txtContrastTest");
-    private By otherSaveButton = By.id("CE_btnAddUpdateColorVision");
-
+   
     // ===== POPUP =====
     private By successPopup = By.id("popup_message");
     private By okButton = By.id("popup_ok");
@@ -169,33 +165,39 @@ public class VisualAcuityPage extends BasePage {
     }
 
     // ================= SELECT2 UNIVERSAL METHOD =================
-    private void selectSelect2Dropdown(By select2Container, String value) {
+   private void selectSelect2Dropdown(By select2Container, String value) {
+    WebElement container = wait.until(ExpectedConditions.presenceOfElementLocated(select2Container));
 
-        WebElement container = wait.until(ExpectedConditions.presenceOfElementLocated(select2Container));
+    String select2Id = container.getAttribute("id");
+    String actualSelectId = select2Id.replace("s2id_", "");
 
-        // Step 1: Get actual select ID
-        String select2Id = container.getAttribute("id");  
-        String actualSelectId = select2Id.replace("s2id_", "");
+    JavascriptExecutor js = (JavascriptExecutor) driver;
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+    Boolean selected = (Boolean) js.executeScript(
+        "var select = document.getElementById(arguments[0]);" +
+        "if (!select) return false;" +
+        "for (var i = 0; i < select.options.length; i++) {" +
+        "  if (select.options[i].text.trim() === arguments[1]) {" +
+        "    select.value = select.options[i].value;" +
+        "    if (window.jQuery) {" +
+        "      jQuery(select).trigger('change');" +
+        "    } else {" +
+        "      select.dispatchEvent(new Event('change', { bubbles: true }));" +
+        "    }" +
+        "    return true;" +
+        "  }" +
+        "}" +
+        "return false;",
+        actualSelectId, value
+    );
 
-        // Step 2: Set value directly
-        js.executeScript(
-            "var select = document.getElementById(arguments[0]);" +
-            "if(!select) return;" +
-            "for (var i = 0; i < select.options.length; i++) {" +
-            "  var txt = select.options[i].text.trim();" +
-            "  if (txt === arguments[1]) {" +
-            "    select.selectedIndex = i;" +
-            "    select.dispatchEvent(new Event('change'));" +
-            "    return;" +
-            "  }" +
-            "}",
-            actualSelectId, value
-        );
-
-        System.out.println("✅ Selected (JS): " + value);
+    if (!Boolean.TRUE.equals(selected)) {
+        throw new RuntimeException("Option not found in dropdown " + actualSelectId + ": " + value);
     }
+
+    System.out.println("Selected: " + value);
+}
+
 
     // ===== SAVE =====
     public void clickSave() { scrollAndClick(wait.until(ExpectedConditions.elementToBeClickable(saveButton))); }
@@ -217,17 +219,9 @@ public class VisualAcuityPage extends BasePage {
         System.out.println("✅ Stereopsis selected: " + value);
     }
 
-    public void enterContrast(String value) {
-        WebElement input = wait.until(ExpectedConditions.visibilityOfElementLocated(contrastField));
-        input.click();
-        input.sendKeys(Keys.CONTROL + "a", Keys.DELETE);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].value='';", input);
-        input.sendKeys(value);
-        System.out.println("✅ Contrast entered: " + value);
-    }
+   
 
-    public void clickOtherSave() { scrollAndClick(wait.until(ExpectedConditions.elementToBeClickable(otherSaveButton)));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(rePGSph));}
+   
 
     public void handleSuccessPopup() {
         WebElement popup = wait.until(ExpectedConditions.visibilityOfElementLocated(successPopup));
@@ -316,28 +310,22 @@ public class VisualAcuityPage extends BasePage {
 
     // ===== FULL FLOW =====
     public void fillVisualAcuityForm(String spectacles, String years, String months, String purpose,
-                                     String reUnaided, String reSpecs, String rePH, String reNear,
-                                     String leUnaided, String leSpecs, String lePH, String leNear,
-                                     String colorVision, String stereopsis, String contrast) {
-        openVisualAcuityTab();
-        selectSpectacles(spectacles);
-        enterSpectacleAge(years, months);
-        enterPurpose(purpose);
-        fillRightEye(reUnaided, reSpecs, rePH, reNear);
-        fillLeftEye(leUnaided, leSpecs, lePH, leNear);
-        clickSave();
-        handleSuccessPopup();
+                                 String reUnaided, String reSpecs, String rePH, String reNear,
+                                 String leUnaided, String leSpecs, String lePH, String leNear) {
+    openVisualAcuityTab();
+    selectSpectacles(spectacles);
+    enterSpectacleAge(years, months);
+    enterPurpose(purpose);
 
-        selectColorVision(colorVision);
-        selectStereopsis(stereopsis);
-        enterContrast(contrast);
+    fillRightEye(reUnaided, reSpecs, rePH, reNear);
+    fillLeftEye(leUnaided, leSpecs, lePH, leNear);
 
-        clickOtherSave();
-        handleSuccessPopup();
+    clickSave();
+    handleSuccessPopup();
 
-        // 🔥 ADD THIS LINE
-        waitForRefractionSection();
-    }
+    waitForRefractionSection();
+}
+
 
     // ===== OTHER DIAGNOSIS POPUP =====
     public void handleOtherDiagnosisPopup() {
@@ -570,6 +558,7 @@ public class VisualAcuityPage extends BasePage {
 	        selectSelect2Dropdown(leNearNpc, leValue);
 	        System.out.println("✅ LE NPC selected: " + leValue);
 	    }
+	    System.out.println("visualAcuity done");
 	}
     
     

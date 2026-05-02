@@ -9,20 +9,19 @@ import base.BaseTest;
 import pages.ClinicalPage;
 import pages.LoginPage;
 import pages.SidebarPage;
-import pages.clinicalExamination.ChiefComplaintPage;
+import pages.clinicalExamination.VitalSignsPage;
 import utils.ConfigReader;
 import utils.ScreenshotUtil;
 
-public class ChiefComplaintTest extends BaseTest {
+public class VitalSignsTest extends BaseTest {
 
     @Test
-    public void verifyChiefComplaintEntry() {
+    public void verifyVitalSignsEntry() {
 
         // ✅ Login
         LoginPage login = new LoginPage(driver);
         login.login(
                 ConfigReader.getProperty("username"),
-                
                 ConfigReader.getProperty("password")
         );
 
@@ -30,24 +29,24 @@ public class ChiefComplaintTest extends BaseTest {
         SidebarPage sidebar = new SidebarPage(driver);
         sidebar.clickMenu("Clinical Examination By Optom");
 
-
         // ✅ Clinical Page actions
         ClinicalPage clinical = new ClinicalPage(driver);
-        
-        clinical.searchByDate("02/05/2026", "03/05/2026");
+
+        clinical.searchByDate("01/05/2026", "03/05/2026");
         clinical.clickNewStatusIcon();
 
-        // ✅ Chief Complaint Flow (UPDATED ORDER)
-        ChiefComplaintPage chiefComplaint = new ChiefComplaintPage(driver);
-        chiefComplaint.fillChiefComplaint(
-                "BLURRED VISION FOR DISTANCE",   // Chief Complaint
-                "BOTH",   // Eye (⚠️ must match dropdown text exactly)
-                "3",          // Duration
-                "Weeks"        // Period
+        // ✅ Vital Signs Flow
+        VitalSignsPage vitalSigns = new VitalSignsPage(driver);
+        vitalSigns.fillVitalSigns(
+                "80",     // BP Diastolic
+                "120",    // BP Systolic
+                "72",     // Pulse
+                "110",    // Random Sugar
+                "No"      // Diabetic Status
         );
 
-        // ✅ Better Assertion (you can improve later with toast/message)
-        Assert.assertTrue(true, "Chief Complaint saved successfully.");
+        // ✅ Better Assertion
+        Assert.assertTrue(true, "Vital Signs saved successfully.");
     }
 
     @AfterMethod

@@ -13,8 +13,12 @@ public class OcularHistoryPage extends BasePage {
 
     // ===== LOCATORS =====
     private By ocularHistoryTab = By.id("ocularSystemicDisease-tab");
+    
+    private By ocularDiseaseYesNoDropdown = By.id("CE_ddlOcularDiseasYesNo");
+
 
     private By diseaseDropdown = By.id("s2id_CE_ddlOcularDiseaseName");
+    
     private By surgeryDropdown = By.id("s2id_CE_ddlOcularDiseaseSurgery");
 
     private By eyeDropdown = By.id("CE_txtOcularDiseaseEyeSubSection");
@@ -196,9 +200,33 @@ public class OcularHistoryPage extends BasePage {
         clickSystemicSaveButton();
         handleSuccessPopup();
     }
+    
+    public void selectOcularDiseaseYesNo(String value) {
+        WebElement dropdown = wait.until(
+                ExpectedConditions.elementToBeClickable(ocularDiseaseYesNoDropdown)
+        );
+
+        Select select = new Select(dropdown);
+        select.selectByVisibleText(value);   // Yes / No
+
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].dispatchEvent(new Event('change'));", dropdown
+        );
+
+        wait.until(d -> {
+            try {
+                return new Select(d.findElement(ocularDiseaseYesNoDropdown))
+                        .getFirstSelectedOption()
+                        .getText()
+                        .trim()
+                        .equalsIgnoreCase(value);
+            } catch (Exception e) {
+                return false;
+            }
+        });
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(diseaseDropdown));
+    }
+
 }
-//<<<<<<< HEAD
-//}
-//=======
-//}
-//>>>>>>> branch 'master' of https://github.com/Rohitkr41/EicherProject
+
