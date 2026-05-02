@@ -6,9 +6,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
+import pages.ClinicalPage;
 import pages.LoginPage;
 import pages.SidebarPage;
-import pages.clinicalExamination.ClinicalPage;
 import pages.clinicalExamination.OcularHistoryPage;
 import utils.ConfigReader;
 import utils.ScreenshotUtil;
@@ -19,11 +19,14 @@ public class OcularHistoryTest extends BaseTest {
     public void validateOcularAndSystemicFlow() {
 
         // ===== TEST DATA =====
-        String disease = "CORNEA";
-        String eye     = "BOTH";
-        String surgery = "RETINA";
-        String status  = "Unsatisfactory";
-        String remarks = "Automation Test Entry";
+    	// ===== TEST DATA =====
+    	String dropdown = "Yes";
+    	String disease  = "CORNEA";
+    	String eye      = "BOTH";
+    	String surgery  = "RETINA";
+    	String status   = "Unsatisfactory";
+    	String remarks  = "Automation Test Entry";
+
 
         try {
 
@@ -37,12 +40,13 @@ public class OcularHistoryTest extends BaseTest {
 
             // ===== NAVIGATION =====
             SidebarPage sidebar = new SidebarPage(driver);
-            sidebar.clickMenu("Clinical Examination");
+            sidebar.clickMenu("Clinical Examination By Optom");
+            
             System.out.println("✅ Navigated to Clinical Examination");
 
             // ===== OPEN PATIENT =====
             ClinicalPage clinical = new ClinicalPage(driver);
-            clinical.searchByDate("02/04/2026", "03/04/2026");
+            clinical.searchByDate("01/05/2026", "03/05/2026");
             clinical.clickNewStatusIcon();
             System.out.println("✅ Patient opened");
 
@@ -55,7 +59,8 @@ public class OcularHistoryTest extends BaseTest {
             // 🔵 OCULAR HISTORY FLOW
             // =====================================================
             System.out.println("🔵 Filling Ocular History...");
-
+            
+            ocular.selectOcularDiseaseYesNo(dropdown); 
             ocular.selectDisease(disease);
             ocular.selectEye(eye);
             ocular.selectSurgeryTreatmentDone(surgery);

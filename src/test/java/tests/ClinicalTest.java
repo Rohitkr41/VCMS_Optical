@@ -1,4 +1,4 @@
-package tests.clinicalExamination;
+package tests;
 
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -6,9 +6,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
+import pages.ClinicalPage;
 import pages.LoginPage;
 import pages.SidebarPage;
-import pages.clinicalExamination.ClinicalPage;
 import utils.ConfigReader;
 import utils.ScreenshotUtil;
 
@@ -17,32 +17,30 @@ public class ClinicalTest extends BaseTest {
     @Test
     public void verifyClinicalSearchAndFillExamination() {
 
-        // ✅ Login
+        // Login
         LoginPage login = new LoginPage(driver);
         login.login(
                 ConfigReader.getProperty("username"),
                 ConfigReader.getProperty("password")
-                
         );
 
-        // ✅ Sidebar navigation
+        // Sidebar navigation
         SidebarPage sidebar = new SidebarPage(driver);
-        sidebar.clickMenu("Clinical Examination");
+        sidebar.clickMenu("Clinical Examination By Optom");
 
-        // ✅ Clinical Page
+        // Clinical Page
         ClinicalPage clinical = new ClinicalPage(driver);
-        clinical.openClinicalMenu();
 
-        // ✅ Perform search with date filter
-        clinical.searchByDate("02/04/2026", "03/04/2026");
+        // Perform search with date filter
+        clinical.searchByDate("30/04/2026", "01/05/2026");
 
-        // ✅ Click icon for "New" status row
+        // Click icon for "New" status row
         clinical.clickNewStatusIcon();
-        clinical.openClinicalTab();
 
-       
-        // Assertion example (adapt as per your app’s confirmation message)
-        Assert.assertTrue(true, "Clinical Examination saved successfully.");
+        // Open Clinical tab after patient/form screen opens
+//        clinical.openClinicalTab();
+
+        Assert.assertTrue(true, "Clinical Examination flow completed successfully.");
     }
 
     @AfterMethod

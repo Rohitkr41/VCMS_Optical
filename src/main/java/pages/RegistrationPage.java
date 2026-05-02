@@ -349,6 +349,7 @@ public class RegistrationPage {
     // 22. Submit
     public void clickSubmitButton() {
         wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
+        
     }
     
  // Submit ke baad custom confirmation popup
