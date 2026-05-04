@@ -1,3 +1,4 @@
+
 package tests.opticalTransaction;
 
 import org.testng.annotations.Test;
@@ -19,17 +20,21 @@ public class OpticalBookingTest extends BaseTest {
         );
 
         OpticalBookingPage opticalBookingPage = new OpticalBookingPage(driver);
-        opticalBookingPage.openOpticalBookingPage();
-        
-        opticalBookingPage.clickPlusIcon();
-        opticalBookingPage.clickVcmrSearchButton();
-        opticalBookingPage.searchVisionCenterPatientByDate("30/04/2026", "01/05/2026");
-        
-        opticalBookingPage.clickFirstPatientSelectIcon();
-        
-        opticalBookingPage.selectItemType("FRAME");
 
+        opticalBookingPage.openOpticalBookingPage();
+
+        opticalBookingPage.clickPlusIcon();
+
+        opticalBookingPage.clickVcmrSearchButton();
+
+        opticalBookingPage.searchVisionCenterPatientByDate("04/05/2026", "16/05/2026");
+
+        // Select exact patient by VCMR No.
+        opticalBookingPage.selectPatientByVcmrNo("SGMF-BGT-26-0143");
+
+        opticalBookingPage.selectItemType("FRAME");
 
         System.out.println("Optical Booking page opened successfully");
     }
 }
+
