@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="tests.RegistrationPageTest">
+      <class name="tests.opticalTransaction.OpticalBookingAdvanceTest">
         <methods>
           <include name="setUp"/>
           <include name="tearDown"/>
-          <include name="verifyNewRegistrationClick"/>
+          <include name="verifyOpticalBookingAdvanceFlow"/>
         </methods>
-      </class> <!-- tests.RegistrationPageTest -->
+      </class> <!-- tests.opticalTransaction.OpticalBookingAdvanceTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
