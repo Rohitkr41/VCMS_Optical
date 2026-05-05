@@ -32,7 +32,7 @@ public class ClinicalTest extends BaseTest {
         ClinicalPage clinical = new ClinicalPage(driver);
 
         // Perform search with date filter
-        clinical.searchByDate("30/04/2026", "01/05/2026");
+        clinical.searchByDate("05/05/2026", "21/05/2026");
 
         // Click icon for "New" status row
         clinical.clickNewStatusIcon();

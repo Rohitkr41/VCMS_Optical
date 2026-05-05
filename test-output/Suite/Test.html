@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>7/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>6/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Mon May 04 09:45:15 IST 2026</td>
+<td>Started on:</td><td>Tue May 05 10:05:18 IST 2026</td>
 </tr>
-<tr><td>Total time:</td><td>128 seconds (128665 ms)</td>
+<tr><td>Total time:</td><td>82 seconds (82547 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,6 +67,112 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='tests.clinicalExamination.OcularExaminationTest.validateOcularExaminationWithCheckboxFlow()'><b>validateOcularExaminationWithCheckboxFlow</b><br>Test class: tests.clinicalExamination.OcularExaminationTest</td>
+<td><div><pre>java.lang.AssertionError: Test failed due to exception
+	at tests.clinicalExamination.OcularExaminationTest.validateOcularExaminationWithCheckboxFlow(OcularExaminationTest.java:156)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=147.0.7727.138)
+Build info: version: &apos;4.18.1&apos;, revision: &apos;b1d3319b48&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [42b1fae0673d8222857338547f57fdbe, findElements {value=#CE_dataGrid tbody tr, using=css selector}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.138, chrome: {chromedriverVersion: 147.0.7727.117 (474cc805edd..., userDataDir: C:\Users\sumit\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:61899}, goog:processID: 21560, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:61899/devtoo..., se:cdpVersion: 147.0.7727.138, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 42b1fae0673d8222857338547f57fdbe
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:519)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElements(ElementLocation.java:182)
+	at org.openqa.selenium.remote.ElementLocation.findElements(ElementLocation.java:103)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:369)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:363)
+	at pages.ClinicalPage.lambda$1(ClinicalPage.java:175)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
+	at pages.ClinicalPage.waitForClinicalGridToFinishLoading(ClinicalPage.java:175)
+	at pages.ClinicalPage.searchByDate(ClinicalPage.java:83)
+	at tests.clinicalExamination.OcularExaminationTest.validateOcularExaminationWithCheckboxFlow(OcularExaminationTest.java:120)
+	... 28 more
+... Removed 33 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace113211374", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace113211374'><pre>java.lang.AssertionError: Test failed due to exception
+	at org.testng.Assert.fail(Assert.java:99)
+	at tests.clinicalExamination.OcularExaminationTest.validateOcularExaminationWithCheckboxFlow(OcularExaminationTest.java:156)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+Caused by: org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=147.0.7727.138)
+Build info: version: &apos;4.18.1&apos;, revision: &apos;b1d3319b48&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [42b1fae0673d8222857338547f57fdbe, findElements {value=#CE_dataGrid tbody tr, using=css selector}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.138, chrome: {chromedriverVersion: 147.0.7727.117 (474cc805edd..., userDataDir: C:\Users\sumit\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:61899}, goog:processID: 21560, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:61899/devtoo..., se:cdpVersion: 147.0.7727.138, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 42b1fae0673d8222857338547f57fdbe
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:519)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElements(ElementLocation.java:182)
+	at org.openqa.selenium.remote.ElementLocation.findElements(ElementLocation.java:103)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:369)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:363)
+	at pages.ClinicalPage.lambda$1(ClinicalPage.java:175)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
+	at pages.ClinicalPage.waitForClinicalGridToFinishLoading(ClinicalPage.java:175)
+	at pages.ClinicalPage.searchByDate(ClinicalPage.java:83)
+	at tests.clinicalExamination.OcularExaminationTest.validateOcularExaminationWithCheckboxFlow(OcularExaminationTest.java:120)
+	... 28 more
+</pre></div></td>
+<td>22</td>
+<td>tests.clinicalExamination.OcularExaminationTest@70325e14</td></tr>
+</table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
@@ -76,39 +182,34 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='tests.clinicalExamination.OcularExaminationTest.validateOcularExaminationFlow()'><b>validateOcularExaminationFlow</b><br>Test class: tests.clinicalExamination.OcularExaminationTest</td>
-<td></td>
-<td>21</td>
-<td>tests.clinicalExamination.OcularExaminationTest@70325e14</td></tr>
-<tr>
 <td title='tests.clinicalExamination.OcularHistoryTest.validateOcularAndSystemicFlow()'><b>validateOcularAndSystemicFlow</b><br>Test class: tests.clinicalExamination.OcularHistoryTest</td>
 <td></td>
-<td>13</td>
+<td>10</td>
 <td>tests.clinicalExamination.OcularHistoryTest@2df3b89c</td></tr>
 <tr>
 <td title='tests.clinicalExamination.DiagnosisAndAdviseTest.validatePatientStatusAndAdviseFlow()'><b>validatePatientStatusAndAdviseFlow</b><br>Test class: tests.clinicalExamination.DiagnosisAndAdviseTest</td>
 <td></td>
-<td>16</td>
+<td>8</td>
 <td>tests.clinicalExamination.DiagnosisAndAdviseTest@7c9d8e2</td></tr>
-<tr>
-<td title='tests.clinicalExamination.OcularExaminationTest.validateOcularExaminationWithCheckboxFlow()'><b>validateOcularExaminationWithCheckboxFlow</b><br>Test class: tests.clinicalExamination.OcularExaminationTest</td>
-<td></td>
-<td>31</td>
-<td>tests.clinicalExamination.OcularExaminationTest@70325e14</td></tr>
 <tr>
 <td title='tests.clinicalExamination.VitalSignsTest.verifyVitalSignsEntry()'><b>verifyVitalSignsEntry</b><br>Test class: tests.clinicalExamination.VitalSignsTest</td>
 <td></td>
-<td>7</td>
+<td>5</td>
 <td>tests.clinicalExamination.VitalSignsTest@6a78afa0</td></tr>
 <tr>
 <td title='tests.clinicalExamination.VisualAcuityTest.validateFullVisualAcuityAndRefractionFlow()'><b>validateFullVisualAcuityAndRefractionFlow</b><br>Test class: tests.clinicalExamination.VisualAcuityTest</td>
 <td></td>
-<td>15</td>
+<td>9</td>
 <td>tests.clinicalExamination.VisualAcuityTest@23348b5d</td></tr>
+<tr>
+<td title='tests.clinicalExamination.OcularExaminationTest.validateOcularExaminationFlow()'><b>validateOcularExaminationFlow</b><br>Test class: tests.clinicalExamination.OcularExaminationTest</td>
+<td></td>
+<td>12</td>
+<td>tests.clinicalExamination.OcularExaminationTest@70325e14</td></tr>
 <tr>
 <td title='tests.clinicalExamination.ChiefComplaintTest.verifyChiefComplaintEntry()'><b>verifyChiefComplaintEntry</b><br>Test class: tests.clinicalExamination.ChiefComplaintTest</td>
 <td></td>
-<td>8</td>
+<td>4</td>
 <td>tests.clinicalExamination.ChiefComplaintTest@37ceb1df</td></tr>
 </table><p>
 </body>
