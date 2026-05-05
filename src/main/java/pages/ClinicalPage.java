@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,6 +26,7 @@ public class ClinicalPage extends BasePage {
 
     private By clinicalGrid = By.id("CE_dataGrid");
     private By clinicalGridRows = By.cssSelector("#CE_dataGrid tbody tr");
+    private By clinicalGridProcessing = By.cssSelector("#CE_dataGrid_processing");
     private By statusIconInRow = By.cssSelector("td[name='key'] [title]");
     private By clinicalExaminationIconInRow = By.cssSelector("td[name='fieldFortyFive'] [title='Clinical Examination']");
 
@@ -72,21 +74,36 @@ public class ClinicalPage extends BasePage {
         );
 
         WebElement searchBtn = wait.until(
-                ExpectedConditions.presenceOfElementLocated(searchButton)
+                ExpectedConditions.elementToBeClickable(searchButton)
         );
 
         js.executeScript("arguments[0].click();", searchBtn);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(clinicalGrid));
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(clinicalGridRows));
+        waitForClinicalGridToFinishLoading();
+
+        List<WebElement> resultRows = getClinicalGridResultRows();
+
+        if (resultRows.isEmpty()) {
+            throw new NoSuchElementException(
+                    "Clinical search returned no result rows for FromDate: " + fromDate + " and ToDate: " + toDate
+            );
+        }
 
         System.out.println("Clinical Search executed with FromDate: " + fromDate + " and ToDate: " + toDate);
     }
 
     public void clickClinicalExaminationForPendingRecord() {
         List<String> completedStatuses = Arrays.asList("Examine", "Examination Done");
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(clinicalGrid));
-        List<WebElement> rows = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(clinicalGridRows));
+        waitForClinicalGridToFinishLoading();
+
+        List<WebElement> rows = getClinicalGridResultRows();
+
+        if (rows.isEmpty()) {
+            throw new NoSuchElementException("No clinical grid result rows found");
+        }
 
         for (WebElement row : rows) {
             WebElement statusIcon;
@@ -141,5 +158,31 @@ public class ClinicalPage extends BasePage {
         );
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", tab);
+    }
+
+    private void waitForClinicalGridToFinishLoading() {
+        wait.until(driver -> {
+            List<WebElement> processingIndicators = driver.findElements(clinicalGridProcessing);
+
+            if (processingIndicators.isEmpty()) {
+                return true;
+            }
+
+            return !processingIndicators.get(0).isDisplayed();
+        });
+
+        try {
+            wait.until(driver -> !driver.findElements(clinicalGridRows).isEmpty());
+        } catch (TimeoutException e) {
+            throw new TimeoutException("Clinical grid loaded, but no table rows were rendered.", e);
+        }
+    }
+
+    private List<WebElement> getClinicalGridResultRows() {
+        return driver.findElements(clinicalGridRows)
+                .stream()
+                .filter(WebElement::isDisplayed)
+                .filter(row -> row.findElements(By.cssSelector("td.dataTables_empty")).isEmpty())
+                .toList();
     }
 }

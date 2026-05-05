@@ -46,7 +46,7 @@ public class OcularHistoryTest extends BaseTest {
 
             // ===== OPEN PATIENT =====
             ClinicalPage clinical = new ClinicalPage(driver);
-            clinical.searchByDate("04/05/2026", "08/05/2026");
+            clinical.searchByDate("04/05/2026", "30/05/2026");
             clinical.clickNewStatusIcon();
             System.out.println("✅ Patient opened");
 

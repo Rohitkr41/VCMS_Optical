@@ -3,13 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="tests.opticalTransaction.OpticalBookingAdvanceTest">
+      <class name="opticalTranscationMasterTest.ViewPurchaseOrderTest">
         <methods>
           <include name="setUp"/>
           <include name="tearDown"/>
-          <include name="verifyOpticalBookingAdvanceFlow"/>
+          <include name="verifyCreatePurchaseOrderWithMultipleItems"/>
+          <include name="captureFailure"/>
         </methods>
-      </class> <!-- tests.opticalTransaction.OpticalBookingAdvanceTest -->
+      </class> <!-- opticalTranscationMasterTest.ViewPurchaseOrderTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

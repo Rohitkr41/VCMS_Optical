@@ -32,7 +32,7 @@ public class VitalSignsTest extends BaseTest {
         // ✅ Clinical Page actions
         ClinicalPage clinical = new ClinicalPage(driver);
 
-        clinical.searchByDate("04/05/2026", "08/05/2026");
+        clinical.searchByDate("05/05/2026", "30/05/2026");
         clinical.clickNewStatusIcon();
 
         // ✅ Vital Signs Flow
