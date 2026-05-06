@@ -3,14 +3,14 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="tests.clinicalExamination.OcularExaminationTest">
+      <class name="tests.clinicalExamination.VitalSignsTest">
         <methods>
           <include name="setUp"/>
-          <include name="validateOcularExaminationWithCheckboxFlow"/>
           <include name="tearDown"/>
+          <include name="verifyVitalSignsEntry"/>
           <include name="captureFailure"/>
         </methods>
-      </class> <!-- tests.clinicalExamination.OcularExaminationTest -->
+      </class> <!-- tests.clinicalExamination.VitalSignsTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
