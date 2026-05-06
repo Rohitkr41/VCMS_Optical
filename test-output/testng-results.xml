@@ -2,35 +2,35 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-05-05T14:57:08 IST" name="Default suite" finished-at="2026-05-05T14:57:27 IST" duration-ms="18760">
+  <suite started-at="2026-05-06T11:46:18 IST" name="Default suite" finished-at="2026-05-06T11:46:25 IST" duration-ms="7405">
     <groups>
     </groups>
-    <test started-at="2026-05-05T14:57:08 IST" name="Default test" finished-at="2026-05-05T14:57:27 IST" duration-ms="18760">
-      <class name="opticalTranscationMasterTest.ViewPurchaseOrderTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:opticalTranscationMasterTest.ViewPurchaseOrderTest@1165b38]" started-at="2026-05-05T14:57:08 IST" name="setUp" finished-at="2026-05-05T14:57:11 IST" duration-ms="2600" status="PASS">
+    <test started-at="2026-05-06T11:46:18 IST" name="Default test" finished-at="2026-05-06T11:46:25 IST" duration-ms="7405">
+      <class name="opticalTranscationMasterTest.ApprovePurchaseOrderTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:opticalTranscationMasterTest.ApprovePurchaseOrderTest@1165b38]" started-at="2026-05-06T11:46:18 IST" name="setUp" finished-at="2026-05-06T11:46:19 IST" duration-ms="1597" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="verifyCreatePurchaseOrderWithMultipleItems()[pri:0, instance:opticalTranscationMasterTest.ViewPurchaseOrderTest@1165b38]" started-at="2026-05-05T14:57:11 IST" name="verifyCreatePurchaseOrderWithMultipleItems" finished-at="2026-05-05T14:57:27 IST" duration-ms="16077" status="PASS">
+        <test-method signature="verifyApprovePurchaseOrder()[pri:0, instance:opticalTranscationMasterTest.ApprovePurchaseOrderTest@1165b38]" started-at="2026-05-06T11:46:19 IST" name="verifyApprovePurchaseOrder" finished-at="2026-05-06T11:46:25 IST" duration-ms="5751" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyCreatePurchaseOrderWithMultipleItems -->
-        <test-method is-config="true" signature="captureFailure(org.testng.ITestResult)[pri:0, instance:opticalTranscationMasterTest.ViewPurchaseOrderTest@1165b38]" started-at="2026-05-05T14:57:27 IST" name="captureFailure" finished-at="2026-05-05T14:57:27 IST" duration-ms="6" status="PASS">
+        </test-method> <!-- verifyApprovePurchaseOrder -->
+        <test-method is-config="true" signature="captureFailure(org.testng.ITestResult)[pri:0, instance:opticalTranscationMasterTest.ApprovePurchaseOrderTest@1165b38]" started-at="2026-05-06T11:46:25 IST" name="captureFailure" finished-at="2026-05-06T11:46:25 IST" duration-ms="5" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verifyCreatePurchaseOrderWithMultipleItems status=SUCCESS method=ViewPurchaseOrderTest.verifyCreatePurchaseOrderWithMultipleItems()[pri:0, instance:opticalTranscationMasterTest.ViewPurchaseOrderTest@1165b38] output={null}]]]>
+                <![CDATA[[TestResult name=verifyApprovePurchaseOrder status=SUCCESS method=ApprovePurchaseOrderTest.verifyApprovePurchaseOrder()[pri:0, instance:opticalTranscationMasterTest.ApprovePurchaseOrderTest@1165b38] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- captureFailure -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:opticalTranscationMasterTest.ViewPurchaseOrderTest@1165b38]" started-at="2026-05-05T14:57:27 IST" name="tearDown" finished-at="2026-05-05T14:57:27 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:opticalTranscationMasterTest.ApprovePurchaseOrderTest@1165b38]" started-at="2026-05-06T11:46:25 IST" name="tearDown" finished-at="2026-05-06T11:46:25 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- opticalTranscationMasterTest.ViewPurchaseOrderTest -->
+      </class> <!-- opticalTranscationMasterTest.ApprovePurchaseOrderTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

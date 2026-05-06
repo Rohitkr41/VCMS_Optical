@@ -3,7 +3,7 @@
 <suite name="Suite">
   <test thread-count="5" name="Test">
     <classes>
-    	
+    	<class name="tests.RegistrationPageTest"/>
       <class name="tests.clinicalExamination.VitalSignsTest"/>
      
       <class name="tests.clinicalExamination.OcularHistoryTest"/>

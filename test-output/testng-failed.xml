@@ -3,14 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="opticalTranscationMasterTest.ViewPurchaseOrderTest">
+      <class name="opticalTranscationMasterTest.ApprovePurchaseOrderTest">
         <methods>
           <include name="setUp"/>
           <include name="tearDown"/>
-          <include name="verifyCreatePurchaseOrderWithMultipleItems"/>
+          <include name="verifyApprovePurchaseOrder"/>
           <include name="captureFailure"/>
         </methods>
-      </class> <!-- opticalTranscationMasterTest.ViewPurchaseOrderTest -->
+      </class> <!-- opticalTranscationMasterTest.ApprovePurchaseOrderTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
