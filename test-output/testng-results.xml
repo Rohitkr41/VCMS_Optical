@@ -2,35 +2,35 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-05-06T11:46:18 IST" name="Default suite" finished-at="2026-05-06T11:46:25 IST" duration-ms="7405">
+  <suite started-at="2026-05-07T12:15:59 IST" name="Default suite" finished-at="2026-05-07T12:16:08 IST" duration-ms="8907">
     <groups>
     </groups>
-    <test started-at="2026-05-06T11:46:18 IST" name="Default test" finished-at="2026-05-06T11:46:25 IST" duration-ms="7405">
-      <class name="opticalTranscationMasterTest.ApprovePurchaseOrderTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:opticalTranscationMasterTest.ApprovePurchaseOrderTest@1165b38]" started-at="2026-05-06T11:46:18 IST" name="setUp" finished-at="2026-05-06T11:46:19 IST" duration-ms="1597" status="PASS">
+    <test started-at="2026-05-07T12:15:59 IST" name="Default test" finished-at="2026-05-07T12:16:08 IST" duration-ms="8907">
+      <class name="opticalTranscationMasterTest.DiscountRefundApprovalTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:opticalTranscationMasterTest.DiscountRefundApprovalTest@1165b38]" started-at="2026-05-07T12:15:59 IST" name="setUp" finished-at="2026-05-07T12:16:00 IST" duration-ms="1666" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="verifyApprovePurchaseOrder()[pri:0, instance:opticalTranscationMasterTest.ApprovePurchaseOrderTest@1165b38]" started-at="2026-05-06T11:46:19 IST" name="verifyApprovePurchaseOrder" finished-at="2026-05-06T11:46:25 IST" duration-ms="5751" status="PASS">
+        <test-method signature="verifyDiscountRefundApprovalFlow()[pri:0, instance:opticalTranscationMasterTest.DiscountRefundApprovalTest@1165b38]" started-at="2026-05-07T12:16:00 IST" name="verifyDiscountRefundApprovalFlow" finished-at="2026-05-07T12:16:08 IST" duration-ms="7194" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyApprovePurchaseOrder -->
-        <test-method is-config="true" signature="captureFailure(org.testng.ITestResult)[pri:0, instance:opticalTranscationMasterTest.ApprovePurchaseOrderTest@1165b38]" started-at="2026-05-06T11:46:25 IST" name="captureFailure" finished-at="2026-05-06T11:46:25 IST" duration-ms="5" status="PASS">
+        </test-method> <!-- verifyDiscountRefundApprovalFlow -->
+        <test-method is-config="true" signature="captureFailure(org.testng.ITestResult)[pri:0, instance:opticalTranscationMasterTest.DiscountRefundApprovalTest@1165b38]" started-at="2026-05-07T12:16:08 IST" name="captureFailure" finished-at="2026-05-07T12:16:08 IST" duration-ms="0" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verifyApprovePurchaseOrder status=SUCCESS method=ApprovePurchaseOrderTest.verifyApprovePurchaseOrder()[pri:0, instance:opticalTranscationMasterTest.ApprovePurchaseOrderTest@1165b38] output={null}]]]>
+                <![CDATA[[TestResult name=verifyDiscountRefundApprovalFlow status=SUCCESS method=DiscountRefundApprovalTest.verifyDiscountRefundApprovalFlow()[pri:0, instance:opticalTranscationMasterTest.DiscountRefundApprovalTest@1165b38] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- captureFailure -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:opticalTranscationMasterTest.ApprovePurchaseOrderTest@1165b38]" started-at="2026-05-06T11:46:25 IST" name="tearDown" finished-at="2026-05-06T11:46:25 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:opticalTranscationMasterTest.DiscountRefundApprovalTest@1165b38]" started-at="2026-05-07T12:16:08 IST" name="tearDown" finished-at="2026-05-07T12:16:08 IST" duration-ms="12" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- opticalTranscationMasterTest.ApprovePurchaseOrderTest -->
+      </class> <!-- opticalTranscationMasterTest.DiscountRefundApprovalTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
