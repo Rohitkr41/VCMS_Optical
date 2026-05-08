@@ -26,18 +26,19 @@ public class RegistrationPageTest extends BaseTest {
         registrationPage.selectNewPatient();
         registrationPage.selectSpeciality("EYE");
         registrationPage.selectPatientType("WALK IN");
-        registrationPage.enterFirstName("Aawesh");
-        registrationPage.enterLastName("sharma");
+        registrationPage.enterFirstName("Munank");
+        registrationPage.enterLastName("Patel");
 //        registrationPage.selectMaleGender();
-        registrationPage.enterAgeYear("28");
-        registrationPage.enterAgeMonth("5");
-        registrationPage.enterNextOfKin("sharma family");
-        registrationPage.enterContactNumber("6589098760");
+        registrationPage.enterAgeYear("34");
+        registrationPage.enterAgeMonth("6");
+        registrationPage.enterNextOfKin("Patel family");
+        registrationPage.enterContactNumber("6655880990");
         registrationPage.enterAddress("House No 12, Main Road");
-//        registrationPage.selectAreaVillage("MALLAUR");   //abhishek vc
+        registrationPage.selectAreaVillage("MALLAUR");   //abhishek vc
 //        registrationPage.selectAreaVillage("Alampur Fatehpur");  // mukesh vc
 //        registrationPage.selectAreaVillage("Chakathal");  //komal vc
-        registrationPage.selectAreaVillage("Barhauli");  //mukesh vc
+//        registrationPage.selectAreaVillage("Barautha");  //komal vc
+//        registrationPage.selectAreaVillage("Barhauli");  //mukesh vc
         registrationPage.selectDiabeticStatus("No");
         registrationPage.selectOccupation("SERVICE");
         registrationPage.selectQualification("GRADUATE");
