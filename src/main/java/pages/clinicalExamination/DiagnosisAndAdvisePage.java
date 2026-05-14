@@ -1,18 +1,16 @@
 package pages.clinicalExamination;
 
-import pages.BasePage;
-
 import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import pages.BasePage;
 
 public class DiagnosisAndAdvisePage extends BasePage {
 
@@ -247,27 +245,6 @@ public class DiagnosisAndAdvisePage extends BasePage {
         }
     }
 
-    private void selectDropdownByVisibleText(By locator, String value) {
-        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(locator));
-        scrollToCenter(dropdown);
-        Select select = new Select(dropdown);
-
-        try {
-            select.selectByVisibleText(value);
-            return;
-        } catch (Exception ignored) {
-            // Fallback below supports partial visible text like "SINGLE VISION GLASSES".
-        }
-
-        for (WebElement option : select.getOptions()) {
-            if (option.getText().trim().contains(value.trim())) {
-                select.selectByVisibleText(option.getText().trim());
-                return;
-            }
-        }
-
-        throw new NoSuchElementException("Dropdown option not found: " + value);
-    }
 
     private void selectSelect2Dropdown(By locator, String value) {
         WebElement container = wait.until(ExpectedConditions.elementToBeClickable(locator));

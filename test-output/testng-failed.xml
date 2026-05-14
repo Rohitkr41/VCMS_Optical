@@ -11,6 +11,14 @@
           <include name="captureFailure"/>
         </methods>
       </class> <!-- tests.clinicalExamination.OcularExaminationTest -->
+      <class name="tests.clinicalExamination.DiagnosisAndAdviseTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="validatePatientStatusAndAdviseFlow"/>
+          <include name="captureFailure"/>
+        </methods>
+      </class> <!-- tests.clinicalExamination.DiagnosisAndAdviseTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

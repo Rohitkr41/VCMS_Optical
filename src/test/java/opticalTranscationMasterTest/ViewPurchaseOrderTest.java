@@ -43,13 +43,21 @@ public class ViewPurchaseOrderTest extends BaseTest {
 
         // ===== MULTIPLE ITEMS DATA =====
         List<POItemDetails> poItems = Arrays.asList(
-                new POItemDetails("FRAME", "fr", "FR26-0006", "8", false, "", "5"),
-                new POItemDetails("LENS", "le", "LE26-0007", "6", false, "", "8")
+        		 new POItemDetails("FRAME", "fr", "FR26-0005", "30", false, "", "7"), //QTY , "", discount%
+                new POItemDetails("FRAME", "fr", "FR26-0006", "30", false, "", "0"),  //QTY , "", discount%
+               
+                new POItemDetails("CASE", "ca", "CA26-0005", "30", false, "", "0"),
+                new POItemDetails("CASE", "ca", "CA26-0004", "30", false, "", "0")
+                
+//                new POItemDetails("LENS", "le", "LE26-0007", "10", false, "", ""),
+//                new POItemDetails("LENS", "le", "LE26-0007", "10", false, "", "")
         );
 
         // ===== ADD ITEMS =====
         viewPurchaseOrderPage.addMultipleDirectPOItems(
-                "REGIONALMUKESH",
+//                "REGIONALMUKESH",
+//                "SHRI GURU MAHIPATIRAJ EYE BANK  RESEARCH FOUNDATION TRUST",
+                "REGV3M",
                 "LE",
                 "LENSKART SOLUTIONS LIMITED",
                 "Local",

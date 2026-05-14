@@ -195,5 +195,98 @@ public class BasePage {
         }
     }
     
+    protected void selectDropdownByVisibleText(By locator, String visibleText) {
+
+        WebElement dropdown = wait.until(
+                ExpectedConditions.elementToBeClickable(locator)
+        );
+
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block:'center'});",
+                dropdown
+        );
+
+        Select select = new Select(dropdown);
+
+        boolean optionFound = false;
+
+        String expectedText = visibleText
+                .trim()
+                .replaceAll("\\s+", " ");
+
+        for (WebElement option : select.getOptions()) {
+
+            String actualText = option.getText()
+                    .trim()
+                    .replaceAll("\\s+", " ");
+
+            System.out.println("Dropdown Option => " + actualText);
+
+            // Exact match
+            if (actualText.equalsIgnoreCase(expectedText)) {
+
+                try {
+                    option.click();
+                } catch (Exception e) {
+                    ((JavascriptExecutor) driver).executeScript(
+                            "arguments[0].click();",
+                            option
+                    );
+                }
+
+                optionFound = true;
+
+                System.out.println("Selected Option => " + actualText);
+                break;
+            }
+        }
+
+        // Partial match fallback
+        if (!optionFound) {
+
+            for (WebElement option : select.getOptions()) {
+
+                String actualText = option.getText()
+                        .trim()
+                        .replaceAll("\\s+", " ");
+
+                if (actualText.toLowerCase()
+                        .contains(expectedText.toLowerCase())) {
+
+                    try {
+                        option.click();
+                    } catch (Exception e) {
+                        ((JavascriptExecutor) driver).executeScript(
+                                "arguments[0].click();",
+                                option
+                        );
+                    }
+
+                    optionFound = true;
+
+                    System.out.println("Selected By Partial Match => " + actualText);
+                    break;
+                }
+            }
+        }
+
+        if (!optionFound) {
+
+            System.out.println("===== AVAILABLE OPTIONS =====");
+
+            for (WebElement option : select.getOptions()) {
+                System.out.println(option.getText());
+            }
+
+            throw new NoSuchElementException(
+                    "Dropdown option not found: " + visibleText
+            );
+        }
+
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].dispatchEvent(new Event('change', { bubbles: true }));",
+                dropdown
+        );
+    }
     
 }

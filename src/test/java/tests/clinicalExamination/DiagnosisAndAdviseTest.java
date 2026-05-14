@@ -35,7 +35,7 @@ public class DiagnosisAndAdviseTest extends BaseTest {
 
             // ===== OPEN PATIENT =====
             ClinicalPage clinical = new ClinicalPage(driver);
-            clinical.searchByDate("04/05/2026", "30/05/2026");
+            clinical.searchByDate("11/05/2026", "30/05/2026");
             clinical.clickNewOrInProgressStatusIcon();
             System.out.println("Patient opened");
 
@@ -54,7 +54,7 @@ public class DiagnosisAndAdviseTest extends BaseTest {
                     "SINGLE VISION GLASSES",     // Spectacles Type
                     "Patient will visit later",  // Other Remarks
                     true,                        // Hospital Visit Date checkbox
-                    "22/05/2026",                // Hospital Visit Date
+                    "30/05/2026",                // Hospital Visit Date
                     false,                       // Hold Patient
                     null,                        // Hold Reason
                     null                         // Hold Remarks
