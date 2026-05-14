@@ -21,7 +21,7 @@ public class LoginTest extends BaseTest {
         String password = ConfigReader.getProperty("password");
 
         // Perform Login
-        login.login(username, password);
+        login.login(username.trim(), password.trim());
     }
       
 }

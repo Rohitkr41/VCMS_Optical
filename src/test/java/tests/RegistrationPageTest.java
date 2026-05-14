@@ -15,30 +15,37 @@ public class RegistrationPageTest extends BaseTest {
         RegistrationPage registrationPage = new RegistrationPage(driver);
 
         LoginPage login = new LoginPage(driver);
+     // Debug credentials
+        System.out.println("Username: " + ConfigReader.getProperty("username"));
+        System.out.println("Password: " + ConfigReader.getProperty("password"));
+
         login.login(
                 ConfigReader.getProperty("username"),
                 ConfigReader.getProperty("password")
+                
+               
         );
-
+  
         registrationPage.clickPatientRegistration();
         registrationPage.clickNewRegistration();
         
         registrationPage.selectNewPatient();
         registrationPage.selectSpeciality("EYE");
         registrationPage.selectPatientType("WALK IN");
-        registrationPage.enterFirstName("Munank");
-        registrationPage.enterLastName("Patel");
+        registrationPage.enterFirstName("Vira");
+        registrationPage.enterLastName("Reddy");
 //        registrationPage.selectMaleGender();
-        registrationPage.enterAgeYear("34");
+        registrationPage.enterAgeYear("32");
         registrationPage.enterAgeMonth("6");
-        registrationPage.enterNextOfKin("Patel family");
-        registrationPage.enterContactNumber("6655880990");
+        registrationPage.enterNextOfKin("Reddy family");
+        registrationPage.enterContactNumber("6579089078");
         registrationPage.enterAddress("House No 12, Main Road");
         registrationPage.selectAreaVillage("MALLAUR");   //abhishek vc
-//        registrationPage.selectAreaVillage("Alampur Fatehpur");  // mukesh vc
+//        registrationPage.selectAreaVillage("Banupura");  // mukesh vc
 //        registrationPage.selectAreaVillage("Chakathal");  //komal vc
-//        registrationPage.selectAreaVillage("Barautha");  //komal vc
+//        registrationPage.selectAreaVillage("Baharabad");  //komal vc
 //        registrationPage.selectAreaVillage("Barhauli");  //mukesh vc
+//        registrationPage.selectAreaVillage("Jamalpur");  //abhishekDEv vc
         registrationPage.selectDiabeticStatus("No");
         registrationPage.selectOccupation("SERVICE");
         registrationPage.selectQualification("GRADUATE");

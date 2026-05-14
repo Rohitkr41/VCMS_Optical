@@ -36,7 +36,7 @@ public class OcularExaminationTest extends BaseTest {
 
             // ===== OPEN PATIENT =====
             ClinicalPage clinical = new ClinicalPage(driver);
-            clinical.searchByDate("04/05/2026", "18/05/2026");
+            clinical.searchByDate("11/05/2026", "30/05/2026");
             clinical.clickNewStatusIcon();
             System.out.println("✅ Patient opened");
 
@@ -117,7 +117,7 @@ public class OcularExaminationTest extends BaseTest {
             System.out.println("✅ Navigated to Clinical Examination");
 
             ClinicalPage clinical = new ClinicalPage(driver);
-            clinical.searchByDate("05/05/2026", "30/05/2026");
+            clinical.searchByDate("11/05/2026", "30/05/2026");
             clinical.clickNewStatusIcon();
             System.out.println("✅ Patient opened");
 

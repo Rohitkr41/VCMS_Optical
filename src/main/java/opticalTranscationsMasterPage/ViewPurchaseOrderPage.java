@@ -11,9 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-
-
 
 import pages.BasePage;
 
@@ -74,6 +71,12 @@ public class ViewPurchaseOrderPage extends BasePage {
     private By purchaseTypePopup = By.id("popup_container");
     private By popupNoButton = By.id("popup_cancel");
     private By popupYesButton = By.id("popup_ok");
+    
+    private By gstAmountInput =
+            By.id("VPO_txtTotalGST");
+
+    private By finalTotalAmountInput =
+            By.id("VPO_txt_GSTTotal_GrossTotal");
     
     //submitStep
  // ===== SUBMIT PO LOCATORS =====
@@ -270,44 +273,68 @@ private void selectPurchaseTypeByName(String purchaseType) {
 
 
 
-	private void setPurchaseType(By selectedRadioLocator, By otherRadioLocator, String purchaseTypeName) {
+	private void setPurchaseType(By selectedRadioLocator,
+                             By otherRadioLocator,
+                             String purchaseTypeName) {
+
+    waitForOverlayToDisappear();
+
+    sleep(1500);
+
     WebElement selectedRadio = wait.until(
             ExpectedConditions.presenceOfElementLocated(selectedRadioLocator)
     );
 
-    WebElement otherRadio = wait.until(
-            ExpectedConditions.presenceOfElementLocated(otherRadioLocator)
-    );
-
     scrollToElement(selectedRadio);
 
-    ((JavascriptExecutor) driver).executeScript(
-            "var selected = arguments[0];" +
-            "var other = arguments[1];" +
-            "selected.removeAttribute('disabled');" +
-            "other.removeAttribute('disabled');" +
-            "selected.checked = true;" +
-            "other.checked = false;" +
-            "selected.dispatchEvent(new Event('input', { bubbles: true }));" +
-            "selected.dispatchEvent(new Event('change', { bubbles: true }));" +
-            "if (window.jQuery) { $(selected).trigger('change'); }",
-            selectedRadio,
-            otherRadio
-    );
+    try {
 
-    wait.until(driver -> {
-        try {
-            return driver.findElement(selectedRadioLocator).isSelected()
-                    && !driver.findElement(otherRadioLocator).isSelected();
-        } catch (Exception e) {
-            return false;
+        wait.until(ExpectedConditions.visibilityOf(selectedRadio));
+
+        if (!selectedRadio.isSelected()) {
+
+            try {
+
+                selectedRadio.click();
+
+            } catch (Exception e) {
+
+                ((JavascriptExecutor) driver).executeScript(
+                        "arguments[0].click();",
+                        selectedRadio
+                );
+            }
         }
-    });
+
+    } catch (Exception e) {
+
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].checked=true;" +
+                "arguments[0].dispatchEvent(new Event('change',{bubbles:true}));",
+                selectedRadio
+        );
+    }
 
     waitForOverlayToDisappear();
-    handlePurchaseTypePopupAndClickNo();   // alert
-    System.out.println("Purchase Type force selected: " + purchaseTypeName);
+
+    sleep(1000);
+
+    handlePurchaseTypePopupAndClickNo();
+
+    System.out.println("Purchase Type selected: " + purchaseTypeName);
 }
+	
+	private void sleep(long millis) {
+
+	    try {
+
+	        Thread.sleep(millis);
+
+	    } catch (InterruptedException e) {
+
+	        Thread.currentThread().interrupt();
+	    }
+	}
 
 
 	private void waitForSelectedItemDetailsToLoad() {
@@ -327,10 +354,49 @@ private void selectPurchaseTypeByName(String purchaseType) {
 	}
 
 	
-    public void enterQuantity(String quantity) {
-        enterText(quantityInput, quantity);
-        System.out.println("Quantity entered: " + quantity);
+   public void enterQuantity(String quantity) {
+
+    String qty = (quantity == null || quantity.trim().isEmpty())
+            ? "1"
+            : quantity.trim();
+
+    waitForOverlayToDisappear();
+
+    WebElement qtyField = wait.until(
+            ExpectedConditions.elementToBeClickable(quantityInput)
+    );
+
+    scrollToElement(qtyField);
+
+    try {
+
+        qtyField.click();
+
+        qtyField.sendKeys(Keys.CONTROL + "a");
+        qtyField.sendKeys(Keys.DELETE);
+
+        // Direct JS value set (FASTEST)
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].value=arguments[1];" +
+                "arguments[0].dispatchEvent(new Event('input',{bubbles:true}));" +
+                "arguments[0].dispatchEvent(new Event('change',{bubbles:true}));",
+                qtyField,
+                qty
+        );
+
+        qtyField.sendKeys(Keys.TAB);
+
+    } catch (Exception e) {
+
+        throw new RuntimeException("Unable to enter quantity : " + qty, e);
     }
+
+    wait.until(driver ->
+            qtyField.getAttribute("value").trim().equals(qty)
+    );
+
+    System.out.println("Quantity entered successfully: " + qty);
+}
 
     public void selectFreeItem(boolean isFreeItem, String freeQty) {
         WebElement checkbox = wait.until(
@@ -357,124 +423,91 @@ private void selectPurchaseTypeByName(String purchaseType) {
     }
 
    public void enterDiscount(String discount) {
-    forceSetDiscount(discount);
-    System.out.println("Discount entered: " + discount);
-}
 
-   private void forceSetDiscount(String discount) {
-    final String discountValue = discount == null ? "0" : discount.trim();
+    String value = (discount == null || discount.trim().isEmpty())
+            ? "0"
+            : discount.trim();
 
     WebElement element = wait.until(
-            ExpectedConditions.presenceOfElementLocated(discountInput)
+            ExpectedConditions.elementToBeClickable(discountInput)
     );
 
     scrollToElement(element);
 
     ((JavascriptExecutor) driver).executeScript(
-            "var el = arguments[0];" +
-            "var val = arguments[1];" +
-            "el.removeAttribute('readonly');" +
-            "el.removeAttribute('disabled');" +
-            "el.focus();" +
-            "el.value = '';" +
-            "if (window.jQuery) { $(el).val('').trigger('input').trigger('change'); }" +
-            "el.dispatchEvent(new Event('input', { bubbles: true }));" +
-            "el.dispatchEvent(new Event('change', { bubbles: true }));",
+            "arguments[0].value=arguments[1];" +
+            "arguments[0].dispatchEvent(new Event('input',{bubbles:true}));" +
+            "arguments[0].dispatchEvent(new Event('change',{bubbles:true}));",
             element,
-            discountValue
+            value
     );
 
-    wait.until(driver -> {
-        String currentValue = element.getAttribute("value");
-        return currentValue == null || currentValue.trim().isEmpty();
-    });
-
-    ((JavascriptExecutor) driver).executeScript(
-            "var el = arguments[0];" +
-            "var val = arguments[1];" +
-            "el.value = val;" +
-            "if (window.jQuery) { $(el).val(val); }" +
-            "el.dispatchEvent(new Event('input', { bubbles: true }));" +
-            "el.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));" +
-            "el.dispatchEvent(new Event('change', { bubbles: true }));",
-            element,
-            discountValue
-    );
-
-    wait.until(driver -> {
-        String actualValue = element.getAttribute("value");
-        return actualValue != null && actualValue.trim().startsWith(discountValue);
-    });
-
-    ((JavascriptExecutor) driver).executeScript(
-            "arguments[0].blur();" +
-            "arguments[0].dispatchEvent(new Event('blur', { bubbles: true }));" +
-            "if (window.jQuery) { $(arguments[0]).trigger('blur'); }",
-            element
-    );
-
-    // Page script blur ke baad value overwrite kare to dobara force set
-    sleepForDiscountCalculation();
-
-    ((JavascriptExecutor) driver).executeScript(
-            "var el = arguments[0];" +
-            "var val = arguments[1];" +
-            "el.value = val;" +
-            "if (window.jQuery) { $(el).val(val).trigger('input').trigger('change').trigger('blur'); }" +
-            "el.dispatchEvent(new Event('input', { bubbles: true }));" +
-            "el.dispatchEvent(new Event('change', { bubbles: true }));" +
-            "el.dispatchEvent(new Event('blur', { bubbles: true }));",
-            element,
-            discountValue
-    );
-
-    wait.until(driver -> {
-        String actualValue = element.getAttribute("value");
-        return actualValue != null
-                && !actualValue.trim().equals("100.00")
-                && actualValue.trim().startsWith(discountValue);
-    });
+    element.sendKeys(Keys.TAB);
 
     waitForOverlayToDisappear();
+
+    System.out.println("Discount entered: " + value);
 }
    
-   private void sleepForDiscountCalculation() {
-	    try {
-	        Thread.sleep(500);
-	    } catch (InterruptedException e) {
-	        Thread.currentThread().interrupt();
-	    }
-	}
+  private void waitForGSTCalculation() {
 
-
-    public void clickAddPOItems() {
-        int beforeCount = getPOGridRowCount();
-
-        WebElement addPOItem = wait.until(
-                ExpectedConditions.presenceOfElementLocated(addPOItemsButton)
-        );
-
-        scrollToElement(addPOItem);
+    wait.until(driver -> {
 
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(addPOItem));
-            new Actions(driver)
-                    .moveToElement(addPOItem)
-                    .pause(Duration.ofMillis(300))
-                    .click()
-                    .perform();
+
+            String gst = driver.findElement(gstAmountInput)
+                    .getAttribute("value")
+                    .trim();
+
+            String total = driver.findElement(finalTotalAmountInput)
+                    .getAttribute("value")
+                    .trim();
+
+            System.out.println("GST VALUE = " + gst);
+            System.out.println("FINAL TOTAL = " + total);
+
+            // only verify calculation completed
+            return !gst.isEmpty()
+                    && !total.isEmpty()
+                    && !gst.contains("NaN")
+                    && !total.contains("NaN");
+
         } catch (Exception e) {
-            jsClick(addPOItem);
+
+            return false;
         }
+    });
 
-        waitForOverlayToDisappear();
-        waitForPopupOverlay();
+    sleep(1000);
+}
+   
 
-        wait.until(driver -> getPOGridRowCount() > beforeCount);
 
-        System.out.println("Clicked on Add PO Items.");
+
+ public void clickAddPOItems() {
+
+    waitForGSTCalculation();
+
+    int beforeCount = getPOGridRowCount();
+
+    WebElement addPOItem = wait.until(
+            ExpectedConditions.elementToBeClickable(addPOItemsButton)
+    );
+
+    scrollToElement(addPOItem);
+
+    try {
+        addPOItem.click();
+    } catch (Exception e) {
+        jsClick(addPOItem);
     }
 
+    wait.until(driver -> getPOGridRowCount() > beforeCount);
+
+    System.out.println("Clicked on Add PO Items.");
+}
+  
+  
     public void addDirectPOItem(
             String locationName,
             String supplierSearchText,
@@ -534,7 +567,7 @@ private void selectPurchaseTypeByName(String purchaseType) {
         System.out.println("Multiple Direct PO items added successfully.");
     }
 
-   private void addSinglePOItem(
+ private void addSinglePOItem(
         String itemType,
         String itemSearchText,
         String itemNameToSelect,
@@ -544,7 +577,9 @@ private void selectPurchaseTypeByName(String purchaseType) {
         String freeQty,
         String discount
 ) {
+
     selectItemType(itemType);
+
     selectItemName(itemSearchText, itemNameToSelect);
 
     waitForSelectedItemDetailsToLoad();
@@ -552,9 +587,16 @@ private void selectPurchaseTypeByName(String purchaseType) {
     selectPurchaseTypeByName(purchaseType);
 
     enterQuantity(quantity);
-    selectFreeItem(isFreeItem, freeQty);
 
-    clickAddPOItemsWithDiscount(discount, purchaseType);
+    if (isFreeItem) {
+        selectFreeItem(true, freeQty);
+    }
+
+    enterDiscount(discount);
+ // IMPORTANT → wait for GST calculation
+    waitForGSTCalculation();
+
+    clickAddPOItems();
 }
 
 
@@ -635,26 +677,7 @@ private void selectPurchaseTypeByName(String purchaseType) {
 
 
     // ===== HELPER METHODS =====
-    private void selectDropdownByVisibleText(By locator, String visibleText) {
-        waitForOverlayToDisappear();
-
-        WebElement dropdown = wait.until(
-                ExpectedConditions.elementToBeClickable(locator)
-        );
-
-        scrollToElement(dropdown);
-
-        Select select = new Select(dropdown);
-        select.selectByVisibleText(visibleText);
-
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].dispatchEvent(new Event('change', { bubbles: true }));" +
-                "if (window.jQuery) { $(arguments[0]).trigger('change'); }",
-                dropdown
-        );
-
-        waitForOverlayToDisappear();
-    }
+    
 
     private void searchAndSelectAutocompleteOption(
             By inputLocator,
@@ -754,7 +777,10 @@ private void selectPurchaseTypeByName(String purchaseType) {
             element.sendKeys(Keys.CONTROL, "a");
             element.sendKeys(Keys.BACK_SPACE);
             element.sendKeys(value);
-            element.sendKeys(Keys.TAB);
+            new Actions(driver)
+            .sendKeys(element, Keys.TAB)
+            .pause(Duration.ofMillis(500))
+            .perform();
         } catch (Exception e) {
             // JS fallback below
         }

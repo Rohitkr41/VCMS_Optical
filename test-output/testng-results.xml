@@ -1,36 +1,395 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="8" passed="6" failed="2" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-05-08T14:32:58 IST" name="Default suite" finished-at="2026-05-08T14:33:02 IST" duration-ms="3776">
+  <suite started-at="2026-05-14T10:32:14 IST" name="Suite" finished-at="2026-05-14T10:34:09 IST" duration-ms="114531">
     <groups>
     </groups>
-    <test started-at="2026-05-08T14:32:58 IST" name="Default test" finished-at="2026-05-08T14:33:02 IST" duration-ms="3776">
-      <class name="opticalTranscationMasterTest.WareHouseTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:opticalTranscationMasterTest.WareHouseTest@1165b38]" started-at="2026-05-08T14:32:58 IST" name="setUp" finished-at="2026-05-08T14:33:00 IST" duration-ms="1594" status="PASS">
+    <test started-at="2026-05-14T10:32:14 IST" name="Test" finished-at="2026-05-14T10:34:09 IST" duration-ms="114531">
+      <class name="tests.clinicalExamination.DiagnosisAndAdviseTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.clinicalExamination.DiagnosisAndAdviseTest@6f4a47c7]" started-at="2026-05-14T10:33:43 IST" name="setUp" finished-at="2026-05-14T10:33:44 IST" duration-ms="1262" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="verifyWareHouseNavigation()[pri:0, instance:opticalTranscationMasterTest.WareHouseTest@1165b38]" started-at="2026-05-08T14:33:00 IST" name="verifyWareHouseNavigation" finished-at="2026-05-08T14:33:02 IST" duration-ms="2144" status="PASS">
+        <test-method signature="validatePatientStatusAndAdviseFlow()[pri:0, instance:tests.clinicalExamination.DiagnosisAndAdviseTest@6f4a47c7]" started-at="2026-05-14T10:33:44 IST" name="validatePatientStatusAndAdviseFlow" finished-at="2026-05-14T10:34:09 IST" duration-ms="24733" status="FAIL">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Test failed due to exception]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Test failed due to exception
+at org.testng.Assert.fail(Assert.java:99)
+at tests.clinicalExamination.DiagnosisAndAdviseTest.validatePatientStatusAndAdviseFlow(DiagnosisAndAdviseTest.java:73)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+Caused by: org.openqa.selenium.TimeoutException: Clinical grid loaded, but no table rows were rendered.
+at pages.ClinicalPage.waitForClinicalGridToFinishLoading(ClinicalPage.java:177)
+at pages.ClinicalPage.searchByDate(ClinicalPage.java:83)
+at tests.clinicalExamination.DiagnosisAndAdviseTest.validatePatientStatusAndAdviseFlow(DiagnosisAndAdviseTest.java:38)
+... 28 more
+Caused by: org.openqa.selenium.TimeoutException: Expected condition failed: waiting for pages.ClinicalPage$$Lambda$702/0x000001f201231b60@28468162 (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '4.18.1', revision: 'b1d3319b48'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 148.0.7778.98, chrome: {chromedriverVersion: 148.0.7778.167 (65db666ac2c..., userDataDir: C:\Users\sumit\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:60176}, goog:processID: 22568, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:60176/devtoo..., se:cdpVersion: 148.0.7778.98, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: aace721bdb5292b705cd7a53ce4e233e
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+at pages.ClinicalPage.waitForClinicalGridToFinishLoading(ClinicalPage.java:175)
+... 30 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyWareHouseNavigation -->
-        <test-method is-config="true" signature="captureFailure(org.testng.ITestResult)[pri:0, instance:opticalTranscationMasterTest.WareHouseTest@1165b38]" started-at="2026-05-08T14:33:02 IST" name="captureFailure" finished-at="2026-05-08T14:33:02 IST" duration-ms="2" status="PASS">
+        </test-method> <!-- validatePatientStatusAndAdviseFlow -->
+        <test-method is-config="true" signature="captureFailure(org.testng.ITestResult)[pri:0, instance:tests.clinicalExamination.DiagnosisAndAdviseTest@6f4a47c7]" started-at="2026-05-14T10:34:09 IST" name="captureFailure" finished-at="2026-05-14T10:34:09 IST" duration-ms="208" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verifyWareHouseNavigation status=SUCCESS method=WareHouseTest.verifyWareHouseNavigation()[pri:0, instance:opticalTranscationMasterTest.WareHouseTest@1165b38] output={null}]]]>
+                <![CDATA[[TestResult name=validatePatientStatusAndAdviseFlow status=FAILURE method=DiagnosisAndAdviseTest.validatePatientStatusAndAdviseFlow()[pri:0, instance:tests.clinicalExamination.DiagnosisAndAdviseTest@6f4a47c7] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- captureFailure -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:opticalTranscationMasterTest.WareHouseTest@1165b38]" started-at="2026-05-08T14:33:02 IST" name="tearDown" finished-at="2026-05-08T14:33:02 IST" duration-ms="2" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.clinicalExamination.DiagnosisAndAdviseTest@6f4a47c7]" started-at="2026-05-14T10:34:09 IST" name="tearDown" finished-at="2026-05-14T10:34:09 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- opticalTranscationMasterTest.WareHouseTest -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+      </class> <!-- tests.clinicalExamination.DiagnosisAndAdviseTest -->
+      <class name="tests.clinicalExamination.VitalSignsTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.clinicalExamination.VitalSignsTest@3a52dba3]" started-at="2026-05-14T10:32:24 IST" name="setUp" finished-at="2026-05-14T10:32:25 IST" duration-ms="1168" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyVitalSignsEntry()[pri:0, instance:tests.clinicalExamination.VitalSignsTest@3a52dba3]" started-at="2026-05-14T10:32:25 IST" name="verifyVitalSignsEntry" finished-at="2026-05-14T10:32:31 IST" duration-ms="5949" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyVitalSignsEntry -->
+        <test-method is-config="true" signature="captureFailure(org.testng.ITestResult)[pri:0, instance:tests.clinicalExamination.VitalSignsTest@3a52dba3]" started-at="2026-05-14T10:32:31 IST" name="captureFailure" finished-at="2026-05-14T10:32:31 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyVitalSignsEntry status=SUCCESS method=VitalSignsTest.verifyVitalSignsEntry()[pri:0, instance:tests.clinicalExamination.VitalSignsTest@3a52dba3] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- captureFailure -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.clinicalExamination.VitalSignsTest@3a52dba3]" started-at="2026-05-14T10:32:31 IST" name="tearDown" finished-at="2026-05-14T10:32:31 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.clinicalExamination.VitalSignsTest -->
+      <class name="tests.clinicalExamination.VisualAcuityTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.clinicalExamination.VisualAcuityTest@6200f9cb]" started-at="2026-05-14T10:32:44 IST" name="setUp" finished-at="2026-05-14T10:32:45 IST" duration-ms="1205" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="validateFullVisualAcuityAndRefractionFlow()[pri:0, instance:tests.clinicalExamination.VisualAcuityTest@6200f9cb]" started-at="2026-05-14T10:32:45 IST" name="validateFullVisualAcuityAndRefractionFlow" finished-at="2026-05-14T10:32:57 IST" duration-ms="11566" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateFullVisualAcuityAndRefractionFlow -->
+        <test-method is-config="true" signature="captureFailure(org.testng.ITestResult)[pri:0, instance:tests.clinicalExamination.VisualAcuityTest@6200f9cb]" started-at="2026-05-14T10:32:57 IST" name="captureFailure" finished-at="2026-05-14T10:32:57 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=validateFullVisualAcuityAndRefractionFlow status=SUCCESS method=VisualAcuityTest.validateFullVisualAcuityAndRefractionFlow()[pri:0, instance:tests.clinicalExamination.VisualAcuityTest@6200f9cb] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- captureFailure -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.clinicalExamination.VisualAcuityTest@6200f9cb]" started-at="2026-05-14T10:32:57 IST" name="tearDown" finished-at="2026-05-14T10:32:57 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.clinicalExamination.VisualAcuityTest -->
+      <class name="tests.clinicalExamination.OcularHistoryTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.clinicalExamination.OcularHistoryTest@20d525]" started-at="2026-05-14T10:32:31 IST" name="setUp" finished-at="2026-05-14T10:32:32 IST" duration-ms="1274" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="validateOcularAndSystemicFlow()[pri:0, instance:tests.clinicalExamination.OcularHistoryTest@20d525]" started-at="2026-05-14T10:32:32 IST" name="validateOcularAndSystemicFlow" finished-at="2026-05-14T10:32:44 IST" duration-ms="11312" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateOcularAndSystemicFlow -->
+        <test-method is-config="true" signature="captureFailure(org.testng.ITestResult)[pri:0, instance:tests.clinicalExamination.OcularHistoryTest@20d525]" started-at="2026-05-14T10:32:44 IST" name="captureFailure" finished-at="2026-05-14T10:32:44 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=validateOcularAndSystemicFlow status=SUCCESS method=OcularHistoryTest.validateOcularAndSystemicFlow()[pri:0, instance:tests.clinicalExamination.OcularHistoryTest@20d525] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- captureFailure -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.clinicalExamination.OcularHistoryTest@20d525]" started-at="2026-05-14T10:32:44 IST" name="tearDown" finished-at="2026-05-14T10:32:44 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.clinicalExamination.OcularHistoryTest -->
+      <class name="tests.clinicalExamination.ChiefComplaintTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.clinicalExamination.ChiefComplaintTest@69453e37]" started-at="2026-05-14T10:33:35 IST" name="setUp" finished-at="2026-05-14T10:33:36 IST" duration-ms="1363" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyChiefComplaintEntry()[pri:0, instance:tests.clinicalExamination.ChiefComplaintTest@69453e37]" started-at="2026-05-14T10:33:36 IST" name="verifyChiefComplaintEntry" finished-at="2026-05-14T10:33:43 IST" duration-ms="6202" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyChiefComplaintEntry -->
+        <test-method is-config="true" signature="captureFailure(org.testng.ITestResult)[pri:0, instance:tests.clinicalExamination.ChiefComplaintTest@69453e37]" started-at="2026-05-14T10:33:43 IST" name="captureFailure" finished-at="2026-05-14T10:33:43 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyChiefComplaintEntry status=SUCCESS method=ChiefComplaintTest.verifyChiefComplaintEntry()[pri:0, instance:tests.clinicalExamination.ChiefComplaintTest@69453e37] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- captureFailure -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.clinicalExamination.ChiefComplaintTest@69453e37]" started-at="2026-05-14T10:33:43 IST" name="tearDown" finished-at="2026-05-14T10:33:43 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.clinicalExamination.ChiefComplaintTest -->
+      <class name="tests.RegistrationPageTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.RegistrationPageTest@3fc2959f]" started-at="2026-05-14T10:32:14 IST" name="setUp" finished-at="2026-05-14T10:32:17 IST" duration-ms="2254" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyNewRegistrationClick()[pri:0, instance:tests.RegistrationPageTest@3fc2959f]" started-at="2026-05-14T10:32:17 IST" name="verifyNewRegistrationClick" finished-at="2026-05-14T10:32:24 IST" duration-ms="7504" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyNewRegistrationClick -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.RegistrationPageTest@3fc2959f]" started-at="2026-05-14T10:32:24 IST" name="tearDown" finished-at="2026-05-14T10:32:24 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.RegistrationPageTest -->
+      <class name="tests.clinicalExamination.OcularExaminationTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.clinicalExamination.OcularExaminationTest@2002fc1d]" started-at="2026-05-14T10:32:57 IST" name="setUp" finished-at="2026-05-14T10:32:58 IST" duration-ms="961" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="validateOcularExaminationFlow()[pri:0, instance:tests.clinicalExamination.OcularExaminationTest@2002fc1d]" started-at="2026-05-14T10:32:58 IST" name="validateOcularExaminationFlow" finished-at="2026-05-14T10:33:14 IST" duration-ms="16228" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateOcularExaminationFlow -->
+        <test-method is-config="true" signature="captureFailure(org.testng.ITestResult)[pri:0, instance:tests.clinicalExamination.OcularExaminationTest@2002fc1d]" started-at="2026-05-14T10:33:14 IST" name="captureFailure" finished-at="2026-05-14T10:33:14 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=validateOcularExaminationFlow status=SUCCESS method=OcularExaminationTest.validateOcularExaminationFlow()[pri:0, instance:tests.clinicalExamination.OcularExaminationTest@2002fc1d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- captureFailure -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.clinicalExamination.OcularExaminationTest@2002fc1d]" started-at="2026-05-14T10:33:14 IST" name="tearDown" finished-at="2026-05-14T10:33:14 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.clinicalExamination.OcularExaminationTest@2002fc1d]" started-at="2026-05-14T10:33:14 IST" name="setUp" finished-at="2026-05-14T10:33:15 IST" duration-ms="1139" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="validateOcularExaminationWithCheckboxFlow()[pri:0, instance:tests.clinicalExamination.OcularExaminationTest@2002fc1d]" started-at="2026-05-14T10:33:15 IST" name="validateOcularExaminationWithCheckboxFlow" finished-at="2026-05-14T10:33:35 IST" duration-ms="20122" status="FAIL">
+          <exception class="org.openqa.selenium.NoSuchWindowException">
+            <message>
+              <![CDATA[no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=148.0.7778.98)
+Build info: version: '4.18.1', revision: 'b1d3319b48'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [31987c45c18086ea6c821a8b807d16c3, screenshot {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 148.0.7778.98, chrome: {chromedriverVersion: 148.0.7778.167 (65db666ac2c..., userDataDir: C:\Users\sumit\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56434}, goog:processID: 24308, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56434/devtoo..., se:cdpVersion: 148.0.7778.98, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 31987c45c18086ea6c821a8b807d16c3]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchWindowException: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=148.0.7778.98)
+Build info: version: '4.18.1', revision: 'b1d3319b48'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [31987c45c18086ea6c821a8b807d16c3, screenshot {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 148.0.7778.98, chrome: {chromedriverVersion: 148.0.7778.167 (65db666ac2c..., userDataDir: C:\Users\sumit\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56434}, goog:processID: 24308, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56434/devtoo..., se:cdpVersion: 148.0.7778.98, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 31987c45c18086ea6c821a8b807d16c3
+at jdk.internal.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:519)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:592)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:596)
+at org.openqa.selenium.remote.RemoteWebDriver.getScreenshotAs(RemoteWebDriver.java:322)
+at utils.ScreenshotUtil.captureScreenshot(ScreenshotUtil.java:21)
+at tests.clinicalExamination.OcularExaminationTest.validateOcularExaminationWithCheckboxFlow(OcularExaminationTest.java:155)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchWindowException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateOcularExaminationWithCheckboxFlow -->
+        <test-method is-config="true" signature="captureFailure(org.testng.ITestResult)[pri:0, instance:tests.clinicalExamination.OcularExaminationTest@2002fc1d]" started-at="2026-05-14T10:33:35 IST" name="captureFailure" finished-at="2026-05-14T10:33:35 IST" duration-ms="4" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=validateOcularExaminationWithCheckboxFlow status=FAILURE method=OcularExaminationTest.validateOcularExaminationWithCheckboxFlow()[pri:0, instance:tests.clinicalExamination.OcularExaminationTest@2002fc1d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.NoSuchWindowException">
+            <message>
+              <![CDATA[no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=148.0.7778.98)
+Build info: version: '4.18.1', revision: 'b1d3319b48'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [31987c45c18086ea6c821a8b807d16c3, screenshot {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 148.0.7778.98, chrome: {chromedriverVersion: 148.0.7778.167 (65db666ac2c..., userDataDir: C:\Users\sumit\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56434}, goog:processID: 24308, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56434/devtoo..., se:cdpVersion: 148.0.7778.98, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 31987c45c18086ea6c821a8b807d16c3]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchWindowException: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=148.0.7778.98)
+Build info: version: '4.18.1', revision: 'b1d3319b48'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [31987c45c18086ea6c821a8b807d16c3, screenshot {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 148.0.7778.98, chrome: {chromedriverVersion: 148.0.7778.167 (65db666ac2c..., userDataDir: C:\Users\sumit\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56434}, goog:processID: 24308, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56434/devtoo..., se:cdpVersion: 148.0.7778.98, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 31987c45c18086ea6c821a8b807d16c3
+at jdk.internal.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:519)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:592)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:596)
+at org.openqa.selenium.remote.RemoteWebDriver.getScreenshotAs(RemoteWebDriver.java:322)
+at utils.ScreenshotUtil.captureScreenshot(ScreenshotUtil.java:21)
+at tests.clinicalExamination.OcularExaminationTest.captureFailure(OcularExaminationTest.java:163)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.runAfterConfigurations(TestInvoker.java:805)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:781)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchWindowException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- captureFailure -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.clinicalExamination.OcularExaminationTest@2002fc1d]" started-at="2026-05-14T10:33:35 IST" name="tearDown" finished-at="2026-05-14T10:33:35 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.clinicalExamination.OcularExaminationTest -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
 </testng-results>

@@ -1,5 +1,3 @@
-
-
 package tests.clinicalExamination;
 
 import org.testng.Assert;
@@ -20,110 +18,94 @@ public class VisualAcuityTest extends BaseTest {
     @Test
     public void validateFullVisualAcuityAndRefractionFlow() {
 
-        // ===== VISUAL ACUITY DATA =====
         String spectacles = "Yes";
         String years = "1";
         String months = "6";
         String purpose = "Distance Vision";
-        
 
         String reUnaided = "6/18";
-        String reSpecs   = "6/6";
-        String rePH      = "6/6";
-        String reNear    = "N6";
+        String reSpecs = "6/6";
+        String rePH = "6/6";
+        String reNear = "N6";
 
         String leUnaided = "6/24";
-        String leSpecs   = "6/12";
-        String lePH      = "6/9";
-        String leNear    = "N8";
-
-        
-
-        // ===== REFRACTION DATA ====
+        String leSpecs = "6/12";
+        String lePH = "6/9";
+        String leNear = "N8";
 
         try {
-
-            // ===== LOGIN =====
             LoginPage login = new LoginPage(driver);
             login.login(
                     ConfigReader.getProperty("username"),
                     ConfigReader.getProperty("password")
             );
-            System.out.println("✅ Login successful");
+            System.out.println("Login successful");
 
-            // ===== NAVIGATION =====
             SidebarPage sidebar = new SidebarPage(driver);
             sidebar.clickMenu("Clinical Examination By Optom");
-            System.out.println("✅ Navigated to Clinical Examination");
+            System.out.println("Navigated to Clinical Examination");
 
-            // ===== OPEN PATIENT =====
             ClinicalPage clinical = new ClinicalPage(driver);
-            clinical.searchByDate("04/05/2026", "30/05/2026");
+            clinical.searchByDate("11/05/2026", "30/05/2026");
             clinical.clickNewStatusIcon();
-            System.out.println("✅ Patient opened");
+            System.out.println("Patient opened");
 
-            // ===== VISUAL ACUITY PAGE =====
             VisualAcuityPage visual = new VisualAcuityPage(driver);
-
-            System.out.println("🔵 Filling Visual Acuity...");
 
             visual.openVisualAcuityTab();
             visual.fillVisualAcuityForm(
                     spectacles, years, months, purpose,
                     reUnaided, reSpecs, rePH, reNear,
                     leUnaided, leSpecs, lePH, leNear
-                    
             );
 
-            System.out.println("✅ Visual Acuity + Other Diagnostic saved");
-            
-            // ===== REFRACTION FLOW =====
-         
-            System.out.println("🟢 Filling Refraction...");
+            System.out.println("Visual Acuity saved");
 
             visual.fillFullRefractionFlow(
+                    // PG
+                    "-1.00", "-0.50", "180", "1.75",
+                    "-1.25", "-0.75", "170", "1.75",
 
-                // ===== PG =====
-                "-1.00", "-0.50", "180", "1.75",
-                "-1.25", "-0.75", "170", "1.75",
+                    // DRY
+                    "-1.00", "-0.50", "180",
+                    "-1.25", "-0.75", "170",
 
-                // ===== DRY =====
-                "-1.00", "-0.50", "180",
-                "-1.25", "-0.75", "170",
+                    // CYCLO
+                    "-1.50", "-0.75", "180",
+                    "-1.75", "-1.00", "170",
 
-                // ===== CYCLO =====
-                "-1.50", "-0.75", "180",
-                "-1.75", "-1.00", "170",
+                    // FINAL
+                    "-1.25", "-0.50", "180", "6/6",
+                    "-1.50", "-0.75", "170", "6/6",
 
-                // ===== FINAL =====
-                "-1.25", "-0.50", "180", "6/6",
-                "-1.50", "-0.75", "170", "6/6",
+                    // EXTRA ADD
+                    "+1.00", "+1.00",
 
-                // ===== EXTRA ADD =====
-                "+1.00", "+1.00",
+                    // REMARKS
+                    "Dry OK", "Dry OK",
+                    "Cyclo OK", "Cyclo OK",
+                    "Add OK", "Add OK",
 
-                // ===== REMARKS =====
-                "Dry OK", "Dry OK",
-                "Cyclo OK", "Cyclo OK",
-                "Add OK", "Add OK",
+                    // NEAR VISION NPC
+                    "10", "10",
 
-                // ===== NPC =====
-                "6", "6",
-
-                // ===== IOP =====
-                "4 mmHg", "4 mmHg", "10:30 AM"
+                    // IOP
+                    "14 mmHg", "16 mmHg", "10:05 AM"
             );
 
-            System.out.println("✅ Full Refraction saved successfully");
+            visual.fillNearVision("N6", "10", "N6", "10");
+            visual.fillIPD("32", "30", "32", "30");
+            visual.fillIOP("10:05 AM", "14 mmHg", "10:05 AM", "16 mmHg");
 
-            Assert.assertTrue(true, "✅ Test completed successfully");
+            visual.clickRefractionSave();
+            visual.handleSuccessPopup();
 
-           
+            System.out.println("Full Refraction saved successfully");
 
-            
+            Assert.assertTrue(true, "Test completed successfully");
+
         } catch (Exception e) {
-
-            System.out.println("❌ TEST FAILED: " + e.getMessage());
+            System.out.println("TEST FAILED: " + e.getMessage());
             e.printStackTrace();
             ScreenshotUtil.captureScreenshot(driver, "VisualAcuity_Refraction_Failure");
             Assert.fail("Test failed due to exception", e);
@@ -136,4 +118,4 @@ public class VisualAcuityTest extends BaseTest {
             ScreenshotUtil.captureScreenshot(driver, result.getName());
         }
     }
-} 
+}
