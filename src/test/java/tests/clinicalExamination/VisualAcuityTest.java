@@ -94,7 +94,7 @@ public class VisualAcuityTest extends BaseTest {
             );
 
             visual.fillNearVision("N6", "10", "N6", "10");
-            visual.fillIPD("32", "30", "32", "30");
+            visual.fillIPD("32", "30", "14", "20");
             visual.fillIOP("10:05 AM", "14 mmHg", "10:05 AM", "16 mmHg");
 
             visual.clickRefractionSave();
