@@ -9,80 +9,17 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">Suite</th></tr>
-<tr><td><a href="#t0">Test</a></td><td class="num">6</td><td class="num">0</td><td class="num">0</td><td class="num attn">2</td><td class="num">114,531</td><td></td><td></td></tr>
+<tr><td><a href="#t0">Test</a></td><td class="num">8</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">66,318</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Test &#8212; failed (configuration methods)</th></tr><tr class="failedeven"><td rowspan="1">tests.clinicalExamination.OcularExaminationTest</td><td><a href="#m0">captureFailure</a></td><td rowspan="1">1778735015538</td><td rowspan="1">4</td></tr><tr><th colspan="4">Test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">tests.clinicalExamination.DiagnosisAndAdviseTest</td><td><a href="#m1">validatePatientStatusAndAdviseFlow</a></td><td rowspan="1">1778735024380</td><td rowspan="1">24733</td></tr><tr class="failedodd"><td rowspan="1">tests.clinicalExamination.OcularExaminationTest</td><td><a href="#m2">validateOcularExaminationWithCheckboxFlow</a></td><td rowspan="1">1778734995411</td><td rowspan="1">20122</td></tr><tr><th colspan="4">Test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">tests.RegistrationPageTest</td><td><a href="#m3">verifyNewRegistrationClick</a></td><td rowspan="1">1778734937087</td><td rowspan="1">7504</td></tr><tr class="passedodd"><td rowspan="1">tests.clinicalExamination.ChiefComplaintTest</td><td><a href="#m4">verifyChiefComplaintEntry</a></td><td rowspan="1">1778735016912</td><td rowspan="1">6202</td></tr><tr class="passedeven"><td rowspan="1">tests.clinicalExamination.OcularExaminationTest</td><td><a href="#m5">validateOcularExaminationFlow</a></td><td rowspan="1">1778734978040</td><td rowspan="1">16228</td></tr><tr class="passedodd"><td rowspan="1">tests.clinicalExamination.OcularHistoryTest</td><td><a href="#m6">validateOcularAndSystemicFlow</a></td><td rowspan="1">1778734952990</td><td rowspan="1">11312</td></tr><tr class="passedeven"><td rowspan="1">tests.clinicalExamination.VisualAcuityTest</td><td><a href="#m7">validateFullVisualAcuityAndRefractionFlow</a></td><td rowspan="1">1778734965510</td><td rowspan="1">11566</td></tr><tr class="passedodd"><td rowspan="1">tests.clinicalExamination.VitalSignsTest</td><td><a href="#m8">verifyVitalSignsEntry</a></td><td rowspan="1">1778734945764</td><td rowspan="1">5949</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">tests.RegistrationPageTest</td><td><a href="#m0">verifyNewRegistrationClick</a></td><td rowspan="1">1778819536127</td><td rowspan="1">10098</td></tr><tr class="passedodd"><td rowspan="1">tests.clinicalExamination.ChiefComplaintTest</td><td><a href="#m1">verifyChiefComplaintEntry</a></td><td rowspan="1">1778819548524</td><td rowspan="1">13300</td></tr><tr class="passedeven"><td rowspan="1">tests.clinicalExamination.DiagnosisAndAdviseTest</td><td><a href="#m2">validatePatientStatusAndAdviseFlow</a></td><td rowspan="1">1778819548810</td><td rowspan="1">19364</td></tr><tr class="passedodd"><td rowspan="2">tests.clinicalExamination.OcularExaminationTest</td><td><a href="#m3">validateOcularExaminationFlow</a></td><td rowspan="1">1778819536156</td><td rowspan="1">30802</td></tr><tr class="passedodd"><td><a href="#m4">validateOcularExaminationWithCheckboxFlow</a></td><td rowspan="1">1778819568408</td><td rowspan="1">30619</td></tr><tr class="passedeven"><td rowspan="1">tests.clinicalExamination.OcularHistoryTest</td><td><a href="#m5">validateOcularAndSystemicFlow</a></td><td rowspan="1">1778819536140</td><td rowspan="1">21799</td></tr><tr class="passedodd"><td rowspan="1">tests.clinicalExamination.VisualAcuityTest</td><td><a href="#m6">validateFullVisualAcuityAndRefractionFlow</a></td><td rowspan="1">1778819535810</td><td rowspan="1">23618</td></tr><tr class="passedeven"><td rowspan="1">tests.clinicalExamination.VitalSignsTest</td><td><a href="#m7">verifyVitalSignsEntry</a></td><td rowspan="1">1778819536126</td><td rowspan="1">9943</td></tr></tbody>
 </table>
-<h2>Test</h2><h3 id="m0">tests.clinicalExamination.OcularExaminationTest#captureFailure</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>[TestResult name=validateOcularExaminationWithCheckboxFlow status=FAILURE method=OcularExaminationTest.validateOcularExaminationWithCheckboxFlow()[pri:0, instance:tests.clinicalExamination.OcularExaminationTest@2002fc1d] output={null}]</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.openqa.selenium.NoSuchWindowException: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=148.0.7778.98)
-Build info: version: &apos;4.18.1&apos;, revision: &apos;b1d3319b48&apos;
-System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [31987c45c18086ea6c821a8b807d16c3, screenshot {}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 148.0.7778.98, chrome: {chromedriverVersion: 148.0.7778.167 (65db666ac2c..., userDataDir: C:\Users\sumit\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56434}, goog:processID: 24308, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56434/devtoo..., se:cdpVersion: 148.0.7778.98, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 31987c45c18086ea6c821a8b807d16c3
-	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:519)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:592)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:596)
-	at org.openqa.selenium.remote.RemoteWebDriver.getScreenshotAs(RemoteWebDriver.java:322)
-	at utils.ScreenshotUtil.captureScreenshot(ScreenshotUtil.java:21)
-	at tests.clinicalExamination.OcularExaminationTest.captureFailure(OcularExaminationTest.java:163)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m1">tests.clinicalExamination.DiagnosisAndAdviseTest#validatePatientStatusAndAdviseFlow</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: Test failed due to exception
-	at tests.clinicalExamination.DiagnosisAndAdviseTest.validatePatientStatusAndAdviseFlow(DiagnosisAndAdviseTest.java:73)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-Caused by: org.openqa.selenium.TimeoutException: Clinical grid loaded, but no table rows were rendered.
-	at pages.ClinicalPage.waitForClinicalGridToFinishLoading(ClinicalPage.java:177)
-	at pages.ClinicalPage.searchByDate(ClinicalPage.java:83)
-	at tests.clinicalExamination.DiagnosisAndAdviseTest.validatePatientStatusAndAdviseFlow(DiagnosisAndAdviseTest.java:38)
-	... 28 more
-Caused by: org.openqa.selenium.TimeoutException: Expected condition failed: waiting for pages.ClinicalPage$$Lambda$702/0x000001f201231b60@28468162 (tried for 20 second(s) with 500 milliseconds interval)
-Build info: version: &apos;4.18.1&apos;, revision: &apos;b1d3319b48&apos;
-System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 148.0.7778.98, chrome: {chromedriverVersion: 148.0.7778.167 (65db666ac2c..., userDataDir: C:\Users\sumit\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:60176}, goog:processID: 22568, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:60176/devtoo..., se:cdpVersion: 148.0.7778.98, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: aace721bdb5292b705cd7a53ce4e233e
-	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
-	at pages.ClinicalPage.waitForClinicalGridToFinishLoading(ClinicalPage.java:175)
-	... 30 more
-... Removed 28 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m2">tests.clinicalExamination.OcularExaminationTest#validateOcularExaminationWithCheckboxFlow</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.openqa.selenium.NoSuchWindowException: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=148.0.7778.98)
-Build info: version: &apos;4.18.1&apos;, revision: &apos;b1d3319b48&apos;
-System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [31987c45c18086ea6c821a8b807d16c3, screenshot {}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 148.0.7778.98, chrome: {chromedriverVersion: 148.0.7778.167 (65db666ac2c..., userDataDir: C:\Users\sumit\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56434}, goog:processID: 24308, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56434/devtoo..., se:cdpVersion: 148.0.7778.98, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 31987c45c18086ea6c821a8b807d16c3
-	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:519)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:592)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:596)
-	at org.openqa.selenium.remote.RemoteWebDriver.getScreenshotAs(RemoteWebDriver.java:322)
-	at utils.ScreenshotUtil.captureScreenshot(ScreenshotUtil.java:21)
-	at tests.clinicalExamination.OcularExaminationTest.validateOcularExaminationWithCheckboxFlow(OcularExaminationTest.java:155)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m3">tests.RegistrationPageTest#verifyNewRegistrationClick</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m4">tests.clinicalExamination.ChiefComplaintTest#verifyChiefComplaintEntry</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m5">tests.clinicalExamination.OcularExaminationTest#validateOcularExaminationFlow</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m6">tests.clinicalExamination.OcularHistoryTest#validateOcularAndSystemicFlow</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m7">tests.clinicalExamination.VisualAcuityTest#validateFullVisualAcuityAndRefractionFlow</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m8">tests.clinicalExamination.VitalSignsTest#verifyVitalSignsEntry</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>Test</h2><h3 id="m0">tests.RegistrationPageTest#verifyNewRegistrationClick</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">tests.clinicalExamination.ChiefComplaintTest#verifyChiefComplaintEntry</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">tests.clinicalExamination.DiagnosisAndAdviseTest#validatePatientStatusAndAdviseFlow</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">tests.clinicalExamination.OcularExaminationTest#validateOcularExaminationFlow</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">tests.clinicalExamination.OcularExaminationTest#validateOcularExaminationWithCheckboxFlow</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">tests.clinicalExamination.OcularHistoryTest#validateOcularAndSystemicFlow</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m6">tests.clinicalExamination.VisualAcuityTest#validateFullVisualAcuityAndRefractionFlow</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m7">tests.clinicalExamination.VitalSignsTest#verifyVitalSignsEntry</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>
