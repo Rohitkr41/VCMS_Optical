@@ -39,24 +39,29 @@ public class PurchaseTest extends BaseTest {
         );
 
         // ===== STEP 1: MAIN PAGE REGION =====
-        purchasePage.selectRegional("REGIONALMUKESH");
+//        purchasePage.selectRegional("REGIONALMUKESH");
 
         // ===== STEP 2: ADD NEW GRN =====
         purchasePage.clickAddNewGRN();
 
         // ===== STEP 3: MODAL SELECTION =====
-        purchasePage.selectModalRegional("REGIONALMUKESH");
+        purchasePage.selectModalRegional("REGV3M");
+//        purchasePage.selectModalRegional("REGIONALAJAY");
+//        purchasePage.selectModalRegional("SHRI GURU MAHIPATIRAJ EYE BANK  RESEARCH FOUNDATION TRUST");
 
-        purchasePage.enterAndSelectPONumber("V001-26-PO-0007");
+        purchasePage.enterAndSelectPONumber("43531-26-PO-0041");
 
         purchasePage.clickGoButton();
 
         // ===== STEP 4: SKU DATA =====
         Map<String, GRNItemData> skuData = new HashMap<>();
-
-//        skuData.put("FR26-0006", new GRNItemData("0", "4"));
-        skuData.put("LE26-0006", new GRNItemData("0", "4"));
-        skuData.put("LE26-0009", new GRNItemData("0", "3"));
+        
+        skuData.put("FR26-0005", new GRNItemData("0", "10"));
+        skuData.put("FR26-0006", new GRNItemData("0", "10"));
+        skuData.put("CA26-0004", new GRNItemData("0", "10"));
+        skuData.put("CA26-0005", new GRNItemData("0", "10"));
+//        skuData.put("LE26-0006", new GRNItemData("0", "4"));
+//        skuData.put("LE26-0009", new GRNItemData("0", "3"));
 //        skuData.put("FR26-0007", new GRNItemData("0", "2"));
         
 

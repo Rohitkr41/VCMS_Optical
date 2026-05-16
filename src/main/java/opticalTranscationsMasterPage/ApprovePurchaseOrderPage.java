@@ -3,6 +3,7 @@ package opticalTranscationsMasterPage;
 import java.io.File;
 import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -36,6 +37,7 @@ public class ApprovePurchaseOrderPage extends BasePage {
     private By searchButton = By.id("APO_btnSearch");
 
     private By poTableRows = By.xpath("//table[@id='APO_tblRecord']//tbody//tr");
+    private By poStatusLabelInRow = By.cssSelector("td[name='code'] label");
     private By approveButton = By.id("APO_btnApprovePONew");
 
     private By overlay = By.id("V3MOverlay");
@@ -54,7 +56,6 @@ public class ApprovePurchaseOrderPage extends BasePage {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
             wait.until(ExpectedConditions.visibilityOfElementLocated(searchButton));
 
-            // Screenshot for debug
             File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(src, new File("D:\\rohit\\VcmsOptical\\screenshots\\afterMenuClick.png"));
 
@@ -77,24 +78,24 @@ public class ApprovePurchaseOrderPage extends BasePage {
     // ===== FILTER POs =====
     public void filterPurchaseOrders(String regional, String supplierName, String poNumber, String fromDate, String toDate) {
 
-        if (regional != null && !regional.isEmpty()) {
-            Select select = new Select(driver.findElement(regionalDropdown));
-            select.selectByVisibleText(regional);
+        waitForOverlayToDisappear();
+
+        if (regional != null && !regional.trim().isEmpty()) {
+            selectDropdownByNormalizedText(regionalDropdown, regional);
         }
 
-        if (supplierName != null && !supplierName.isEmpty()) {
+        if (supplierName != null && !supplierName.trim().isEmpty()) {
             driver.findElement(supplierNameInput).clear();
             driver.findElement(supplierNameInput).sendKeys(supplierName);
         }
 
-        if (poNumber != null && !poNumber.isEmpty()) {
+        if (poNumber != null && !poNumber.trim().isEmpty()) {
             driver.findElement(poNumberInput).clear();
             driver.findElement(poNumberInput).sendKeys(poNumber);
         }
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].value='" + fromDate + "';", driver.findElement(fromDateInput));
-        js.executeScript("arguments[0].value='" + toDate + "';", driver.findElement(toDateInput));
+        setDateValue(fromDateInput, fromDate);
+        setDateValue(toDateInput, toDate);
 
         driver.findElement(searchButton).click();
         waitForOverlayToDisappear();
@@ -114,31 +115,23 @@ public class ApprovePurchaseOrderPage extends BasePage {
 
         for (WebElement row : rows) {
             try {
-                WebElement statusCell = row.findElement(By.xpath(".//td[15]//label"));
-                String status = statusCell.getText().trim();
+                WebElement statusCell = row.findElement(poStatusLabelInRow);
+                String status = normalizeText(statusCell.getText());
 
-                if (status.equalsIgnoreCase("New PO")) {
+                if (isNewPoStatus(status)) {
 
-                    // Click row
                     ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", row);
                     ((JavascriptExecutor) driver).executeScript("arguments[0].click();", row);
 
-                    // Click main Approve PO button
                     WebElement approveBtn = driver.findElement(approveButton);
                     ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", approveBtn);
                     ((JavascriptExecutor) driver).executeScript("arguments[0].click();", approveBtn);
 
-                    // Wait for overlay
                     waitForOverlayToDisappear();
-
-                    // Submit approval remark
                     submitApprovalRemark(remark);
-
-                    anyApproved = true;
-                 // Click Yes on confirmation popup
                     confirmApprovalPopup();
 
-                    // Optional: wait a bit before next row
+                    anyApproved = true;
                     Thread.sleep(1000);
                 }
 
@@ -152,6 +145,10 @@ public class ApprovePurchaseOrderPage extends BasePage {
         if (!anyApproved) {
             System.out.println("No 'New PO' records found to approve.");
         }
+    }
+
+    private boolean isNewPoStatus(String status) {
+        return "New PO".equalsIgnoreCase(status) || "New".equalsIgnoreCase(status);
     }
 
     // ===== SUBMIT APPROVAL REMARK =====
@@ -187,24 +184,80 @@ public class ApprovePurchaseOrderPage extends BasePage {
             // ignore if overlay not present
         }
     }
-    
+
+    private void selectDropdownByNormalizedText(By dropdownLocator, String expectedText) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownLocator));
+
+        wait.until(driver -> new Select(dropdown).getOptions().size() > 1);
+
+        Select select = new Select(dropdown);
+        String expected = normalizeText(expectedText);
+
+        for (WebElement option : select.getOptions()) {
+            if (normalizeText(option.getText()).equalsIgnoreCase(expected)) {
+                select.selectByVisibleText(option.getText());
+                return;
+            }
+        }
+
+        for (WebElement option : select.getOptions()) {
+            String actual = normalizeText(option.getText());
+            if (actual.toLowerCase().contains(expected.toLowerCase())
+                    || expected.toLowerCase().contains(actual.toLowerCase())) {
+                select.selectByVisibleText(option.getText());
+                return;
+            }
+        }
+
+        String availableOptions = select.getOptions()
+            .stream()
+            .map(WebElement::getText)
+            .map(this::normalizeText)
+            .filter(text -> !text.isEmpty())
+            .collect(Collectors.joining(" | "));
+
+        throw new NoSuchElementException(
+            "Cannot locate dropdown option: '" + expectedText + "'. Available options: " + availableOptions
+        );
+    }
+
+    private void setDateValue(By locator, String value) {
+        if (value == null || value.trim().isEmpty()) {
+            return;
+        }
+
+        ((JavascriptExecutor) driver).executeScript(
+            "arguments[0].value=arguments[1]; arguments[0].dispatchEvent(new Event('change'));",
+            driver.findElement(locator),
+            value
+        );
+    }
+
+    private String normalizeText(String text) {
+        if (text == null) {
+            return "";
+        }
+
+        return text.replace('\u00A0', ' ')
+            .replaceAll("\\s+", " ")
+            .trim();
+    }
+
     /**
-     * Clicks the "Yes" button on the approval confirmation popup
+     * Clicks the "Yes" button on the approval confirmation popup.
      */
     public void confirmApprovalPopup() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-            // Wait until popup is visible
             WebElement yesButton = wait.until(
                 ExpectedConditions.elementToBeClickable(By.id("popup_ok"))
             );
 
-            // Scroll and click Yes
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", yesButton);
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", yesButton);
 
-            // Wait for overlay or popup to disappear
             waitForOverlayToDisappear();
 
             System.out.println("Clicked 'Yes' on approval confirmation popup.");
@@ -213,8 +266,4 @@ public class ApprovePurchaseOrderPage extends BasePage {
             throw new RuntimeException("Failed to click 'Yes' on approval confirmation popup.", e);
         }
     }
-    
-  
-    
-    
 }

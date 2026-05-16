@@ -1,40 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite parallel="classes" name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" parallel="classes" name="Test(failed)">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="tests.clinicalExamination.OcularExaminationTest">
-        <methods>
-          <include name="setUp"/>
-          <include name="validateOcularExaminationFlow"/>
-          <include name="tearDown"/>
-          <include name="captureFailure"/>
-        </methods>
-      </class> <!-- tests.clinicalExamination.OcularExaminationTest -->
-      <class name="tests.clinicalExamination.OcularHistoryTest">
+      <class name="opticalTranscationMasterTest.ApprovePurchaseOrderTest">
         <methods>
           <include name="setUp"/>
           <include name="tearDown"/>
-          <include name="captureFailure"/>
-          <include name="validateOcularAndSystemicFlow"/>
-        </methods>
-      </class> <!-- tests.clinicalExamination.OcularHistoryTest -->
-      <class name="tests.clinicalExamination.VitalSignsTest">
-        <methods>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-          <include name="verifyVitalSignsEntry"/>
+          <include name="verifyApprovePurchaseOrder"/>
           <include name="captureFailure"/>
         </methods>
-      </class> <!-- tests.clinicalExamination.VitalSignsTest -->
-      <class name="tests.clinicalExamination.VisualAcuityTest">
-        <methods>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-          <include name="validateFullVisualAcuityAndRefractionFlow"/>
-          <include name="captureFailure"/>
-        </methods>
-      </class> <!-- tests.clinicalExamination.VisualAcuityTest -->
+      </class> <!-- opticalTranscationMasterTest.ApprovePurchaseOrderTest -->
     </classes>
-  </test> <!-- Test(failed) -->
-</suite> <!-- Failed suite [Suite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->
