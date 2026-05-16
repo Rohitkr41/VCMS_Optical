@@ -42,7 +42,8 @@ public class RegistrationPageTest extends BaseTest {
         registrationPage.enterAddress("House No 12, Main Road");
 //        registrationPage.selectAreaVillage("MALLAUR");   //abhishek vc
 //        registrationPage.selectAreaVillage("Banupura");  // mukesh vc
-        registrationPage.selectAreaVillage("Chakathal");  //komal vc
+//        registrationPage.selectAreaVillage("Chakathal");  //komal vc
+        registrationPage.selectAreaVillage("BEGAH");  //VCRahul vc
 //        registrationPage.selectAreaVillage("Baharabad");  //komal vc
 //        registrationPage.selectAreaVillage("Bahadurpur");  //komal vc 206
 //        registrationPage.selectAreaVillage("Barhauli");  //mukesh vc

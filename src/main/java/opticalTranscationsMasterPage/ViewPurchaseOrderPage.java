@@ -1,6 +1,5 @@
 package opticalTranscationsMasterPage;
 
-import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -9,31 +8,20 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import pages.BasePage;
-
 public class ViewPurchaseOrderPage extends BasePage {
 
     public ViewPurchaseOrderPage(WebDriver driver) {
         super(driver);
     }
 
-    // ===== MENU LOCATORS =====
-    private By opticalTransactionsMenu = By.xpath(
-            "//span[normalize-space()='Optical Transactions']/ancestor::a"
-    );
-
+    private By opticalTransactionsMenu = By.xpath("//span[normalize-space()='Optical Transactions']/ancestor::a");
     private By opticalTransactionsCollapse = By.id("OpticalTransacations");
-
-    private By viewPurchaseOrderMenu = By.cssSelector(
-            "a[href='/VCMS_Optical/OpticalRequest/ViewPurchaseOrder']"
-    );
-
+    private By viewPurchaseOrderMenu = By.cssSelector("a[href='/VCMS_Optical/OpticalRequest/ViewPurchaseOrder']");
     private By addNewButton = By.id("VPO_btnAddNew");
 
-    // ===== ADD NEW PURCHASE ORDER LOCATORS =====
     private By directPORadio = By.id("VPO_rdbmdlDirect");
     private By challanBasedPORadio = By.id("VPO_rdbmdlChallanBased");
 
@@ -49,10 +37,9 @@ public class ViewPurchaseOrderPage extends BasePage {
     private By freeItemCheckbox = By.id("VPO_chkFreeItem");
     private By freeItemQtyInput = By.id("VPO_txtFreeItem");
     private By discountInput = By.id("VPO_txtDiscount");
-   
 
     private By addPOItemsButton = By.id("VPO_btnAddIndentListInGrid");
-    private By poItemsGridRows = By.xpath("//table[@id='VPO_mdltblRecord']//tr");
+    private By poItemsGridRows = By.xpath("//table[@id='VPO_mdltblRecord']//tbody/tr");
 
     private By overlay = By.id("V3MOverlay");
     private By popupOverlay = By.id("popup_overlay");
@@ -63,39 +50,31 @@ public class ViewPurchaseOrderPage extends BasePage {
             "//table[contains(@class,'ui-autocomplete') or contains(@id,'ui-id')]//tr | " +
             "//tr[td]"
     );
-    
+
     private By itemTotalGSTText = By.id("PurchaseOrder_spnItemTotalGST");
     private By purchaseRateInput = By.id("VPO_txtPruchaseRate");
     private By mrpInput = By.id("VPO_txtMRP");
-    
+
     private By purchaseTypePopup = By.id("popup_container");
     private By popupNoButton = By.id("popup_cancel");
-    private By popupYesButton = By.id("popup_ok");
-    
-    private By gstAmountInput =
-            By.id("VPO_txtTotalGST");
 
-    private By finalTotalAmountInput =
-            By.id("VPO_txt_GSTTotal_GrossTotal");
-    
-    //submitStep
- // ===== SUBMIT PO LOCATORS =====
+    private By gstAmountInput = By.id("VPO_txtTotalGST");
+    private By finalTotalAmountInput = By.id("VPO_txt_GSTTotal_GrossTotal");
+
+    private By grossTotalInput = By.id("VPO_txtTotalAmount");
+    private By totalQtyInput = By.id("VPO_txtTotalQuantity");
+    private By cgstInput = By.id("VPO_txtCGST");
+    private By sgstInput = By.id("VPO_txtSGST");
+    private By igstInput = By.id("VPO_txtIGST");
+
     private By submitPOTab = By.xpath("//a[contains(text(),'Submit Purchase Order')]");
-
     private By finalRemarksTextArea = By.id("VPO_txtSubmitPoTextAreaRemark");
-
     private By freightGSTCheckbox = By.id("VPO_chkFreightChargesWithGST");
-
     private By freightInput = By.id("VPO_txtFreight");
     private By freightRemarksInput = By.id("VPO_txtFreightRemarks");
-
     private By finalSubmitButton = By.id("VPO_btnFinalPOSubmit");
 
-    
-    
-    // ===== DATA CLASS FOR MULTIPLE ITEMS =====
     public static class POItemDetails {
-
         public String itemType;
         public String itemSearchText;
         public String itemNameToSelect;
@@ -123,27 +102,16 @@ public class ViewPurchaseOrderPage extends BasePage {
         }
     }
 
-    // ===== MENU ACTION METHODS =====
     public void openOpticalTransactionsMenu() {
-        WebElement menu = wait.until(
-                ExpectedConditions.presenceOfElementLocated(opticalTransactionsMenu)
-        );
-
-        WebElement collapse = wait.until(
-                ExpectedConditions.presenceOfElementLocated(opticalTransactionsCollapse)
-        );
+        WebElement menu = wait.until(ExpectedConditions.presenceOfElementLocated(opticalTransactionsMenu));
+        WebElement collapse = wait.until(ExpectedConditions.presenceOfElementLocated(opticalTransactionsCollapse));
 
         String classValue = collapse.getAttribute("class");
 
         if (!classValue.contains("show")) {
             scrollToElement(menu);
             jsClick(menu);
-
-            wait.until(ExpectedConditions.attributeContains(
-                    opticalTransactionsCollapse,
-                    "class",
-                    "show"
-            ));
+            wait.until(ExpectedConditions.attributeContains(opticalTransactionsCollapse, "class", "show"));
         }
 
         System.out.println("Optical Transactions menu opened.");
@@ -152,10 +120,7 @@ public class ViewPurchaseOrderPage extends BasePage {
     public void clickViewPurchaseOrder() {
         openOpticalTransactionsMenu();
 
-        WebElement viewPurchaseOrder = wait.until(
-                ExpectedConditions.presenceOfElementLocated(viewPurchaseOrderMenu)
-        );
-
+        WebElement viewPurchaseOrder = wait.until(ExpectedConditions.presenceOfElementLocated(viewPurchaseOrderMenu));
         scrollToElement(viewPurchaseOrder);
 
         try {
@@ -167,35 +132,10 @@ public class ViewPurchaseOrderPage extends BasePage {
 
         System.out.println("Clicked on View Purchase Order.");
     }
-    
-    
-    private void handlePurchaseTypePopupAndClickNo() {
-    try {
-        List<WebElement> popups = driver.findElements(purchaseTypePopup);
-
-        if (!popups.isEmpty() && popups.get(0).isDisplayed()) {
-
-            WebElement noBtn = driver.findElement(popupNoButton);
-
-            try {
-                noBtn.click();
-            } catch (Exception e) {
-                jsClick(noBtn);
-            }
-
-            System.out.println("Popup handled fast → NO clicked");
-        }
-
-    } catch (Exception e) {
-        // ignore
-    }
-}
 
     public boolean isViewPurchaseOrderPageOpened() {
         try {
-            wait.until(ExpectedConditions.urlContains(
-                    "/VCMS_Optical/OpticalRequest/ViewPurchaseOrder"
-            ));
+            wait.until(ExpectedConditions.urlContains("/VCMS_Optical/OpticalRequest/ViewPurchaseOrder"));
             return true;
         } catch (Exception e) {
             return false;
@@ -203,10 +143,7 @@ public class ViewPurchaseOrderPage extends BasePage {
     }
 
     public void clickAddNew() {
-        WebElement addNew = wait.until(
-                ExpectedConditions.elementToBeClickable(addNewButton)
-        );
-
+        WebElement addNew = wait.until(ExpectedConditions.elementToBeClickable(addNewButton));
         scrollToElement(addNew);
 
         try {
@@ -219,7 +156,6 @@ public class ViewPurchaseOrderPage extends BasePage {
         System.out.println("Clicked on Add New button.");
     }
 
-    // ===== ADD NEW PO METHODS =====
     public void selectPODirect() {
         selectRadioButton(directPORadio);
         System.out.println("PO Type selected: Direct");
@@ -250,159 +186,143 @@ public class ViewPurchaseOrderPage extends BasePage {
         System.out.println("Item Name selected: " + itemNameToSelect);
     }
 
-public void selectPurchaseTypeLocal() {
-    setPurchaseType(localPurchaseRadio, interStatePurchaseRadio, "Local");
-    System.out.println("Purchase Type selected: Local");
-}
-
-public void selectPurchaseTypeInterState() {
-    setPurchaseType(interStatePurchaseRadio, localPurchaseRadio, "Inter-State");
-    System.out.println("Purchase Type selected: Inter-State");
-}
-
-private void selectPurchaseTypeByName(String purchaseType) {
-    if (purchaseType.equalsIgnoreCase("Local")) {
-        selectPurchaseTypeLocal();
-    } else if (purchaseType.equalsIgnoreCase("Inter-State")
-            || purchaseType.equalsIgnoreCase("InterState")) {
-        selectPurchaseTypeInterState();
-    } else {
-        throw new IllegalArgumentException("Invalid Purchase Type: " + purchaseType);
+    public void selectPurchaseTypeLocal() {
+        setPurchaseType(localPurchaseRadio, "Local");
     }
-}
 
+    public void selectPurchaseTypeInterState() {
+        setPurchaseType(interStatePurchaseRadio, "Inter-State");
+    }
 
+    private void selectPurchaseTypeByName(String purchaseType) {
+        if (purchaseType.equalsIgnoreCase("Local")) {
+            selectPurchaseTypeLocal();
+        } else if (purchaseType.equalsIgnoreCase("Inter-State")
+                || purchaseType.equalsIgnoreCase("InterState")) {
+            selectPurchaseTypeInterState();
+        } else {
+            throw new IllegalArgumentException("Invalid Purchase Type: " + purchaseType);
+        }
+    }
 
-	private void setPurchaseType(By selectedRadioLocator,
-                             By otherRadioLocator,
-                             String purchaseTypeName) {
+    private void setPurchaseType(By selectedRadioLocator, String purchaseTypeName) {
+        waitForOverlayToDisappear();
 
-    waitForOverlayToDisappear();
+        clickRadioByJS(selectedRadioLocator);
+        waitForOverlayToDisappear();
 
-    sleep(1500);
+        handlePurchaseTypePopupAndClickNo();
+        waitForOverlayToDisappear();
 
-    WebElement selectedRadio = wait.until(
-            ExpectedConditions.presenceOfElementLocated(selectedRadioLocator)
-    );
+        clickRadioByJS(selectedRadioLocator);
+        waitForOverlayToDisappear();
 
-    scrollToElement(selectedRadio);
+        wait.until(driver -> driver.findElement(selectedRadioLocator).isSelected());
 
-    try {
+        System.out.println("Purchase Type selected: " + purchaseTypeName);
+    }
 
-        wait.until(ExpectedConditions.visibilityOf(selectedRadio));
+    private void clickRadioByJS(By locator) {
+        WebElement radio = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        scrollToElement(radio);
 
-        if (!selectedRadio.isSelected()) {
+        ((JavascriptExecutor) driver).executeScript(
+                "var el = arguments[0];" +
+                "if (!el.checked) { el.click(); }" +
+                "el.checked = true;" +
+                "el.dispatchEvent(new Event('input', { bubbles: true }));" +
+                "el.dispatchEvent(new Event('change', { bubbles: true }));" +
+                "if (window.jQuery) { $(el).trigger('input').trigger('change'); }",
+                radio
+        );
+    }
 
-            try {
+    private void ensurePurchaseTypeStillSelected(String purchaseType) {
+        By expectedRadio;
+        By otherRadio;
 
-                selectedRadio.click();
-
-            } catch (Exception e) {
-
-                ((JavascriptExecutor) driver).executeScript(
-                        "arguments[0].click();",
-                        selectedRadio
-                );
-            }
+        if (purchaseType.equalsIgnoreCase("Local")) {
+            expectedRadio = localPurchaseRadio;
+            otherRadio = interStatePurchaseRadio;
+        } else if (purchaseType.equalsIgnoreCase("Inter-State")
+                || purchaseType.equalsIgnoreCase("InterState")) {
+            expectedRadio = interStatePurchaseRadio;
+            otherRadio = localPurchaseRadio;
+        } else {
+            throw new IllegalArgumentException("Invalid Purchase Type: " + purchaseType);
         }
 
-    } catch (Exception e) {
+        WebElement expected = wait.until(ExpectedConditions.presenceOfElementLocated(expectedRadio));
+        WebElement other = wait.until(ExpectedConditions.presenceOfElementLocated(otherRadio));
 
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].checked=true;" +
-                "arguments[0].dispatchEvent(new Event('change',{bubbles:true}));",
-                selectedRadio
-        );
+        if (!expected.isSelected()) {
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].checked = true;" +
+                    "arguments[1].checked = false;" +
+                    "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));" +
+                    "arguments[0].dispatchEvent(new Event('change', { bubbles: true }));" +
+                    "if (window.jQuery) { $(arguments[0]).trigger('input').trigger('change'); }",
+                    expected,
+                    other
+            );
+        }
+
+        wait.until(driver -> driver.findElement(expectedRadio).isSelected());
+        System.out.println("Purchase Type verified: " + purchaseType);
     }
 
-    waitForOverlayToDisappear();
+    private void handlePurchaseTypePopupAndClickNo() {
+        try {
+            List<WebElement> popups = driver.findElements(purchaseTypePopup);
 
-    sleep(1000);
+            if (!popups.isEmpty() && popups.get(0).isDisplayed()) {
+                WebElement noBtn = driver.findElement(popupNoButton);
 
-    handlePurchaseTypePopupAndClickNo();
+                try {
+                    noBtn.click();
+                } catch (Exception e) {
+                    jsClick(noBtn);
+                }
 
-    System.out.println("Purchase Type selected: " + purchaseTypeName);
-}
-	
-	private void sleep(long millis) {
-
-	    try {
-
-	        Thread.sleep(millis);
-
-	    } catch (InterruptedException e) {
-
-	        Thread.currentThread().interrupt();
-	    }
-	}
-
-
-	private void waitForSelectedItemDetailsToLoad() {
-	    wait.until(driver -> {
-	        try {
-	            String rate = driver.findElement(purchaseRateInput).getAttribute("value");
-	            String mrp = driver.findElement(mrpInput).getAttribute("value");
-
-	            return rate != null && !rate.trim().isEmpty()
-	                    && mrp != null && !mrp.trim().isEmpty();
-	        } catch (Exception e) {
-	            return false;
-	        }
-	    });
-
-	    waitForOverlayToDisappear();
-	}
-
-	
-   public void enterQuantity(String quantity) {
-
-    String qty = (quantity == null || quantity.trim().isEmpty())
-            ? "1"
-            : quantity.trim();
-
-    waitForOverlayToDisappear();
-
-    WebElement qtyField = wait.until(
-            ExpectedConditions.elementToBeClickable(quantityInput)
-    );
-
-    scrollToElement(qtyField);
-
-    try {
-
-        qtyField.click();
-
-        qtyField.sendKeys(Keys.CONTROL + "a");
-        qtyField.sendKeys(Keys.DELETE);
-
-        // Direct JS value set (FASTEST)
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].value=arguments[1];" +
-                "arguments[0].dispatchEvent(new Event('input',{bubbles:true}));" +
-                "arguments[0].dispatchEvent(new Event('change',{bubbles:true}));",
-                qtyField,
-                qty
-        );
-
-        qtyField.sendKeys(Keys.TAB);
-
-    } catch (Exception e) {
-
-        throw new RuntimeException("Unable to enter quantity : " + qty, e);
+                waitForPopupOverlay();
+                System.out.println("Popup handled fast: NO clicked");
+            }
+        } catch (Exception e) {
+            // Popup is optional.
+        }
     }
 
-    wait.until(driver ->
-            qtyField.getAttribute("value").trim().equals(qty)
-    );
+    private void waitForSelectedItemDetailsToLoad() {
+        wait.until(driver -> {
+            try {
+                String rate = driver.findElement(purchaseRateInput).getAttribute("value");
+                String mrp = driver.findElement(mrpInput).getAttribute("value");
 
-    System.out.println("Quantity entered successfully: " + qty);
-}
+                return rate != null && !rate.trim().isEmpty()
+                        && parseNumber(rate) > 0
+                        && mrp != null && !mrp.trim().isEmpty();
+            } catch (Exception e) {
+                return false;
+            }
+        });
+
+        waitForOverlayToDisappear();
+    }
+
+    public void enterQuantity(String quantity) {
+        String qty = (quantity == null || quantity.trim().isEmpty()) ? "1" : quantity.trim();
+
+        waitForOverlayToDisappear();
+        setInputValueByJS(quantityInput, qty);
+        triggerCalculationEvents(quantityInput);
+
+        wait.until(driver -> nearlyEqual(valueOf(totalQtyInput), parseNumber(qty)));
+
+        System.out.println("Quantity entered successfully: " + qty);
+    }
 
     public void selectFreeItem(boolean isFreeItem, String freeQty) {
-        WebElement checkbox = wait.until(
-                ExpectedConditions.presenceOfElementLocated(freeItemCheckbox)
-        );
-
+        WebElement checkbox = wait.until(ExpectedConditions.presenceOfElementLocated(freeItemCheckbox));
         scrollToElement(checkbox);
 
         if (checkbox.isSelected() != isFreeItem) {
@@ -416,98 +336,107 @@ private void selectPurchaseTypeByName(String purchaseType) {
         dispatchChangeEvent(checkbox);
 
         if (isFreeItem && freeQty != null && !freeQty.trim().isEmpty()) {
-            enterText(freeItemQtyInput, freeQty);
+            setInputValue(freeItemQtyInput, freeQty.trim());
         }
 
         System.out.println("Is Free Item selected: " + isFreeItem);
     }
 
-   public void enterDiscount(String discount) {
+    public void enterDiscount(String discount) {
+        String value = (discount == null || discount.trim().isEmpty()) ? "0" : discount.trim();
 
-    String value = (discount == null || discount.trim().isEmpty())
-            ? "0"
-            : discount.trim();
+        waitForOverlayToDisappear();
 
-    WebElement element = wait.until(
-            ExpectedConditions.elementToBeClickable(discountInput)
-    );
+        WebElement discountField = wait.until(ExpectedConditions.elementToBeClickable(discountInput));
+        scrollToElement(discountField);
 
-    scrollToElement(element);
+        ((JavascriptExecutor) driver).executeScript(
+                "var el = arguments[0];" +
+                "var val = arguments[1];" +
+                "el.removeAttribute('readonly');" +
+                "el.removeAttribute('disabled');" +
+                "var setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;" +
+                "el.focus();" +
+                "setter.call(el, '');" +
+                "el.dispatchEvent(new Event('input', { bubbles: true }));" +
+                "el.dispatchEvent(new Event('change', { bubbles: true }));" +
+                "if (window.jQuery) { $(el).val('').trigger('input').trigger('change'); }" +
+                "setter.call(el, val);" +
+                "el.dispatchEvent(new Event('input', { bubbles: true }));" +
+                "el.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));" +
+                "el.dispatchEvent(new Event('change', { bubbles: true }));" +
+                "el.dispatchEvent(new Event('blur', { bubbles: true }));" +
+                "if (window.jQuery) { $(el).val(val).trigger('input').trigger('keyup').trigger('change').trigger('blur'); }",
+                discountField,
+                value
+        );
 
-    ((JavascriptExecutor) driver).executeScript(
-            "arguments[0].value=arguments[1];" +
-            "arguments[0].dispatchEvent(new Event('input',{bubbles:true}));" +
-            "arguments[0].dispatchEvent(new Event('change',{bubbles:true}));",
-            element,
-            value
-    );
+        wait.until(driver -> nearlyEqual(valueOf(discountInput), parseNumber(value)));
+        waitForOverlayToDisappear();
 
-    element.sendKeys(Keys.TAB);
-
-    waitForOverlayToDisappear();
-
-    System.out.println("Discount entered: " + value);
-}
-   
-  private void waitForGSTCalculation() {
-
-    wait.until(driver -> {
-
-        try {
-
-            String gst = driver.findElement(gstAmountInput)
-                    .getAttribute("value")
-                    .trim();
-
-            String total = driver.findElement(finalTotalAmountInput)
-                    .getAttribute("value")
-                    .trim();
-
-            System.out.println("GST VALUE = " + gst);
-            System.out.println("FINAL TOTAL = " + total);
-
-            // only verify calculation completed
-            return !gst.isEmpty()
-                    && !total.isEmpty()
-                    && !gst.contains("NaN")
-                    && !total.contains("NaN");
-
-        } catch (Exception e) {
-
-            return false;
-        }
-    });
-
-    sleep(1000);
-}
-   
-
-
-
- public void clickAddPOItems() {
-
-    waitForGSTCalculation();
-
-    int beforeCount = getPOGridRowCount();
-
-    WebElement addPOItem = wait.until(
-            ExpectedConditions.elementToBeClickable(addPOItemsButton)
-    );
-
-    scrollToElement(addPOItem);
-
-    try {
-        addPOItem.click();
-    } catch (Exception e) {
-        jsClick(addPOItem);
+        System.out.println("Discount entered from test data: " + discountField.getAttribute("value"));
     }
 
-    wait.until(driver -> getPOGridRowCount() > beforeCount);
+    private void setInputValueByJS(By locator, String value) {
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        scrollToElement(element);
 
-    System.out.println("Clicked on Add PO Items.");
-}
-  
-  
+        ((JavascriptExecutor) driver).executeScript(
+                "var el = arguments[0];" +
+                "var val = arguments[1];" +
+                "el.removeAttribute('readonly');" +
+                "el.removeAttribute('disabled');" +
+                "var setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;" +
+                "setter.call(el, '');" +
+                "el.dispatchEvent(new Event('input', { bubbles: true }));" +
+                "setter.call(el, val);" +
+                "el.dispatchEvent(new Event('input', { bubbles: true }));" +
+                "el.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));" +
+                "el.dispatchEvent(new Event('change', { bubbles: true }));" +
+                "el.dispatchEvent(new Event('blur', { bubbles: true }));" +
+                "if (window.jQuery) {" +
+                "  $(el).val(val).trigger('input').trigger('keyup').trigger('change').trigger('blur');" +
+                "}",
+                element,
+                value
+        );
+    }
+
+    private void triggerCalculationEvents(By locator) {
+        WebElement element = driver.findElement(locator);
+
+        ((JavascriptExecutor) driver).executeScript(
+                "var el = arguments[0];" +
+                "el.dispatchEvent(new Event('input', { bubbles: true }));" +
+                "el.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));" +
+                "el.dispatchEvent(new Event('change', { bubbles: true }));" +
+                "el.dispatchEvent(new Event('blur', { bubbles: true }));" +
+                "if (window.jQuery) {" +
+                "  $(el).trigger('input').trigger('keyup').trigger('change').trigger('blur');" +
+                "}",
+                element
+        );
+    }
+
+    public void clickAddPOItems() {
+        int beforeCount = getPOGridRowCount();
+
+        WebElement addPOItem = wait.until(ExpectedConditions.presenceOfElementLocated(addPOItemsButton));
+        scrollToElement(addPOItem);
+
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block:'center'}); arguments[0].click();",
+                addPOItem
+        );
+
+        waitForOverlayToDisappear();
+        waitForPopupOverlay();
+
+        wait.until(driver -> getPOGridRowCount() > beforeCount);
+
+        System.out.println("Clicked on Add PO Items.");
+    }
+
     public void addDirectPOItem(
             String locationName,
             String supplierSearchText,
@@ -524,6 +453,7 @@ private void selectPurchaseTypeByName(String purchaseType) {
         selectPODirect();
         selectLocation(locationName);
         selectSupplierName(supplierSearchText, supplierNameToSelect);
+
         addSinglePOItem(
                 itemType,
                 itemSearchText,
@@ -532,7 +462,8 @@ private void selectPurchaseTypeByName(String purchaseType) {
                 quantity,
                 isFreeItem,
                 freeQty,
-                discount
+                discount,
+                true
         );
 
         System.out.println("Direct PO item added successfully.");
@@ -549,6 +480,8 @@ private void selectPurchaseTypeByName(String purchaseType) {
         selectLocation(locationName);
         selectSupplierName(supplierSearchText, supplierNameToSelect);
 
+        boolean purchaseTypeSelected = false;
+
         for (POItemDetails item : items) {
             addSinglePOItem(
                     item.itemType,
@@ -558,138 +491,62 @@ private void selectPurchaseTypeByName(String purchaseType) {
                     item.quantity,
                     item.isFreeItem,
                     item.freeQty,
-                    item.discount
+                    item.discount,
+                    !purchaseTypeSelected
             );
 
+            purchaseTypeSelected = true;
             System.out.println("PO item added: " + item.itemNameToSelect);
         }
 
         System.out.println("Multiple Direct PO items added successfully.");
     }
 
- private void addSinglePOItem(
-        String itemType,
-        String itemSearchText,
-        String itemNameToSelect,
-        String purchaseType,
-        String quantity,
-        boolean isFreeItem,
-        String freeQty,
-        String discount
-) {
+    private void addSinglePOItem(
+            String itemType,
+            String itemSearchText,
+            String itemNameToSelect,
+            String purchaseType,
+            String quantity,
+            boolean isFreeItem,
+            String freeQty,
+            String discount,
+            boolean shouldSelectPurchaseType
+    ) {
+        selectItemType(itemType);
+        selectItemName(itemSearchText, itemNameToSelect);
+        waitForSelectedItemDetailsToLoad();
 
-    selectItemType(itemType);
-
-    selectItemName(itemSearchText, itemNameToSelect);
-
-    waitForSelectedItemDetailsToLoad();
-
-    selectPurchaseTypeByName(purchaseType);
-
-    enterQuantity(quantity);
-
-    if (isFreeItem) {
-        selectFreeItem(true, freeQty);
-    }
-
-    enterDiscount(discount);
- // IMPORTANT → wait for GST calculation
-    waitForGSTCalculation();
-
-    clickAddPOItems();
-}
-
-
-
-    
-    
-    public void clickAddPOItemsWithDiscount(String discount, String purchaseType) {
-    int beforeCount = getPOGridRowCount();
-
-    // Re-apply purchase type just before Add button click
-    selectPurchaseTypeByName(purchaseType);
-
-    forceDiscountValueBeforeAdd(discount);
-
-    WebElement addPOItem = wait.until(
-            ExpectedConditions.presenceOfElementLocated(addPOItemsButton)
-    );
-
-    scrollToElement(addPOItem);
-
-    try {
-        wait.until(ExpectedConditions.elementToBeClickable(addPOItem));
-        new Actions(driver)
-                .moveToElement(addPOItem)
-                .pause(Duration.ofMillis(100))
-                .click()
-                .perform();
-    } catch (Exception e) {
-        jsClick(addPOItem);
-    }
-
-    waitForOverlayToDisappear();
-    waitForPopupOverlay();
-
-    wait.until(driver -> getPOGridRowCount() > beforeCount);
-
-    System.out.println("Clicked on Add PO Items with discount: " + discount);
-}
-
-    
-    private void forceDiscountValueBeforeAdd(String discount) {
-        final String discountValue = discount == null || discount.trim().isEmpty()
-                ? "0"
-                : discount.trim();
-
-        WebElement element = wait.until(
-                ExpectedConditions.presenceOfElementLocated(discountInput)
-        );
-
-        scrollToElement(element);
-
-        ((JavascriptExecutor) driver).executeScript(
-                "var el = arguments[0];" +
-                "var val = arguments[1];" +
-                "el.removeAttribute('readonly');" +
-                "el.removeAttribute('disabled');" +
-                "el.focus();" +
-                "el.value = val;" +
-                "if (window.jQuery) { $(el).val(val); }",
-                element,
-                discountValue
-        );
-
-        String actualValue = element.getAttribute("value");
-
-        if (!actualValue.trim().equals(discountValue)) {
-            throw new RuntimeException(
-                    "Discount value not set properly. Expected: "
-                            + discountValue + ", Actual: " + actualValue
-            );
+        if (shouldSelectPurchaseType) {
+            selectPurchaseTypeByName(purchaseType);
+        } else {
+            ensurePurchaseTypeStillSelected(purchaseType);
         }
 
-        System.out.println("Discount force set before Add PO Items: " + discountValue);
+        enterQuantity(quantity);
+
+        if (isFreeItem) {
+            selectFreeItem(true, freeQty);
+        }
+
+        enterDiscount(discount);
+        waitForGSTCalculation(quantity, discount);
+        clickAddPOItems();
     }
 
-    
+    public void clickAddPOItemsWithDiscount(String discount, String purchaseType) {
+        selectPurchaseTypeByName(purchaseType);
+        enterDiscount(discount);
+        waitForGSTCalculation(driver.findElement(quantityInput).getAttribute("value"), discount);
+        clickAddPOItems();
 
+        System.out.println("Clicked on Add PO Items with discount: " + discount);
+    }
 
-
-    // ===== HELPER METHODS =====
-    
-
-    private void searchAndSelectAutocompleteOption(
-            By inputLocator,
-            String searchText,
-            String optionText
-    ) {
+    private void searchAndSelectAutocompleteOption(By inputLocator, String searchText, String optionText) {
         waitForOverlayToDisappear();
 
-        WebElement input = wait.until(
-                ExpectedConditions.elementToBeClickable(inputLocator)
-        );
-
+        WebElement input = wait.until(ExpectedConditions.elementToBeClickable(inputLocator));
         scrollToElement(input);
 
         input.click();
@@ -735,10 +592,7 @@ private void selectPurchaseTypeByName(String purchaseType) {
     }
 
     private void selectRadioButton(By locator) {
-        WebElement radio = wait.until(
-                ExpectedConditions.presenceOfElementLocated(locator)
-        );
-
+        WebElement radio = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         scrollToElement(radio);
 
         if (!radio.isSelected()) {
@@ -754,49 +608,152 @@ private void selectPurchaseTypeByName(String purchaseType) {
         waitForOverlayToDisappear();
     }
 
-    private void enterText(By locator, String value) {
+    private void setInputValue(By locator, String value) {
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        scrollToElement(element);
+
         if (value == null) {
             value = "";
         }
 
-        WebElement element = wait.until(
-                ExpectedConditions.presenceOfElementLocated(locator)
-        );
-
-        scrollToElement(element);
-
-        if (!element.isEnabled()) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            element.click();
+            element.sendKeys(Keys.CONTROL, "a");
+            element.sendKeys(Keys.DELETE);
+            element.sendKeys(value);
+            element.sendKeys(Keys.TAB);
+        } catch (Exception e) {
             ((JavascriptExecutor) driver).executeScript(
-                    "arguments[0].removeAttribute('disabled'); arguments[0].removeAttribute('readonly');",
-                    element
+                    "var el=arguments[0], val=arguments[1];" +
+                    "el.removeAttribute('readonly');" +
+                    "el.removeAttribute('disabled');" +
+                    "el.focus();" +
+                    "el.value=val;" +
+                    "el.dispatchEvent(new Event('input',{bubbles:true}));" +
+                    "el.dispatchEvent(new KeyboardEvent('keyup',{bubbles:true}));" +
+                    "el.dispatchEvent(new Event('change',{bubbles:true}));" +
+                    "el.dispatchEvent(new Event('blur',{bubbles:true}));" +
+                    "if(window.jQuery){$(el).val(val).trigger('input').trigger('keyup').trigger('change').trigger('blur');}",
+                    element,
+                    value
             );
         }
 
-        try {
-            element.click();
-            element.sendKeys(Keys.CONTROL, "a");
-            element.sendKeys(Keys.BACK_SPACE);
-            element.sendKeys(value);
-            new Actions(driver)
-            .sendKeys(element, Keys.TAB)
-            .pause(Duration.ofMillis(500))
-            .perform();
-        } catch (Exception e) {
-            // JS fallback below
-        }
+        String expected = value;
 
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].value = arguments[1];" +
-                "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));" +
-                "arguments[0].dispatchEvent(new Event('keyup', { bubbles: true }));" +
-                "arguments[0].dispatchEvent(new Event('change', { bubbles: true }));" +
-                "arguments[0].dispatchEvent(new Event('blur', { bubbles: true }));" +
-                "if (window.jQuery) { $(arguments[0]).trigger('input').trigger('change').trigger('blur'); }",
-                element,
-                value
-        );
+        wait.until(driver -> {
+            String actual = element.getAttribute("value");
+
+            if (actual == null) {
+                actual = "";
+            }
+
+            actual = actual.trim();
+
+            if (actual.equals(expected)) {
+                return true;
+            }
+
+            if (isNumeric(expected) && isNumeric(actual)) {
+                return nearlyEqual(parseNumber(actual), parseNumber(expected));
+            }
+
+            return !expected.trim().isEmpty() && actual.contains(expected.trim());
+        });
 
         waitForOverlayToDisappear();
+    }
+
+    private boolean isNumeric(String value) {
+        if (value == null || value.trim().isEmpty()) {
+            return false;
+        }
+
+        try {
+            parseNumber(value);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private void waitForGSTCalculation(String quantity, String discount) {
+        double qty = parseNumber((quantity == null || quantity.trim().isEmpty()) ? "1" : quantity);
+        double disc = parseNumber((discount == null || discount.trim().isEmpty()) ? "0" : discount);
+
+        wait.until(driver -> {
+            try {
+                double rate = valueOf(purchaseRateInput);
+                double actualDiscount = valueOf(discountInput);
+
+                double cgst = valueOf(cgstInput);
+                double sgst = valueOf(sgstInput);
+                double igst = valueOf(igstInput);
+                double gstPercent = cgst + sgst + igst;
+
+                double grossBeforeDiscount = rate * qty;
+                double taxableAmount = grossBeforeDiscount - (grossBeforeDiscount * disc / 100.0);
+                double expectedGST = taxableAmount * gstPercent / 100.0;
+                double expectedTotal = taxableAmount + expectedGST;
+
+                double actualGross = valueOf(grossTotalInput);
+                double actualGST = valueOf(gstAmountInput);
+                double actualTotal = valueOf(finalTotalAmountInput);
+
+                boolean localSelected = driver.findElement(localPurchaseRadio).isSelected();
+                boolean interStateSelected = driver.findElement(interStatePurchaseRadio).isSelected();
+
+                System.out.println(
+                        "CALC CHECK => local=" + localSelected +
+                        ", interstate=" + interStateSelected +
+                        ", rate=" + rate +
+                        ", qty=" + qty +
+                        ", discount=" + actualDiscount +
+                        ", cgst=" + cgst +
+                        ", sgst=" + sgst +
+                        ", igst=" + igst +
+                        ", gross=" + actualGross +
+                        ", gst=" + actualGST +
+                        ", total=" + actualTotal +
+                        ", expectedGross=" + taxableAmount +
+                        ", expectedGST=" + expectedGST +
+                        ", expectedTotal=" + expectedTotal
+                );
+
+                return rate > 0
+                        && localSelected
+                        && !interStateSelected
+                        && nearlyEqual(actualDiscount, disc)
+                        && nearlyEqual(actualGross, taxableAmount)
+                        && nearlyEqual(actualGST, expectedGST)
+                        && nearlyEqual(actualTotal, expectedTotal);
+            } catch (Exception e) {
+                return false;
+            }
+        });
+    }
+
+    private double valueOf(By locator) {
+        return parseNumber(driver.findElement(locator).getAttribute("value"));
+    }
+
+    private double parseNumber(String value) {
+        if (value == null) {
+            return 0.0;
+        }
+
+        String cleanValue = value.replaceAll("[^0-9.\\-]", "").trim();
+
+        if (cleanValue.isEmpty()) {
+            return 0.0;
+        }
+
+        return Double.parseDouble(cleanValue);
+    }
+
+    private boolean nearlyEqual(double actual, double expected) {
+        return Math.abs(actual - expected) <= 0.05;
     }
 
     protected void scrollToElement(WebElement element) {
@@ -807,10 +764,7 @@ private void selectPurchaseTypeByName(String purchaseType) {
     }
 
     private void jsClick(WebElement element) {
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].click();",
-                element
-        );
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
     private void dispatchChangeEvent(WebElement element) {
@@ -825,7 +779,7 @@ private void selectPurchaseTypeByName(String purchaseType) {
         try {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(overlay));
         } catch (Exception e) {
-            // ignore
+            // Overlay is optional.
         }
     }
 
@@ -833,17 +787,16 @@ private void selectPurchaseTypeByName(String purchaseType) {
         try {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(popupOverlay));
         } catch (Exception e) {
-            // ignore
+            // Popup overlay is optional.
         }
     }
 
     private int getPOGridRowCount() {
         return driver.findElements(poItemsGridRows).size();
     }
-    
+
     public void clickSubmitPurchaseOrderTab() {
         WebElement tab = wait.until(ExpectedConditions.elementToBeClickable(submitPOTab));
-
         scrollToElement(tab);
 
         try {
@@ -853,47 +806,39 @@ private void selectPurchaseTypeByName(String purchaseType) {
         }
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(finalRemarksTextArea));
-
         System.out.println("Submit Purchase Order tab opened");
     }
-    
+
     public void enterFinalRemarks(String remarks) {
-        WebElement textarea = wait.until(ExpectedConditions.elementToBeClickable(finalRemarksTextArea));
-
-        textarea.clear();
-        textarea.sendKeys(remarks);
-
+        setInputValue(finalRemarksTextArea, remarks == null ? "" : remarks);
         System.out.println("Final Remarks entered: " + remarks);
     }
-    
+
     public void selectFreightChargesWithGST(boolean shouldSelect) {
         WebElement checkbox = wait.until(ExpectedConditions.elementToBeClickable(freightGSTCheckbox));
+        scrollToElement(checkbox);
 
         if (checkbox.isSelected() != shouldSelect) {
-            checkbox.click();
+            try {
+                checkbox.click();
+            } catch (Exception e) {
+                jsClick(checkbox);
+            }
         }
 
+        dispatchChangeEvent(checkbox);
         System.out.println("Freight GST checkbox set to: " + shouldSelect);
     }
-    
+
     public void enterFreightDetails(String freight, String remarks) {
-
-        WebElement freightField = wait.until(ExpectedConditions.elementToBeClickable(freightInput));
-        freightField.clear();
-        freightField.sendKeys(freight);
-
-        WebElement remarksField = wait.until(ExpectedConditions.elementToBeClickable(freightRemarksInput));
-        remarksField.clear();
-        remarksField.sendKeys(remarks);
+        setInputValue(freightInput, freight == null ? "0" : freight);
+        setInputValue(freightRemarksInput, remarks == null ? "" : remarks);
 
         System.out.println("Freight: " + freight + " | Remarks: " + remarks);
     }
-    
-    
+
     public void clickFinalSubmit() {
-
         WebElement submitBtn = wait.until(ExpectedConditions.elementToBeClickable(finalSubmitButton));
-
         scrollToElement(submitBtn);
 
         try {
@@ -903,10 +848,9 @@ private void selectPurchaseTypeByName(String purchaseType) {
         }
 
         waitForOverlayToDisappear();
-
         System.out.println("Final Submit clicked");
     }
-    
+
     public void submitPurchaseOrder(
             String remarks,
             boolean isFreightGST,
@@ -914,9 +858,7 @@ private void selectPurchaseTypeByName(String purchaseType) {
             String freightRemarks
     ) {
         clickSubmitPurchaseOrderTab();
-
         enterFinalRemarks(remarks);
-
         selectFreightChargesWithGST(isFreightGST);
 
         if (isFreightGST) {
@@ -924,8 +866,6 @@ private void selectPurchaseTypeByName(String purchaseType) {
         }
 
         clickFinalSubmit();
-
         System.out.println("Purchase Order Submitted Successfully");
     }
-    
 }

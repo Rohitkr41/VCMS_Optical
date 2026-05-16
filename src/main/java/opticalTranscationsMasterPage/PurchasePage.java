@@ -406,6 +406,4 @@ public class PurchasePage extends BasePage {
 	throw new RuntimeException("Failed to save GRN", e);
 	}
 	}
-    
-   
 }
