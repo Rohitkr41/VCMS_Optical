@@ -44,28 +44,26 @@ public class ViewPurchaseOrderTest extends BaseTest {
         // ===== MULTIPLE ITEMS DATA =====
         List<POItemDetails> poItems = Arrays.asList(
         		 new POItemDetails("FRAME", "ga", "FR26-0005", "30", false, "", "7"), //QTY , "", discount%
-                new POItemDetails("FRAME", "hr", "FR26-0006", "30", false, "", "5")  //QTY , "", discount%
-//                new POItemDetails("FRAME", "fr", "FR26-0007", "30", false, "", "0"),  //QTY , "", discount%
+                new POItemDetails("FRAME", "hr", "FR26-0006", "30", false, "", "5"), //QTY , "", discount%
+                new POItemDetails("FRAME", "fr", "FR26-0007", "30", false, "", "0"),  //QTY , "", discount%
                
-//                new POItemDetails("CASE", "ca", "CA26-0005", "30", false, "", "0"), //case
-//                new POItemDetails("CASE", "ca", "CA26-0004", "30", false, "", "0"),
-//                
-//                
-//                new POItemDetails("CONTACT LENS", "cl", "CL26-0004", "30", false, "", "0"), //contact lense
-////                new POItemDetails("CONTACT LENS", "cl", "CA26-0005", "30", false, "", "0"), //contact lense
-//                
-//                new POItemDetails("GOGGLES", "go", "GO26-0001", "30", false, "", "0"), //goggles
-//                new POItemDetails("GOGGLES", "go", "GO26-0002", "30", false, "", "0"), //goggles
-//                
-//                new POItemDetails("LOW VISION AIDS", "lv", "LV26-0001", "30", false, "", "0"), //low vision aids
-//                new POItemDetails("LOW VISION AIDS", "lv", "LV26-0002", "30", false, "", "0"), //low vision aids
-//                new POItemDetails("LOW VISION AIDS", "lv", "LV26-0003", "30", false, "", "0"), //low vision aids
-//                
-//                new POItemDetails("SOLUTION", "so", "SO26-0002", "30", false, "", "0"), //solution
-//                new POItemDetails("SOLUTION", "so", "SO26-0003", "30", false, "", "0"), //solution
-//                
-//                new POItemDetails("SELVETS", "se", "SE26-0005", "30", false, "", "0"), //SELVETS
-//                new POItemDetails("SELVETS", "se", "SE26-0004", "30", false, "", "0") //SELVETS
+                new POItemDetails("CASE", "ca", "CA26-0005", "30", false, "", "0"), //case
+                new POItemDetails("CASE", "ca", "CA26-0004", "30", false, "", "0"),
+                
+              new POItemDetails("CONTACT LENS", "cl", "CL26-0004", "30", false, "", "0"), //contact lense
+//                new POItemDetails("CONTACT LENS", "cl", "CA26-0005", "30", false, "", "0"), //contact lense
+                
+                new POItemDetails("GOGGLES", "go", "GO26-0001", "30", false, "", "0"), //goggles
+                new POItemDetails("GOGGLES", "go", "GO26-0002", "30", false, "", "0"), //goggles              
+                new POItemDetails("LOW VISION AIDS", "lv", "LV26-0001", "30", false, "", "0"), //low vision aids
+                new POItemDetails("LOW VISION AIDS", "lv", "LV26-0002", "30", false, "", "0"), //low vision aids
+                new POItemDetails("LOW VISION AIDS", "lv", "LV26-0003", "30", false, "", "0"), //low vision aids
+                
+                new POItemDetails("SOLUTION", "so", "SO26-0002", "30", false, "", "0"), //solution
+                new POItemDetails("SOLUTION", "so", "SO26-0003", "30", false, "", "0"), //solution
+                
+                new POItemDetails("SELVETS", "se", "SE26-0005", "30", false, "", "0"), //SELVETS
+                new POItemDetails("SELVETS", "se", "SE26-0004", "30", false, "", "0") //SELVETS
 //                
 //                              
 ////                new POItemDetails("LENS", "le", "LE26-0007", "10", false, "", ""),
