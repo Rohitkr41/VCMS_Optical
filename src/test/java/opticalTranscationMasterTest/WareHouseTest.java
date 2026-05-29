@@ -29,6 +29,23 @@ public class WareHouseTest extends BaseTest {
 
         // ===== NAVIGATION =====
         wareHousePage.navigateToWareHousePage();
+        
+        // Step 1
+//        wareHousePage.bookedToUnderFitting();
+
+        // Step 2
+        wareHousePage.underFittingToReadyToDispatch();
+
+        // Step 3
+        wareHousePage.readyToDispatchToDispatch();
+        
+        wareHousePage.fillDispatchDetails(
+                "By Courier",
+                "BLUE DART",
+                "100",
+                "TRK12345",
+                "Courier dispatched successfully"
+        );
 
         // ===== VALIDATION =====
         Assert.assertTrue(
@@ -38,6 +55,7 @@ public class WareHouseTest extends BaseTest {
 
         System.out.println("WareHouse page opened successfully.");
     }
+    
 
     // ===== SCREENSHOT ON FAILURE =====
     @AfterMethod
