@@ -44,7 +44,8 @@ public class RegistrationPage {
     By specialityDropdown = By.id("PR_ddlSpeciality");
 
     // 3. Patient Type dropdown
-    By patientTypeDropdown = By.id("PR_ddlPatientType");
+//    By patientTypeDropdown = By.id("PR_ddlPatientType");
+    By patientTypeDropdown = By.id("PR_ddlPatientType_new");
 
     // 4. First Name
     By firstNameTextbox = By.id("PR_txtFirstName");
@@ -377,7 +378,4 @@ public class RegistrationPage {
     public void clickPrintReceiptNo() {
         wait.until(ExpectedConditions.elementToBeClickable(printReceiptNoButton)).click();
     }
-
-
-
 }
