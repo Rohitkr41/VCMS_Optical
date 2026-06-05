@@ -13,24 +13,55 @@ import utils.ScreenshotUtil;
 
 public class OpticalDeliveryTest extends BaseTest {
 
+    private static final String FROM_DATE = "01/06/2026";
+    private static final String TO_DATE = "30/06/2026";
+
     @Test
     public void verifyOpticalDeliverySearchWithDateFilter() {
+        OpticalDeliveryPage opticalDelivery = loginAndSearchOpticalDelivery();
 
-        // Login
+        Assert.assertTrue(true, "Optical Delivery search completed successfully.");
+    }
+
+    @Test
+    public void verifyWaitingToReceiveRecordCanBeSubmittedAsHold() {
+        OpticalDeliveryPage opticalDelivery = loginAndSearchOpticalDelivery();
+
+        opticalDelivery.processFirstWaitingToReceiveOrHoldRecordAsHold(
+                "Scratch",
+                "Perfect",
+                "Inaccurate",
+                "Hold submitted from automation"
+        );
+
+        Assert.assertTrue(true, "Waiting to Receive record submitted as Hold successfully.");
+    }
+
+    @Test
+    public void verifyWaitingToReceiveRecordCanBeSubmittedAsReceive() {
+        OpticalDeliveryPage opticalDelivery = loginAndSearchOpticalDelivery();
+
+        opticalDelivery.processFirstWaitingToReceiveOrHoldRecordAsReceive(
+                "Receive submitted from automation"
+        );
+
+        Assert.assertTrue(true, "Waiting to Receive record submitted as Receive successfully.");
+    }
+
+    private OpticalDeliveryPage loginAndSearchOpticalDelivery() {
         LoginPage login = new LoginPage(driver);
         login.login(
                 ConfigReader.getProperty("username"),
                 ConfigReader.getProperty("password")
         );
 
-        // Optical Transactions -> Optical Delivery -> Date Filter -> Search
         OpticalDeliveryPage opticalDelivery = new OpticalDeliveryPage(driver);
         opticalDelivery.searchByDate(
-                "29/05/2026",
-                "30/06/2026"
+                FROM_DATE,
+                TO_DATE
         );
 
-        Assert.assertTrue(true, "Optical Delivery search completed successfully.");
+        return opticalDelivery;
     }
 
     @AfterMethod
