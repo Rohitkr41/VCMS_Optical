@@ -3,6 +3,7 @@ package opticalTranscationsMasterPage;
 import pages.BasePage;
 import java.util.List;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class OpticalDeliveryPage extends BasePage {
@@ -12,8 +13,18 @@ public class OpticalDeliveryPage extends BasePage {
     }
 
     // ===== LOCATORS =====
-    private By opticalTransactionsMenu = By.xpath("//span[normalize-space()='Optical Transactions']/ancestor::a");
-    private By opticalDeliveryMenu = By.cssSelector("a[href='/VCMS_Optical/OpticalBooking/ViewOpticalDelivery']");
+    private By opticalTransactionsMenu = By.xpath(
+            "//a[@data-toggle='collapse' and @href='#OpticalTransacations']" +
+            "[.//span[normalize-space()='Optical Transactions']]"
+    );
+
+    private By opticalTransactionsPanel = By.id("OpticalTransacations");
+
+    private By opticalDeliveryMenu = By.xpath(
+            "//div[@id='OpticalTransacations']//a" +
+            "[.//span[normalize-space()='Optical Delivery'] or normalize-space()='Optical Delivery' " +
+            " or contains(@href,'/OpticalBooking/ViewOpticalDelivery')]"
+    );
 
     private By fromDateInput = By.id("VOD_txtFromDate");
     private By toDateInput = By.id("VOD_txtToDate");
@@ -23,22 +34,58 @@ public class OpticalDeliveryPage extends BasePage {
     private By overlay = By.id("V3MOverlay");
 
     private By opticalDeliveryRows = By.xpath("//table[@id='VOD_tblRecord']//tbody//tr");
+    private By waitingToReceiveRows = By.xpath(
+            "//table[@id='VOD_tblRecord']//tbody//tr" +
+            "[.//*[normalize-space()='Waiting to Receive']]"
+    );
+    private By holdRows = By.xpath(
+            "//table[@id='VOD_tblRecord']//tbody//tr" +
+            "[.//*[normalize-space()='Hold']]"
+    );
+    private By waitingToReceiveOrHoldRows = By.xpath(
+            "//table[@id='VOD_tblRecord']//tbody//tr" +
+            "[.//*[normalize-space()='Waiting to Receive' or normalize-space()='Hold']]"
+    );
     private By waitingToReceiveButton = By.id("VOD_btnHold");
+
+    private By waitingToReceiveModal = By.xpath(
+            "//div[contains(@class,'modal') and .//*[@id='VBO_btnSubmitQualityCheck']]"
+    );
+    private By holdRadioButton = By.id("VOD_rdbHold");
+    private By receiveRadioButton = By.id("VOD_rdbReceive");
+    private By lenseQcDropdown = By.id("VBO_ddlLenseQC");
+    private By fittingQcDropdown = By.id("VBO_ddlFittingQC");
+    private By powerMatchingDropdown = By.id("VBO_ddlPowerMatching");
+    private By finalRemarkInput = By.id("VBO_txtFinalRemarks");
+    private By qualityCheckSubmitButton = By.id("VBO_btnSubmitQualityCheck");
 
     // ===== NAVIGATION =====
     public void openOpticalDelivery() {
         try {
-            WebElement menu = driver.findElement(opticalTransactionsMenu);
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", menu);
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", menu);
+            waitForLoaderToDisappear();
 
-            WebElement deliveryMenu = wait.until(
-                    ExpectedConditions.presenceOfElementLocated(opticalDeliveryMenu)
+            WebElement menu = wait.until(ExpectedConditions.elementToBeClickable(opticalTransactionsMenu));
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    menu
             );
 
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", deliveryMenu);
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", deliveryMenu);
+            String expanded = menu.getAttribute("aria-expanded");
+            if (!"true".equalsIgnoreCase(expanded)) {
+                clickWithJs(menu);
+            }
 
+            wait.until(ExpectedConditions.attributeContains(opticalTransactionsMenu, "aria-expanded", "true"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(opticalTransactionsPanel));
+
+            WebElement deliveryMenu = wait.until(ExpectedConditions.elementToBeClickable(opticalDeliveryMenu));
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    deliveryMenu
+            );
+            clickWithJs(deliveryMenu);
+
+            wait.until(ExpectedConditions.urlContains("/OpticalBooking/ViewOpticalDelivery"));
             wait.until(ExpectedConditions.visibilityOfElementLocated(searchButton));
 
         } catch (Exception e) {
@@ -53,7 +100,7 @@ public class OpticalDeliveryPage extends BasePage {
         );
 
         if (!checkbox.isSelected()) {
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
+            clickWithJs(checkbox);
         }
     }
 
@@ -90,7 +137,7 @@ public class OpticalDeliveryPage extends BasePage {
                 searchBtn
         );
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", searchBtn);
+        clickWithJs(searchBtn);
 
         waitForLoaderToDisappear();
 
@@ -110,45 +157,38 @@ public class OpticalDeliveryPage extends BasePage {
         waitForLoaderToDisappear();
 
         List<WebElement> rows = wait.until(
-                ExpectedConditions.presenceOfAllElementsLocatedBy(opticalDeliveryRows)
+                ExpectedConditions.presenceOfAllElementsLocatedBy(waitingToReceiveRows)
         );
 
-        WebElement matchedRow = null;
+        selectRow(rows.get(0));
+    }
 
-        for (WebElement row : rows) {
-            String rowText = row.getText().trim();
+    public void selectHoldRecordFromList() {
+        waitForLoaderToDisappear();
 
-            if (rowText.contains("Waiting to Receive")) {
-                matchedRow = row;
-                System.out.println("Selected Waiting to Receive row: " + rowText);
-                break;
-            }
-        }
-
-        if (matchedRow == null) {
-            throw new RuntimeException("No Waiting to Receive record found in Optical Delivery list.");
-        }
-
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block:'center'});",
-                matchedRow
+        List<WebElement> rows = wait.until(
+                ExpectedConditions.presenceOfAllElementsLocatedBy(holdRows)
         );
 
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].click();",
-                matchedRow
-        );
+        selectRow(rows.get(0));
+    }
 
-        try {
-            wait.until(ExpectedConditions.attributeContains(matchedRow, "class", "selectedrow"));
-        } catch (Exception ignored) {
-            System.out.println("Row clicked, but selectedrow class was not found.");
+    public void selectWaitingToReceiveOrHoldRecordFromList() {
+        waitForLoaderToDisappear();
+
+        List<WebElement> rows = driver.findElements(waitingToReceiveOrHoldRows);
+
+        if (rows.isEmpty()) {
+            System.out.println("No Waiting to Receive or Hold record found in Optical Delivery list.");
+            return;
         }
+
+        selectRow(rows.get(0));
     }
 
     public void clickWaitingToReceiveButton() {
         WebElement holdButton = wait.until(
-                ExpectedConditions.presenceOfElementLocated(waitingToReceiveButton)
+                ExpectedConditions.elementToBeClickable(waitingToReceiveButton)
         );
 
         ((JavascriptExecutor) driver).executeScript(
@@ -156,9 +196,69 @@ public class OpticalDeliveryPage extends BasePage {
                 holdButton
         );
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", holdButton);
+        clickWithJs(holdButton);
 
         waitForLoaderToDisappear();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(waitingToReceiveModal));
+    }
+
+    public void selectFirstWaitingToReceiveRecordAndClickIcon() {
+        selectWaitingToReceiveRecordFromList();
+        clickWaitingToReceiveButton();
+    }
+
+    public void selectFirstHoldRecordAndClickIcon() {
+        selectHoldRecordFromList();
+        clickWaitingToReceiveButton();
+    }
+
+    public void selectFirstWaitingToReceiveOrHoldRecordAndClickIcon() {
+        if (!selectFirstWaitingToReceiveOrHoldRecordIfAvailable()) {
+            return;
+        }
+
+        clickWaitingToReceiveButton();
+    }
+
+    public void processAllWaitingToReceiveRecordsAsHold(
+            String lenseQc,
+            String fittingQc,
+            String powerMatching,
+            String finalRemark
+    ) {
+        waitForLoaderToDisappear();
+
+        while (true) {
+            List<WebElement> rows = driver.findElements(waitingToReceiveOrHoldRows);
+
+            if (rows.isEmpty()) {
+                System.out.println("No more Waiting to Receive or Hold records found.");
+                break;
+            }
+
+            selectRow(rows.get(0));
+            clickWaitingToReceiveButton();
+            submitWaitingToReceiveAsHold(lenseQc, fittingQc, powerMatching, finalRemark);
+            waitForLoaderToDisappear();
+        }
+    }
+
+    public void processAllWaitingToReceiveRecordsAsReceive(String finalRemark) {
+        waitForLoaderToDisappear();
+
+        while (true) {
+            List<WebElement> rows = driver.findElements(waitingToReceiveOrHoldRows);
+
+            if (rows.isEmpty()) {
+                System.out.println("No more Waiting to Receive or Hold records found.");
+                break;
+            }
+
+            selectRow(rows.get(0));
+            clickWaitingToReceiveButton();
+            submitWaitingToReceiveAsReceive(finalRemark);
+            waitForLoaderToDisappear();
+        }
     }
 
     public void selectWaitingToReceiveRecordAndClickHold() {
@@ -169,6 +269,171 @@ public class OpticalDeliveryPage extends BasePage {
     public void searchByDateAndClickWaitingToReceive(String fromDate, String toDate) {
         searchByDate(fromDate, toDate);
         selectWaitingToReceiveRecordAndClickHold();
+    }
+
+    public void submitWaitingToReceiveAsHold(
+            String lenseQc,
+            String fittingQc,
+            String powerMatching,
+            String finalRemark
+    ) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(waitingToReceiveModal));
+        clickRadioButton(holdRadioButton);
+
+        selectDropdownByValue(lenseQcDropdown, lenseQc);
+        selectDropdownByValue(fittingQcDropdown, fittingQc);
+        selectDropdownByValue(powerMatchingDropdown, powerMatching);
+        enterFinalRemark(finalRemark);
+
+        clickQualityCheckSubmitButton();
+    }
+
+    public void submitWaitingToReceiveAsReceive(String finalRemark) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(waitingToReceiveModal));
+        clickRadioButton(receiveRadioButton);
+
+        enterFinalRemark(finalRemark);
+
+        clickQualityCheckSubmitButton();
+    }
+
+    public void processFirstWaitingToReceiveRecordAsHold(
+            String lenseQc,
+            String fittingQc,
+            String powerMatching,
+            String finalRemark
+    ) {
+        selectFirstWaitingToReceiveRecordAndClickIcon();
+        submitWaitingToReceiveAsHold(lenseQc, fittingQc, powerMatching, finalRemark);
+    }
+
+    public void processFirstWaitingToReceiveRecordAsReceive(String finalRemark) {
+        selectFirstWaitingToReceiveRecordAndClickIcon();
+        submitWaitingToReceiveAsReceive(finalRemark);
+    }
+
+    public void processFirstHoldRecordAsHold(
+            String lenseQc,
+            String fittingQc,
+            String powerMatching,
+            String finalRemark
+    ) {
+        selectFirstHoldRecordAndClickIcon();
+        submitWaitingToReceiveAsHold(lenseQc, fittingQc, powerMatching, finalRemark);
+    }
+
+    public void processFirstHoldRecordAsReceive(String finalRemark) {
+        selectFirstHoldRecordAndClickIcon();
+        submitWaitingToReceiveAsReceive(finalRemark);
+    }
+
+    public void processFirstWaitingToReceiveOrHoldRecordAsHold(
+            String lenseQc,
+            String fittingQc,
+            String powerMatching,
+            String finalRemark
+    ) {
+        if (!selectFirstWaitingToReceiveOrHoldRecordIfAvailable()) {
+            return;
+        }
+
+        clickWaitingToReceiveButton();
+        submitWaitingToReceiveAsHold(lenseQc, fittingQc, powerMatching, finalRemark);
+    }
+
+    public void processFirstWaitingToReceiveOrHoldRecordAsReceive(String finalRemark) {
+        if (!selectFirstWaitingToReceiveOrHoldRecordIfAvailable()) {
+            return;
+        }
+
+        clickWaitingToReceiveButton();
+        submitWaitingToReceiveAsReceive(finalRemark);
+    }
+
+    public boolean selectFirstWaitingToReceiveOrHoldRecordIfAvailable() {
+        waitForLoaderToDisappear();
+
+        List<WebElement> rows = driver.findElements(waitingToReceiveOrHoldRows);
+
+        if (rows.isEmpty()) {
+            System.out.println("No Waiting to Receive or Hold record found in Optical Delivery list.");
+            return false;
+        }
+
+        selectRow(rows.get(0));
+        return true;
+    }
+
+    private void selectRow(WebElement row) {
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block:'center'});",
+                row
+        );
+
+        clickWithJs(row);
+        System.out.println("Selected Optical Delivery row: " + row.getText().trim());
+
+        try {
+            wait.until(ExpectedConditions.or(
+                    ExpectedConditions.attributeContains(row, "class", "selectedrow"),
+                    ExpectedConditions.attributeContains(row, "class", "selected")
+            ));
+        } catch (Exception ignored) {
+            System.out.println("Row clicked, but selected class was not found.");
+        }
+    }
+
+    private void clickRadioButton(By locator) {
+        WebElement radioButton = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+
+        if (!radioButton.isSelected()) {
+            clickWithJs(radioButton);
+        }
+    }
+
+    private void selectDropdownByValue(By locator, String value) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        Select select = new Select(dropdown);
+
+        try {
+            select.selectByValue(value);
+        } catch (NoSuchElementException e) {
+            select.selectByVisibleText(value);
+        }
+    }
+
+    private void enterFinalRemark(String finalRemark) {
+        WebElement remarkInput = wait.until(ExpectedConditions.elementToBeClickable(finalRemarkInput));
+        remarkInput.clear();
+        remarkInput.sendKeys(finalRemark);
+    }
+
+    private void clickQualityCheckSubmitButton() {
+        WebElement submitButton = wait.until(
+                ExpectedConditions.elementToBeClickable(qualityCheckSubmitButton)
+        );
+
+        clickWithJs(submitButton);
+        waitForLoaderToDisappear();
+        acceptAlertIfPresent();
+
+        try {
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(waitingToReceiveModal));
+        } catch (Exception ignored) {
+            System.out.println("Quality check submitted, but modal did not close within wait time.");
+        }
+    }
+
+    private void acceptAlertIfPresent() {
+        try {
+            Alert alert = driver.switchTo().alert();
+            alert.accept();
+        } catch (Exception ignored) {
+        }
+    }
+
+    private void clickWithJs(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
     protected void waitForLoaderToDisappear() {
