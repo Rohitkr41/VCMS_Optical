@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.TestDataGenerator;
 
 public class RegistrationPage {
 
@@ -378,4 +379,16 @@ public class RegistrationPage {
     public void clickPrintReceiptNo() {
         wait.until(ExpectedConditions.elementToBeClickable(printReceiptNoButton)).click();
     }
+    
+    public void enterGeneratedRegistrationDetails() {
+
+    enterFirstName(TestDataGenerator.getFirstName());
+    enterLastName(TestDataGenerator.getLastName());
+    enterAgeYear(TestDataGenerator.getAgeYear());
+    enterAgeMonth(TestDataGenerator.getAgeMonth());
+    enterNextOfKin(TestDataGenerator.getNextOfKin());
+    enterContactNumber(TestDataGenerator.getMobileNumber());
+    enterAddress(TestDataGenerator.getAddress());
+    enterDriverLicenseNo(TestDataGenerator.getDrivingLicense());
+}
 }
