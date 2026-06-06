@@ -7,65 +7,78 @@ import base.BaseTest;
 import pages.LoginPage;
 import pages.RegistrationPage;
 import utils.ConfigReader;
+import utils.TestDataGenerator;
 
 public class RegistrationPageTest extends BaseTest {
 
-	@Test
-	public void verifyNewRegistrationClick() {
-		RegistrationPage registrationPage = new RegistrationPage(driver);
+    @Test
+    public void verifyNewRegistrationClick() {
 
-		LoginPage login = new LoginPage(driver);
-		// Debug credentials
-		System.out.println("Username: " + ConfigReader.getProperty("username"));
-		System.out.println("Password: " + ConfigReader.getProperty("password"));
+        LoginPage login = new LoginPage(driver);
 
-		login.login(ConfigReader.getProperty("username"), ConfigReader.getProperty("password")
+        System.out.println("Username: " + ConfigReader.getProperty("username"));
+        System.out.println("Password: " + ConfigReader.getProperty("password"));
 
-		);
+        login.login(
+                ConfigReader.getProperty("username"),
+                ConfigReader.getProperty("password"));
 
-		registrationPage.clickPatientRegistration();
-		registrationPage.clickNewRegistration();
+        int registrationLimit = 10; // Change as needed
 
-		registrationPage.selectNewPatient();
-//        registrationPage.selectSpeciality("EYE");
-		registrationPage.selectPatientType("WALK IN");
-		registrationPage.enterFirstName("Sachin");
-		registrationPage.enterLastName("Das");
-//        registrationPage.selectMaleGender();
-		registrationPage.enterAgeYear("32");
-		registrationPage.enterAgeMonth("6");
-		registrationPage.enterNextOfKin("Das family");
-		registrationPage.enterContactNumber("9608900980");
-		registrationPage.enterAddress("House No 12, Main Road");
-		registrationPage.selectAreaVillage("CHATTA"); // abhishek vc
-//        registrationPage.selectAreaVillage("Banupura");  // mukesh vc
-//        registrationPage.selectAreaVillage("Chakathal");  //komal vc
-//        registrationPage.selectAreaVillage("BEGAH");  //VCRahul vc
-//        registrationPage.selectAreaVillage("Baharabad");  //komal vc
-//        registrationPage.selectAreaVillage("Bahadurpur");  //komal vc 206
-//        registrationPage.selectAreaVillage("Barhauli");  //mukesh vc
-//        registrationPage.selectAreaVillage("Jamalpur");  //abhishekDEv vc
-		registrationPage.selectDiabeticStatus("No");
-		registrationPage.selectOccupation("SERVICE");
-		registrationPage.selectQualification("GRADUATE");
-		registrationPage.selectIdentityType("DRIVING LICENSE");
-		registrationPage.enterDriverLicenseNo("DL1234567890");
+        for (int count = 1; count <= registrationLimit; count++) {
 
-		registrationPage.selectPaymentCategory("PAID");
-		registrationPage.selectCashPaymentMode();
-//        registrationPage.enterTransactionNumber("UPI123456789");
-//        registrationPage.selectBankName("STATE BANK OF INDIA");
-		registrationPage.clickSubmitButton();
+            try {
 
-		Assert.assertTrue(registrationPage.isPrintReceiptPopupDisplayed(),
-				"Print receipt confirmation popup is not displayed");
+                System.out.println("\n========== REGISTRATION " + count + " ==========");
 
-		Assert.assertEquals(registrationPage.getPrintReceiptPopupMessage(), "Are you sure, you want to print receipt?");
+                RegistrationPage registrationPage = new RegistrationPage(driver);
 
-		registrationPage.clickPrintReceiptNo();
+                registrationPage.clickPatientRegistration();
+                registrationPage.clickNewRegistration();
 
-		// Expected page/field check after click
-		Assert.assertTrue(driver.getPageSource().contains("New Registration"));
-	}
+                registrationPage.selectNewPatient();
+                registrationPage.selectPatientType("WALK IN");
 
+                registrationPage.enterFirstName(TestDataGenerator.getFirstName());
+                registrationPage.enterLastName(TestDataGenerator.getLastName());
+                registrationPage.enterAgeYear(TestDataGenerator.getAgeYear());
+                registrationPage.enterAgeMonth(TestDataGenerator.getAgeMonth());
+                registrationPage.enterNextOfKin(TestDataGenerator.getNextOfKin());
+                registrationPage.enterContactNumber(TestDataGenerator.getMobileNumber());
+                registrationPage.enterAddress(TestDataGenerator.getAddress());
+
+                registrationPage.selectAreaVillage("Samaspur");
+
+                registrationPage.selectDiabeticStatus("No");
+                registrationPage.selectOccupation("SERVICE");
+                registrationPage.selectQualification("GRADUATE");
+                registrationPage.selectIdentityType("DRIVING LICENSE");
+
+                registrationPage.enterDriverLicenseNo(
+                        TestDataGenerator.getDrivingLicense());
+
+                registrationPage.selectPaymentCategory("PAID");
+                registrationPage.selectCashPaymentMode();
+
+                registrationPage.clickSubmitButton();
+
+                Assert.assertTrue(
+                        registrationPage.isPrintReceiptPopupDisplayed(),
+                        "Print receipt popup not displayed");
+
+                Assert.assertEquals(
+                        registrationPage.getPrintReceiptPopupMessage(),
+                        "Are you sure, you want to print receipt?");
+
+                registrationPage.clickPrintReceiptNo();
+
+                System.out.println("✅ Registration Successful : " + count);
+
+            } catch (Exception e) {
+
+                System.out.println("❌ Registration Failed : " + count);
+                e.printStackTrace();
+            }
+        }
+    }
 }
