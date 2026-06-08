@@ -1,85 +1,117 @@
 package utils;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.poi.ss.usermodel.*;
 
 public class ExcelUtils {
 
-    public static void exportTableToExcel(WebDriver driver, By rowsLocator, String fileName, String sheetName) {
+    private static final int HEADER_ROW_INDEX = 6;      // Excel row 7
+    private static final int DATA_START_ROW_INDEX = 7;  // Excel row 8
 
-        try {
+    public static List<CampRegistrationData> getCampRegistrationData(String filePath) {
 
-            // Excel folder path
-            String folderPath = System.getProperty("user.dir") + "/reports/excel/";
+        List<CampRegistrationData> patients = new ArrayList<>();
 
-            File folder = new File(folderPath);
+        try (FileInputStream fis = new FileInputStream(filePath);
+             Workbook workbook = WorkbookFactory.create(fis)) {
 
-            if (!folder.exists()) {
-                folder.mkdirs();
-            }
+            Sheet sheet = workbook.getSheetAt(0);
+            DataFormatter formatter = new DataFormatter();
 
-            String filePath = folderPath + fileName + ".xlsx";
+            Row headerRow = sheet.getRow(HEADER_ROW_INDEX);
+            Map<String, Integer> columns = new HashMap<>();
 
-            // Table rows
-            List<WebElement> rows = driver.findElements(rowsLocator);
-
-            // Table headers
-            List<WebElement> headers = driver.findElements(By.xpath("//table//thead//th"));
-
-            XSSFWorkbook workbook = new XSSFWorkbook();
-            XSSFSheet sheet = workbook.createSheet(sheetName);
-
-            int rowNum = 0;
-
-            // =========================
-            // HEADER ROW
-            // =========================
-
-            Row headerRow = sheet.createRow(rowNum++);
-
-            for (int i = 0; i < headers.size(); i++) {
-
-                headerRow.createCell(i).setCellValue(headers.get(i).getText());
-            }
-
-            // =========================
-            // TABLE DATA
-            // =========================
-
-            for (WebElement row : rows) {
-
-                Row excelRow = sheet.createRow(rowNum++);
-
-                List<WebElement> cols = row.findElements(By.tagName("td"));
-
-                int colNum = 0;
-
-                for (WebElement col : cols) {
-
-                    excelRow.createCell(colNum++).setCellValue(col.getText());
+            for (Cell cell : headerRow) {
+                String header = formatter.formatCellValue(cell).trim().toUpperCase();
+                if (!header.isEmpty()) {
+                    columns.put(header, cell.getColumnIndex());
                 }
             }
 
-            FileOutputStream file = new FileOutputStream(filePath);
+            for (int i = DATA_START_ROW_INDEX; i <= sheet.getLastRowNum(); i++) {
 
-            workbook.write(file);
+                Row row = sheet.getRow(i);
+                if (row == null) continue;
 
-            workbook.close();
-            file.close();
+                String gender = getValue(row, columns, "GENDER", formatter);
+                if (gender.isEmpty()) continue;
 
-            System.out.println("Excel Generated : " + filePath);
+                CampRegistrationData data = new CampRegistrationData();
+
+                data.setCampName(getValue(row, columns, "EICHER MOBILE VAN", formatter));
+                data.setGender(gender);
+                data.setNextOfKin(getValue(row, columns, "NEXT OF KIN", formatter));
+                data.setDistrict(getValue(row, columns, "DISTRICT", formatter));
+                data.setQualification(getValue(row, columns, "PROFESSION/QUALIFICATION", formatter));
+                data.setOccupation(getValue(row, columns, "OCCUPATION", formatter));
+                data.setIdentityType(getValue(row, columns, "IDENTITY TYPE", formatter));
+                data.setDrivingExp(getValue(row, columns, "EXPERIENCE", formatter));
+                data.setRemarks("Automation Test");
+
+                setAgeValues(data, getValue(row, columns, "AGE", formatter));
+
+                data.setPreviousEyeCheckup(getValue(row, columns, "PREVIOUS EYE CHECKUP", formatter));
+                data.setEyeExaminedCenter(getValue(row, columns, "EYE CARE CENTER", formatter));
+                data.setEyeExaminedDate(getOptionalValue(row, columns, "EYE EXAMINED DATE", formatter));
+
+                data.setPreviousEarCheckup(getValue(row, columns, "PREVIOUS EAR CHECKUP", formatter));
+                data.setEarExaminedCenter(getValue(row, columns, "EAR CARE CENTER", formatter));
+                data.setEarExaminedDate(getOptionalValue(row, columns, "EAR EXAMINED DATE", formatter));
+
+                patients.add(data);
+            }
 
         } catch (Exception e) {
-
-            e.printStackTrace();
+            throw new RuntimeException("Excel data read karne mein issue hai: " + filePath, e);
         }
+
+        return patients;
+    }
+
+    private static String getValue(Row row, Map<String, Integer> columns, String columnName, DataFormatter formatter) {
+        Integer index = columns.get(columnName.toUpperCase());
+
+        if (index == null) {
+            throw new RuntimeException("Column not found in Excel: " + columnName);
+        }
+
+        Cell cell = row.getCell(index);
+        return cell == null ? "" : formatter.formatCellValue(cell).trim();
+    }
+
+    private static String getOptionalValue(Row row, Map<String, Integer> columns, String columnName, DataFormatter formatter) {
+        Integer index = columns.get(columnName.toUpperCase());
+
+        if (index == null) {
+            return "";
+        }
+
+        Cell cell = row.getCell(index);
+        return cell == null ? "" : formatter.formatCellValue(cell).trim();
+    }
+
+    private static void setAgeValues(CampRegistrationData data, String age) {
+        String year = "";
+        String month = "";
+
+        if (age != null && !age.trim().isEmpty()) {
+            age = age.toUpperCase().trim();
+
+            if (age.contains("Y")) {
+                year = age.substring(0, age.indexOf("Y")).trim();
+            }
+
+            if (age.contains("Y") && age.contains("M")) {
+                month = age.substring(age.indexOf("Y") + 1, age.indexOf("M")).trim();
+            }
+        }
+
+        data.setAgeYear(year);
+        data.setAgeMonth(month);
     }
 }
