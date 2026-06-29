@@ -13,8 +13,8 @@ import utils.ScreenshotUtil;
 
 public class OpticalDeliveryTest extends BaseTest {
 
-    private static final String FROM_DATE = "01/06/2026";
-    private static final String TO_DATE = "30/06/2026";
+    private static final String FROM_DATE = "01/07/2026";
+    private static final String TO_DATE = "30/07/2026";
 
     @Test
     public void verifyOpticalDeliverySearchWithDateFilter() {
