@@ -38,7 +38,7 @@ public class PostPurchaseTest extends BaseTest {
 
         // ===== SELECT RECORD & POST PURCHASE =====
         postPurchasePage.selectRecordAndPostPurchase(
-                "V001-26-GN-0042"                //Enter Manually PURCHASE NO.
+                "V001-26-GN-0044"                //Enter Manually PURCHASE NO.
         );
 
         System.out.println(
