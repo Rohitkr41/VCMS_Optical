@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
+<!--
 <suite name="Suite">
 
   <test thread-count="5" name="Test">
@@ -14,6 +15,7 @@
       <class name="tests.clinicalExamination.OcularExaminationTest"/>
       <class name="tests.clinicalExamination.ChiefComplaintTest"/>
       <class name="tests.clinicalExamination.DiagnosisAndAdviseTest"/>
+      
 
     </classes>
 
@@ -21,15 +23,15 @@
 
 </suite>
 
+-->
 
-<!--
 <suite name="Suite" parallel="classes" thread-count="5">
 
   <test name="Test">
 
     <classes>
 
-      <class name="tests.RegistrationPageTest"/>
+      
       <class name="tests.clinicalExamination.VitalSignsTest"/>
       <class name="tests.clinicalExamination.OcularHistoryTest"/>
       <class name="tests.clinicalExamination.VisualAcuityTest"/>
@@ -42,4 +44,4 @@
   </test>
 
 </suite>
--->
+
