@@ -9,7 +9,7 @@ public class MultipleSuiteRunner {
 
     public static void main(String[] args) {
 
-        int runCount = 5;
+        int runCount = 6;
 
         for (int i = 1; i <= runCount; i++) {
 
