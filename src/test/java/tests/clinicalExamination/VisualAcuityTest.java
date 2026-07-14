@@ -46,7 +46,7 @@ public class VisualAcuityTest extends BaseTest {
             System.out.println("Navigated to Clinical Examination");
 
             ClinicalPage clinical = new ClinicalPage(driver);
-            clinical.searchByDate("11/05/2026", "30/05/2026");
+            clinical.searchByDate("01/07/2026", "30/09/2026");
             clinical.clickNewStatusIcon();
             System.out.println("Patient opened");
 
