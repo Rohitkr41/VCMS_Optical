@@ -48,7 +48,7 @@ public class OpticalBookingAdvanceTest extends BaseTest {
 
             bookingPage.applyDiscountOnMultipleItems(discountData);
 
-            bookingPage.enterExpectedDeliveryDate("10/05/2026");
+            bookingPage.enterExpectedDeliveryDate("10/08/2026");
 
             String advanceAmount = "400";
 
