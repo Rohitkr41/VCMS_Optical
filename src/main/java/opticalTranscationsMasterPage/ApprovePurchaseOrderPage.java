@@ -143,7 +143,7 @@ public class ApprovePurchaseOrderPage extends BasePage {
         }
 
         if (!anyApproved) {
-            System.out.println("No 'New PO' records found to approve.");
+            System.out.println("No 'New PO' records found to approved.");
         }
     }
 
