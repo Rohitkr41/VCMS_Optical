@@ -49,16 +49,16 @@ public class PurchaseTest extends BaseTest {
 //        purchasePage.selectModalRegional("REGIONALAJAY");
 //        purchasePage.selectModalRegional("SHRI GURU MAHIPATIRAJ EYE BANK  RESEARCH FOUNDATION TRUST");
 
-        purchasePage.enterAndSelectPONumber("43531-26-PO-0041");
+        purchasePage.enterAndSelectPONumber("43531-26-PO-0045");
 
         purchasePage.clickGoButton();
 
         // ===== STEP 4: SKU DATA =====
         Map<String, GRNItemData> skuData = new HashMap<>();
         
-        skuData.put("FR26-0005", new GRNItemData("0", "10"));
+        skuData.put("FR26-0005", new GRNItemData("0", "15"));
         skuData.put("FR26-0006", new GRNItemData("0", "10"));
-        skuData.put("CA26-0004", new GRNItemData("0", "10"));
+        skuData.put("CA26-0004", new GRNItemData("0", "15"));
         skuData.put("CA26-0005", new GRNItemData("0", "10"));
 //        skuData.put("LE26-0006", new GRNItemData("0", "4"));
 //        skuData.put("LE26-0009", new GRNItemData("0", "3"));
@@ -71,7 +71,7 @@ public class PurchaseTest extends BaseTest {
      // ===== HEADER DETAILS =====
         purchasePage.fillInvoiceAndSaveGRN(
                 "INV-12345",
-                "1130",
+                "1134",
                 "Automation GRN entry"
         );
         
