@@ -153,7 +153,7 @@ public class DiscountRefundApprovalPage extends BasePage {
             WebElement yesButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("popup_ok")));
             yesButton.click();
             waitForOverlay(); // optional: wait for overlay if your page has loading
-            System.out.println("Clicked 'Yes' on approval confirmation popup.");
+            System.out.println("Clicked 'Yes' on approval confirmation popup");
         } catch (Exception e) {
             System.out.println("Approval confirmation popup not found: " + e.getMessage());
         }
