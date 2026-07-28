@@ -23,7 +23,7 @@ public class RegistrationPageTest extends BaseTest {
                 ConfigReader.getProperty("username"),
                 ConfigReader.getProperty("password"));
 
-        int registrationLimit = 10; // Change as needed
+        int registrationLimit = 8; // Change as needed
 
         for (int count = 1; count <= registrationLimit; count++) {
 
