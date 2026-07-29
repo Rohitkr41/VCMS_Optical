@@ -34,7 +34,7 @@ public class OpticalBookingDirectSaleTest extends BaseTest {
             bookingPage.clickPlusIcon();
 
             bookingPage.clickVcmrSearchButton();
-            bookingPage.searchVisionCenterPatientByDate("04/05/2026", "16/05/2026");
+            bookingPage.searchVisionCenterPatientByDate("01/08/2026", "16/09/2026");
 
             bookingPage.selectPatientByVcmrNo(vcmrNo);
 
@@ -48,7 +48,7 @@ public class OpticalBookingDirectSaleTest extends BaseTest {
 
             bookingPage.applyDiscountOnMultipleItems(discountData);
 
-            bookingPage.enterExpectedDeliveryDate("10/05/2026");
+            bookingPage.enterExpectedDeliveryDate("01/08/2026");
 
             String payableAmount = bookingPage.getPayableAmount();
             System.out.println("Payable Amount for " + vcmrNo + ": " + payableAmount);
