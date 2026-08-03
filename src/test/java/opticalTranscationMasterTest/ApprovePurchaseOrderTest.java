@@ -43,7 +43,7 @@ public class ApprovePurchaseOrderTest extends BaseTest {
 //        		 "REGV3M",
             "",                 // Supplier Name (or null)
             "",                 // PO Number (or null)
-            "01/07/2026",       // From Date
+            "01/08/2026",       // From Date
             "30/09/2026"        // To Date
         );
         
