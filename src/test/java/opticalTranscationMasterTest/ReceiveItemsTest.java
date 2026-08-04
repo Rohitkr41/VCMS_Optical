@@ -43,7 +43,7 @@ public class ReceiveItemsTest extends BaseTest {
         // ===== SELECT RECORD & RECEIVE =====
 
         receivePage.selectReceiveRecordAndReceive(
-                "V001-26-IS-0008"
+                "V001-26-IS-0018"
         );
 
         System.out.println(
