@@ -40,8 +40,8 @@ public class ReturnToSupplierTest extends BaseTest {
         returnPage.selectGRNAndClickGo("V001-26-GN-0042");
         
      // ===== ENTER RETURN QTY =====
-        returnPage.enterReturnQty("CA26-0004", "2");
-        returnPage.enterReturnQty("CA26-0005", "2");
+        returnPage.enterReturnQty("CA26-0004", "3");
+        returnPage.enterReturnQty("CA26-0005", "4");
         
         returnPage.enterInvoiceNumber("INV-2026-001");
 
