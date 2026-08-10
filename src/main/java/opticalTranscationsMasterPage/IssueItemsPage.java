@@ -125,7 +125,7 @@ public class IssueItemsPage extends BasePage {
             jsClick(issueMenu);
 
             System.out.println(
-                    "Clicked Issue Items menu"
+                    "Clicked Issue Items menu btn"
             );
 
             waitForVisibility(addNewButton);
