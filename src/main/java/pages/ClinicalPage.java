@@ -137,7 +137,7 @@ public class ClinicalPage extends BasePage {
             return;
         }
 
-        throw new NoSuchElementException("No pending patient found for Clinical Examination");
+        throw new NoSuchElementException("No pending patient found for Clinical Examination page");
     }
 
     public void clickNewOrInProgressStatusIcon() {
