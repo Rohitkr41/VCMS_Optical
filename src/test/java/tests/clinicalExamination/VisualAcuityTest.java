@@ -19,8 +19,8 @@ public class VisualAcuityTest extends BaseTest {
     public void validateFullVisualAcuityAndRefractionFlow() {
 
         String spectacles = "Yes";
-        String years = "1";
-        String months = "6";
+        String years = "0";
+        String months = "4";
         String purpose = "Distance Vision";
 
         String reUnaided = "6/18";
@@ -46,7 +46,7 @@ public class VisualAcuityTest extends BaseTest {
             System.out.println("Navigated to Clinical Examination");
 
             ClinicalPage clinical = new ClinicalPage(driver);
-            clinical.searchByDate("01/07/2026", "30/09/2026");
+            clinical.searchByDate("01/08/2026", "30/09/2026");
             clinical.clickNewStatusIcon();
             System.out.println("Patient opened");
 
