@@ -25,8 +25,8 @@ public class OpticalBookingDirectSaleTest extends BaseTest {
 
         List<String> vcmrNumbers = Arrays.asList(
                 "SGMF-BGT-26-0140",
-                "SGMF-BGT-26-0141",
-                "SGMF-BGT-26-0142"
+                "SGMF-BGT-26-0144",
+                "SGMF-BGT-26-0143"
         );
 
         for (String vcmrNo : vcmrNumbers) {
