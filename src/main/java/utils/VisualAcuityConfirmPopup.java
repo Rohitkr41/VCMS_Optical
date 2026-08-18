@@ -54,7 +54,7 @@ public class VisualAcuityConfirmPopup {
             System.out.println("✅ Alert closed successfully");
 
         } catch (TimeoutException e) {
-            System.out.println("⚠️ Alert did not appear");
+            System.out.println("⚠️ Alert did not appear popup");
         } catch (Exception e) {
             System.out.println("⚠️ Error handling alert: " + e.getMessage());
         }
