@@ -250,7 +250,7 @@ public class OpticalDeliveryPage extends BasePage {
             List<WebElement> rows = driver.findElements(waitingToReceiveOrHoldRows);
 
             if (rows.isEmpty()) {
-                System.out.println("No more Waiting to Receive or Hold records found.");
+                System.out.println("No more Waiting to Receive or Hold records founds.");
                 break;
             }
 
