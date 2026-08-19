@@ -37,7 +37,7 @@ public class ReturnToSupplierTest extends BaseTest {
      // CLICK ADD ICON
         returnPage.clickAddNewReturnStock();
         
-        returnPage.selectGRNAndClickGo("V001-26-GN-0042");
+        returnPage.selectGRNAndClickGo("V001-26-GN-0044");
         
      // ===== ENTER RETURN QTY =====
         returnPage.enterReturnQty("CA26-0004", "3");
