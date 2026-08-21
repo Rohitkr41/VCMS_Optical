@@ -43,9 +43,9 @@ public class ViewPurchaseOrderTest extends BaseTest {
 
         // ===== MULTIPLE ITEMS DATA =====
         List<POItemDetails> poItems = Arrays.asList(
-        		 new POItemDetails("FRAME", "ga", "FR26-0005", "30", false, "", "7"), //QTY , "", discount%
+        		 new POItemDetails("FRAME", "ga", "FR26-0005", "30", false, "", "4"), //QTY , "", discount%
                 new POItemDetails("FRAME", "hr", "FR26-0006", "30", false, "", "5"), //QTY , "", discount%
-                new POItemDetails("FRAME", "fr", "FR26-0007", "30", false, "", "2"),  //QTY , "", discount%
+                new POItemDetails("FRAME", "fr", "FR26-0007", "30", false, "", "3"),  //QTY , "", discount%
                
                 new POItemDetails("CASE", "ca", "CA26-0005", "30", false, "", "0"), //case
                 new POItemDetails("CASE", "ca", "CA26-0004", "30", false, "", "0"),
