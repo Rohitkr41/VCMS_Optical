@@ -38,7 +38,6 @@ public class ApprovePurchaseOrderTest extends BaseTest {
         
      // Filter POs from 01-05-2026 to 06-05-2026
         approvePOPage.filterPurchaseOrders(
-            "REGIONALAJAY",   // Regional (or null to skip)
 //        		 "SHRI GURU MAHIPATIRAJ EYE BANK  RESEARCH FOUNDATION TRUST",
 //        		 "REGV3M",
             "",                 // Supplier Name (or null)
