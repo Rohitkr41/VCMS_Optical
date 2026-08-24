@@ -24,8 +24,8 @@ public class OpticalBookingAdvanceTest extends BaseTest {
         OpticalBookingAdvancePage bookingPage = new OpticalBookingAdvancePage(driver);
 
         List<String> vcmrNumbers = Arrays.asList(
+                "SGMF-BGT-26-0148",
                 "SGMF-BGT-26-0140",
-                "SGMF-BGT-26-0141",
                 "SGMF-BGT-26-0142"
         );
 
@@ -39,7 +39,7 @@ public class OpticalBookingAdvanceTest extends BaseTest {
             bookingPage.selectPatientByVcmrNo(vcmrNo);
 
             bookingPage.addItemWithQuantity("FRAME", "fr", "FR26-0006", 1);
-            bookingPage.addItemWithQuantity("LENS", "le", "LE26-0007", 1);
+            bookingPage.addItemWithQuantity("LENS", "le", "LE26-0007", 3);
 
             String[][] discountData = {
                     {"HRBANA", "GENRAL DISCOUNT", "10", "Frame Discount"},
@@ -48,7 +48,7 @@ public class OpticalBookingAdvanceTest extends BaseTest {
 
             bookingPage.applyDiscountOnMultipleItems(discountData);
 
-            bookingPage.enterExpectedDeliveryDate("10/08/2026");
+            bookingPage.enterExpectedDeliveryDate("01/09/2026");
 
             String advanceAmount = "400";
 
