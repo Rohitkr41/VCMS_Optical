@@ -27,10 +27,10 @@ public class OpticalBookingTest extends BaseTest {
 
         opticalBookingPage.clickVcmrSearchButton();
 
-        opticalBookingPage.searchVisionCenterPatientByDate("01/08/2026", "16/09/2026");
+        opticalBookingPage.searchVisionCenterPatientByDate("01/09/2026", "16/09/2026");
 
         // Select exact patient by VCMR No.
-        opticalBookingPage.selectPatientByVcmrNo("SGMF-BGT-26-0143");
+        opticalBookingPage.selectPatientByVcmrNo("SGMF-BGT-26-0144");
 
         opticalBookingPage.selectItemType("FRAME");
 
