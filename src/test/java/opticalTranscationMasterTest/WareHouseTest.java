@@ -42,8 +42,8 @@ public class WareHouseTest extends BaseTest {
         wareHousePage.fillDispatchDetails(
                 "By Courier",
                 "BLUE DART",
-                "100",
-                "TRK64513",
+                "500",
+                "TRK6451425",
                 "Courier dispatched successfully"
         );
 
