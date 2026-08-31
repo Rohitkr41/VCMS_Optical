@@ -56,10 +56,10 @@ public class PurchaseTest extends BaseTest {
         // ===== STEP 4: SKU DATA =====
         Map<String, GRNItemData> skuData = new HashMap<>();
         
-        skuData.put("FR26-0005", new GRNItemData("0", "15"));
+        skuData.put("FR26-0005", new GRNItemData("0", "10"));
         skuData.put("FR26-0006", new GRNItemData("0", "10"));
         skuData.put("CA26-0004", new GRNItemData("0", "15"));
-        skuData.put("CA26-0005", new GRNItemData("0", "10"));
+        skuData.put("CA26-0005", new GRNItemData("0", "20"));
 //        skuData.put("LE26-0006", new GRNItemData("0", "4"));
 //        skuData.put("LE26-0009", new GRNItemData("0", "3"));
 //        skuData.put("FR26-0007", new GRNItemData("0", "2"));
