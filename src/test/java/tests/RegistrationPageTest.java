@@ -76,7 +76,7 @@ public class RegistrationPageTest extends BaseTest {
 
             } catch (Exception e) {
 
-                System.out.println("❌ Registration Failed : " + count);
+                System.out.println("❌ Registration Fail : " + count);
                 e.printStackTrace();
             }
         }
