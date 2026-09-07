@@ -35,7 +35,7 @@ public class DiagnosisAndAdviseTest extends BaseTest {
 
             // ===== OPEN PATIENT =====
             ClinicalPage clinical = new ClinicalPage(driver);
-            clinical.searchByDate("01/08/2026", "30/09/2026");
+            clinical.searchByDate("01/09/2026", "30/10/2026");
             clinical.clickNewOrInProgressStatusIcon();
             System.out.println("Patient opened");
 
