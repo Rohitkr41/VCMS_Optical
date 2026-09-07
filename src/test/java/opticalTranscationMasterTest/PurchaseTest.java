@@ -49,7 +49,7 @@ public class PurchaseTest extends BaseTest {
 //        purchasePage.selectModalRegional("REGIONALAJAY");
 //        purchasePage.selectModalRegional("SHRI GURU MAHIPATIRAJ EYE BANK  RESEARCH FOUNDATION TRUST");
 
-        purchasePage.enterAndSelectPONumber("43531-26-PO-0045");
+        purchasePage.enterAndSelectPONumber("43531-26-PO-0040");
 
         purchasePage.clickGoButton();
 
@@ -57,7 +57,7 @@ public class PurchaseTest extends BaseTest {
         Map<String, GRNItemData> skuData = new HashMap<>();
         
         skuData.put("FR26-0005", new GRNItemData("0", "10"));
-        skuData.put("FR26-0006", new GRNItemData("0", "10"));
+        skuData.put("FR26-0006", new GRNItemData("0", "20"));
         skuData.put("CA26-0004", new GRNItemData("0", "15"));
         skuData.put("CA26-0005", new GRNItemData("0", "20"));
 //        skuData.put("LE26-0006", new GRNItemData("0", "4"));
