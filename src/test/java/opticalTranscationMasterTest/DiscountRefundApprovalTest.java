@@ -31,7 +31,7 @@ public class DiscountRefundApprovalTest extends BaseTest {
         // ===== SET FILTER =====
         page.selectRegional("REGIONALMUKESH");
         // page.selectOpticalShop("ALL"); // if applicable
-        page.setDateRange("01/08/2026", "30/09/2026");
+        page.setDateRange("01/09/2026", "30/10/2026");
         page.clickSearch();
     
 
