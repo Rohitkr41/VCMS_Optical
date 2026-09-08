@@ -43,7 +43,7 @@ public class PostReturnToSupplierTest extends BaseTest {
         // ===== SELECT RECORD & POST =====
 
         returnPage.selectReturnRecordAndPost(
-                "V001-26-IR-0014"
+                "V001-26-IR-0016"
         );
 
         System.out.println(
