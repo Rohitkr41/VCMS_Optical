@@ -34,11 +34,11 @@ public class OpticalBookingAdvanceTest extends BaseTest {
             bookingPage.clickPlusIcon();
 
             bookingPage.clickVcmrSearchButton();
-            bookingPage.searchVisionCenterPatientByDate("04/05/2026", "16/05/2026");
+            bookingPage.searchVisionCenterPatientByDate("01/09/2026", "01/10/2026");
 
             bookingPage.selectPatientByVcmrNo(vcmrNo);
 
-            bookingPage.addItemWithQuantity("FRAME", "fr", "FR26-0006", 1);
+            bookingPage.addItemWithQuantity("FRAME", "fr", "FR26-0006", 4);
             bookingPage.addItemWithQuantity("LENS", "le", "LE26-0007", 3);
 
             String[][] discountData = {
@@ -48,7 +48,7 @@ public class OpticalBookingAdvanceTest extends BaseTest {
 
             bookingPage.applyDiscountOnMultipleItems(discountData);
 
-            bookingPage.enterExpectedDeliveryDate("01/09/2026");
+            bookingPage.enterExpectedDeliveryDate("01/10/2026");
 
             String advanceAmount = "400";
 
