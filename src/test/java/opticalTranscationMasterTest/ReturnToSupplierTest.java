@@ -37,13 +37,13 @@ public class ReturnToSupplierTest extends BaseTest {
      // CLICK ADD ICON
         returnPage.clickAddNewReturnStock();
         
-        returnPage.selectGRNAndClickGo("V001-26-GN-0044");
+        returnPage.selectGRNAndClickGo("V001-26-GN-0045");
         
      // ===== ENTER RETURN QTY =====
-        returnPage.enterReturnQty("CA26-0004", "3");
+        returnPage.enterReturnQty("CA26-0004", "4");
         returnPage.enterReturnQty("CA26-0005", "4");
         
-        returnPage.enterInvoiceNumber("INV-2026-001");
+        returnPage.enterInvoiceNumber("INV-2026-003");
 
         returnPage.enterReturnRemarks(
                 "Return stock automation testing"
