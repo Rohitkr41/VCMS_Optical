@@ -32,13 +32,13 @@ public class VitalSignsTest extends BaseTest {
         // ✅ Clinical Page actions
         ClinicalPage clinical = new ClinicalPage(driver);
 
-        clinical.searchByDate("01/08/2026", "30/09/2026");
+        clinical.searchByDate("01/09/2026", "30/10/2026");
         clinical.clickNewStatusIcon();
 
         // ✅ Vital Signs Flow
         VitalSignsPage vitalSigns = new VitalSignsPage(driver);
         vitalSigns.fillVitalSigns(
-                "90",     // BP Diastolic
+                "70",     // BP Diastolic
                 "120",    // BP Systolic
                 "80",     // Pulse
                 "110",    // Random Sugar
