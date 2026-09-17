@@ -540,7 +540,7 @@ public class IssueItemsPage extends BasePage {
         } catch (Exception e) {
 
             System.out.println(
-                    "Failed to capture screenshot : "
+                    "Failed to capture screenshot: "
                             + e.getMessage()
             );
         }
