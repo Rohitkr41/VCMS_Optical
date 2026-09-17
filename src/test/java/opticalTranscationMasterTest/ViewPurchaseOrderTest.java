@@ -43,8 +43,8 @@ public class ViewPurchaseOrderTest extends BaseTest {
 
         // ===== MULTIPLE ITEMS DATA =====
         List<POItemDetails> poItems = Arrays.asList(
-        		 new POItemDetails("FRAME", "ga", "FR26-0005", "30", false, "", "4"), //QTY , "", discount%
-                new POItemDetails("FRAME", "hr", "FR26-0006", "30", false, "", "5"), //QTY , "", discount%
+        		 new POItemDetails("FRAME", "ga", "FR26-0005", "30", false, "", "2"), //QTY , "", discount%
+                new POItemDetails("FRAME", "hr", "FR26-0006", "30", false, "", "3"), //QTY , "", discount%
                 new POItemDetails("FRAME", "fr", "FR26-0007", "30", false, "", "3"),  //QTY , "", discount%
                
                 new POItemDetails("CASE", "ca", "CA26-0005", "30", false, "", "0"), //case
@@ -55,7 +55,7 @@ public class ViewPurchaseOrderTest extends BaseTest {
                 
                 new POItemDetails("GOGGLES", "go", "GO26-0001", "30", false, "", "0"), //goggles
                 new POItemDetails("GOGGLES", "go", "GO26-0002", "30", false, "", "0"), //goggles              
-                new POItemDetails("LOW VISION AIDS", "lv", "LV26-0001", "30", false, "", "0"), //low vision aids
+                new POItemDetails("LOW VISION AIDS", "lv", "LV26-0001", "30", false, "", "4"), //low vision aids
                 new POItemDetails("LOW VISION AIDS", "lv", "LV26-0002", "30", false, "", "0"), //low vision aids
                 new POItemDetails("LOW VISION AIDS", "lv", "LV26-0003", "30", false, "", "0"), //low vision aids
                 
