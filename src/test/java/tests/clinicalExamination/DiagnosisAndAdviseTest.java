@@ -54,7 +54,7 @@ public class DiagnosisAndAdviseTest extends BaseTest {
                     "SINGLE VISION GLASSES",     // Spectacles Type
                     "Patient will visit later",  // Other Remarks
                     true,                        // Hospital Visit Date checkbox
-                    "30/05/2026",                // Hospital Visit Date
+                    "30/10/2026",                // Hospital Visit Date
                     false,                       // Hold Patient
                     null,                        // Hold Reason
                     null                         // Hold Remarks
