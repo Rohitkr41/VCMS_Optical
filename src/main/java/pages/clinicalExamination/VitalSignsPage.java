@@ -104,7 +104,7 @@ public class VitalSignsPage extends BasePage {
 
         handleSuccessPopup();
 
-        System.out.println("Vital Signs saved successfully!");
+        System.out.println("Vital Signs saved successfull!");
     }
 
     public void handleSuccessPopup() {
