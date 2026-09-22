@@ -24,7 +24,7 @@ public class VisualAcuityTest extends BaseTest {
         String purpose = "Distance Vision";
 
         String reUnaided = "6/18";
-        String reSpecs = "6/6";
+        String reSpecs = "6/12";
         String rePH = "6/6";
         String reNear = "N6";
 
@@ -87,13 +87,13 @@ public class VisualAcuityTest extends BaseTest {
                     "Add OK", "Add OK",
 
                     // NEAR VISION NPC
-                    "10", "10",
+                    "10", "15",
 
                     // IOP
                     "14 mmHg", "16 mmHg", "10:05 AM"
             );
 
-            visual.fillNearVision("N6", "10", "N6", "10");
+            visual.fillNearVision("N6", "10", "N8", "10");
             visual.fillIPD("32", "30", "14", "20");
             visual.fillIOP("10:05 AM", "14 mmHg", "10:05 AM", "16 mmHg");
 
