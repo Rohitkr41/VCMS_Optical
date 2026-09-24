@@ -38,7 +38,7 @@ public class VitalSignsTest extends BaseTest {
         // ✅ Vital Signs Flow
         VitalSignsPage vitalSigns = new VitalSignsPage(driver);
         vitalSigns.fillVitalSigns(
-                "70",     // BP Diastolic
+                "80",     // BP Diastolic
                 "120",    // BP Systolic
                 "80",     // Pulse
                 "110",    // Random Sugar
