@@ -39,7 +39,7 @@ public class OpticalBookingAdvanceTest extends BaseTest {
             bookingPage.selectPatientByVcmrNo(vcmrNo);
 
             bookingPage.addItemWithQuantity("FRAME", "fr", "FR26-0006", 4);
-            bookingPage.addItemWithQuantity("LENS", "le", "LE26-0007", 3);
+            bookingPage.addItemWithQuantity("LENS", "le", "LE26-0007", 7);
 
             String[][] discountData = {
                     {"HRBANA", "GENRAL DISCOUNT", "10", "Frame Discount"},
