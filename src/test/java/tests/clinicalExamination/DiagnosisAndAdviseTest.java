@@ -26,7 +26,7 @@ public class DiagnosisAndAdviseTest extends BaseTest {
                     ConfigReader.getProperty("username"),
                     ConfigReader.getProperty("password")
             );
-            System.out.println("Login successful");
+            System.out.println("Login successfull");
 
             // ===== NAVIGATION =====
             SidebarPage sidebar = new SidebarPage(driver);
