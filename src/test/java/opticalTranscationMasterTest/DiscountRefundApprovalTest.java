@@ -45,7 +45,7 @@ public class DiscountRefundApprovalTest extends BaseTest {
             System.out.println("Approval confirmed successfully.");
             
         } else {
-            System.out.println("No records available to approve");
+            System.out.println("No records available to approved");
         }
     }
 
