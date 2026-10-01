@@ -24,7 +24,7 @@ public class OpticalBookingDirectSaleTest extends BaseTest {
         OpticalBookingDirectSalePage bookingPage = new OpticalBookingDirectSalePage(driver);
 
         List<String> vcmrNumbers = Arrays.asList(
-                "SGMF-BGT-26-0142",
+                "SGMF-BGT-26-0141",
                 "SGMF-BGT-26-0145",
                 "SGMF-BGT-26-0143"
         );
