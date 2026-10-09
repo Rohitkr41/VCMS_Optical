@@ -49,7 +49,7 @@ public class PurchaseTest extends BaseTest {
 //        purchasePage.selectModalRegional("REGIONALAJAY");
 //        purchasePage.selectModalRegional("SHRI GURU MAHIPATIRAJ EYE BANK  RESEARCH FOUNDATION TRUST");
 
-        purchasePage.enterAndSelectPONumber("43531-26-PO-0040");
+        purchasePage.enterAndSelectPONumber("43531-26-PO-0043");
 
         purchasePage.clickGoButton();
 
