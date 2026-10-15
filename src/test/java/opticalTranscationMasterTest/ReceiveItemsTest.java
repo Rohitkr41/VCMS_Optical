@@ -47,7 +47,7 @@ public class ReceiveItemsTest extends BaseTest {
         );
 
         System.out.println(
-                "Test Passed : Item received successfully."
+                "Test Passed : Item received successfull"
         );
     }
 
