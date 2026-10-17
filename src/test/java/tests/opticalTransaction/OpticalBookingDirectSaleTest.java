@@ -34,7 +34,7 @@ public class OpticalBookingDirectSaleTest extends BaseTest {
             bookingPage.clickPlusIcon();
 
             bookingPage.clickVcmrSearchButton();
-            bookingPage.searchVisionCenterPatientByDate("01/08/2026", "16/09/2026");
+            bookingPage.searchVisionCenterPatientByDate("01/10/2026", "30/10/2026");
 
             bookingPage.selectPatientByVcmrNo(vcmrNo);
 
