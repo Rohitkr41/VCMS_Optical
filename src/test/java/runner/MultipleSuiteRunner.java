@@ -13,9 +13,9 @@ public class MultipleSuiteRunner {
 
         for (int i = 1; i <= runCount; i++) {
 
-            System.out.println("================================");
+            System.out.println("===============================");
             System.out.println("RUN NUMBER : " + i);
-            System.out.println("================================");
+            System.out.println("===============================");
 
             TestNG testng = new TestNG();
 
