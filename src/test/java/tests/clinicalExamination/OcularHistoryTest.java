@@ -53,7 +53,7 @@ public class OcularHistoryTest extends BaseTest {
             // ===== PAGE =====
             OcularHistoryPage ocular = new OcularHistoryPage(driver);
             ocular.openOcularHistoryTab();
-            System.out.println("✅ Ocular History tab opened");
+            System.out.println("✅ Ocular History tab opened successfully");
 
             // =====================================================
             // 🔵 OCULAR HISTORY FLOW
