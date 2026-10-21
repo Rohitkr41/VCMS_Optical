@@ -46,9 +46,9 @@ public class IssueItemsTest extends BaseTest {
         issuePage.clickSearchButton();
 
         // STEP-3 ISSUE QTY
-        issuePage.enterIssueQty("CA26-0004", "5");
-        issuePage.enterIssueQty("CA26-0005", "8");
-        issuePage.enterIssueQty("CL26-0004", "4");
+        issuePage.enterIssueQty("CA26-0004", "4");
+        issuePage.enterIssueQty("CA26-0005", "3");
+        issuePage.enterIssueQty("CL26-0004", "2");
 
         // STEP-4 SELECT VC
         issuePage.selectVisionCenter(
