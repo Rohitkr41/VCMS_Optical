@@ -40,7 +40,7 @@ public class VitalSignsTest extends BaseTest {
         vitalSigns.fillVitalSigns(
                 "80",     // BP Diastolic
                 "120",    // BP Systolic
-                "80",     // Pulse
+                "90",     // Pulse
                 "110",    // Random Sugar
                 "No"      // Diabetic Status
         );
