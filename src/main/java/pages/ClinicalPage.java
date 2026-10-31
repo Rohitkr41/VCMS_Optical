@@ -71,6 +71,7 @@ public class ClinicalPage extends BasePage {
                         "arguments[0].blur();",
                 toDateElement,
                 toDate
+                
         );
 
         WebElement searchBtn = wait.until(
@@ -92,6 +93,17 @@ public class ClinicalPage extends BasePage {
 
         System.out.println("Clinical Search executed with FromDate: " + fromDate + " and ToDate: " + toDate);
     }
+    
+    public void searchbtn() {
+
+        WebElement searchBtn = wait.until(
+                ExpectedConditions.elementToBeClickable(searchButton));
+
+        searchBtn.click();
+
+        System.out.println("Clinical Search button clicked successfully.");
+    }
+
 
     public void clickClinicalExaminationForPendingRecord() {
         List<String> completedStatuses = Arrays.asList("Examine", "Examination Done");
@@ -137,7 +149,7 @@ public class ClinicalPage extends BasePage {
             return;
         }
 
-        throw new NoSuchElementException("No pending patient found for Clinical Examination page");
+        throw new NoSuchElementException("No pending patient found for Clinical Examination");
     }
 
     public void clickNewOrInProgressStatusIcon() {
