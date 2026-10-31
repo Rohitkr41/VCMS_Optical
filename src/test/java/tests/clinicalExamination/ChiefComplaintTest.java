@@ -34,7 +34,8 @@ public class ChiefComplaintTest extends BaseTest {
         // ✅ Clinical Page actions
         ClinicalPage clinical = new ClinicalPage(driver);
         
-        clinical.searchByDate("10/10/2026", "30/11/2026");
+//        clinical.searchByDate("10/10/2026", "30/10/2026");
+        clinical.searchbtn();
         clinical.clickNewStatusIcon();
 
         // ✅ Chief Complaint Flow (UPDATED ORDER)
