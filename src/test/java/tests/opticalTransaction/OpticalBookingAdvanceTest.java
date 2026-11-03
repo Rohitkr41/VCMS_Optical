@@ -24,7 +24,7 @@ public class OpticalBookingAdvanceTest extends BaseTest {
         OpticalBookingAdvancePage bookingPage = new OpticalBookingAdvancePage(driver);
 
         List<String> vcmrNumbers = Arrays.asList(
-                "SGMF-BGT-26-0148",
+                "SGMF-BGT-26-0149",
                 "SGMF-BGT-26-0140",
                 "SGMF-BGT-26-0142"
         );
@@ -34,7 +34,7 @@ public class OpticalBookingAdvanceTest extends BaseTest {
             bookingPage.clickPlusIcon();
 
             bookingPage.clickVcmrSearchButton();
-            bookingPage.searchVisionCenterPatientByDate("01/09/2026", "01/10/2026");
+            bookingPage.searchVisionCenterPatientByDate("01/11/2026", "01/12/2026");
 
             bookingPage.selectPatientByVcmrNo(vcmrNo);
 
