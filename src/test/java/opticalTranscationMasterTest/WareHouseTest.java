@@ -43,7 +43,7 @@ public class WareHouseTest extends BaseTest {
                 "By Courier",
                 "BLUE DART",
                 "500",
-                "TRK64514467",
+                "trnx08978",
                 "Courier dispatched successfully"
         );
 
