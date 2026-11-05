@@ -47,7 +47,7 @@ public class PostReturnToSupplierTest extends BaseTest {
         );
 
         System.out.println(
-                "Test Passed : Return posted successfully."
+                "Test Passed : Return posted successfully done"
         );
     }
 
