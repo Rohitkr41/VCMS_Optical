@@ -43,7 +43,7 @@ public class ChiefComplaintTest extends BaseTest {
         chiefComplaint.fillChiefComplaint(
                 "BLURRED VISION FOR DISTANCE",   // Chief Complaint
                 "BOTH",   // Eye (⚠️ must match dropdown text exactly)
-                "3",          // Duration
+                "6",          // Duration
                 "Weeks"        // Period
         );
 
