@@ -10,7 +10,7 @@ public class MultipleSuiteRunner {
 
     public static void main(String[] args) {
 
-        int runCount = 5;
+        int runCount = 7;
 
         String suitePath = "src/test/resources/clinicalExamination.xml";
 
