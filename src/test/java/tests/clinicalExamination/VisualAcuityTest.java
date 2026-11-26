@@ -20,7 +20,7 @@ public class VisualAcuityTest extends BaseTest {
 
         String spectacles = "Yes";
         String years = "0";
-        String months = "4";
+        String months = "5";
         String purpose = "Distance Vision";
 
         String reUnaided = "6/18";
@@ -46,7 +46,7 @@ public class VisualAcuityTest extends BaseTest {
             System.out.println("Navigated to Clinical Examination");
 
             ClinicalPage clinical = new ClinicalPage(driver);
-            clinical.searchByDate("01/09/2026", "30/10/2026");
+            clinical.searchByDate("01/10/2026", "30/11/2026");
             clinical.clickNewStatusIcon();
             System.out.println("Patient opened");
 
