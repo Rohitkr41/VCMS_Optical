@@ -26,7 +26,7 @@ public class OpticalBookingAdvanceTest extends BaseTest {
         List<String> vcmrNumbers = Arrays.asList(
                 "SGMF-BGT-26-0149",
                 "SGMF-BGT-26-0140",
-                "SGMF-BGT-26-0142"
+                "SGMF-BGT-26-0144"
         );
 
         for (String vcmrNo : vcmrNumbers) {
@@ -38,7 +38,7 @@ public class OpticalBookingAdvanceTest extends BaseTest {
 
             bookingPage.selectPatientByVcmrNo(vcmrNo);
 
-            bookingPage.addItemWithQuantity("FRAME", "fr", "FR26-0006", 5);
+            bookingPage.addItemWithQuantity("FRAME", "fr", "FR26-0006", 7);
             bookingPage.addItemWithQuantity("LENS", "le", "LE26-0007", 7);
 
             String[][] discountData = {
